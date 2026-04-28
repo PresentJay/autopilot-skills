@@ -1,0 +1,16 @@
+# Node / npm
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Editors
+.DS_Store
+.idea/
+.vscode/
+
+# Skill runtime artifacts (user-side, not for the repo)
+.autopilot.log/
+.autopilot.milestones/
+
+# OS
+Thumbs.db

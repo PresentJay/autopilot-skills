@@ -1,0 +1,34 @@
+{
+  "name": "autopilot-skills",
+  "version": "0.1.0",
+  "description": "Universal self-driving mission runner for AI coding agents (Claude Code, Codex, Cursor, Gemini, ...).",
+  "keywords": [
+    "ai-skill",
+    "autopilot",
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "autonomy",
+    "self-driving",
+    "ralph-loop",
+    "self-improvement"
+  ],
+  "license": "MIT",
+  "author": "Hyeonjae Jeong (PresentJay)",
+  "homepage": "https://github.com/PresentJay/autopilot-skills",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PresentJay/autopilot-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PresentJay/autopilot-skills/issues"
+  },
+  "private": false,
+  "files": [
+    "skills/",
+    "LICENSE",
+    "README.md"
+  ]
+}

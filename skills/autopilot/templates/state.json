@@ -1,0 +1,19 @@
+{
+  "cycle_count": 0,
+  "last_run_at": null,
+  "last_tool_used": null,
+  "consecutive_failures": 0,
+  "consecutive_idle": 0,
+  "current_proposal_id": null,
+  "next_wakeup_at": null,
+  "status": "fresh",
+
+  "defect_baselines": {
+    "lint": { "ever_zero": false, "first_zero_at": null },
+    "test": { "ever_zero": false, "first_zero_at": null },
+    "type_check": { "ever_zero": false, "first_zero_at": null },
+    "coverage": { "modules_first_80": [] }
+  },
+
+  "compaction_history": []
+}
