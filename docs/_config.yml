@@ -6,8 +6,24 @@ url: "https://presentjay.github.io/autopilot-skills"
 markdown: kramdown
 defaults:
   - scope:
+      path: "ko"
+    values:
+      layout: page
+      lang: ko
+  - scope:
+      path: "zh"
+    values:
+      layout: page
+      lang: zh
+  - scope:
+      path: "ja"
+    values:
+      layout: page
+      lang: ja
+  - scope:
       path: ""
     values:
       layout: page
+      lang: en
 exclude:
   - PUBLISH.md

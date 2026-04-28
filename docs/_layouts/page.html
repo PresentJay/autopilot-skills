@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="{{ page.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ page.title }} — autopilot-skills</title>
+  <meta name="description" content="Universal self-driving mission runner for AI coding agents." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}" />
+</head>
+<body>
+  {%- assign lang = page.lang | default: 'en' -%}
+  <nav class="nav">
+    {%- if lang == 'ko' -%}
+      <a href="{{ '/ko/getting-started.html' | relative_url }}">시작하기</a>
+      <a href="{{ '/ko/mission-schema.html' | relative_url }}">미션</a>
+      <a href="{{ '/ko/safety.html' | relative_url }}">안전</a>
+      <a href="{{ '/ko/cadence.html' | relative_url }}">주기</a>
+      <a href="{{ '/ko/milestones.html' | relative_url }}">마일스톤</a>
+    {%- elsif lang == 'zh' -%}
+      <a href="{{ '/zh/getting-started.html' | relative_url }}">入门</a>
+      <a href="{{ '/zh/mission-schema.html' | relative_url }}">任务</a>
+      <a href="{{ '/zh/safety.html' | relative_url }}">安全</a>
+      <a href="{{ '/zh/cadence.html' | relative_url }}">节奏</a>
+      <a href="{{ '/zh/milestones.html' | relative_url }}">里程碑</a>
+    {%- elsif lang == 'ja' -%}
+      <a href="{{ '/ja/getting-started.html' | relative_url }}">はじめに</a>
+      <a href="{{ '/ja/mission-schema.html' | relative_url }}">ミッション</a>
+      <a href="{{ '/ja/safety.html' | relative_url }}">セーフティ</a>
+      <a href="{{ '/ja/cadence.html' | relative_url }}">サイクル</a>
+      <a href="{{ '/ja/milestones.html' | relative_url }}">マイルストーン</a>
+    {%- else -%}
+      <a href="{{ '/getting-started.html' | relative_url }}">Get started</a>
+      <a href="{{ '/mission-schema.html' | relative_url }}">Mission</a>
+      <a href="{{ '/safety.html' | relative_url }}">Safety</a>
+      <a href="{{ '/cadence.html' | relative_url }}">Cadence</a>
+      <a href="{{ '/milestones.html' | relative_url }}">Milestones</a>
+    {%- endif -%}
+    <a href="https://github.com/PresentJay/autopilot-skills">GitHub</a>
+    <span class="lang-switch">
+      <a href="{{ '/' | relative_url }}"{% if lang == 'en' %} class="active"{% endif %}>EN</a>
+      <a href="{{ '/ko/' | relative_url }}"{% if lang == 'ko' %} class="active"{% endif %}>한</a>
+      <a href="{{ '/zh/' | relative_url }}"{% if lang == 'zh' %} class="active"{% endif %}>中</a>
+      <a href="{{ '/ja/' | relative_url }}"{% if lang == 'ja' %} class="active"{% endif %}>日</a>
+    </span>
+  </nav>
+
+  {{ content }}
+
+  <footer>
+    <p>MIT-licensed. Built by <a href="https://github.com/PresentJay">PresentJay</a>. Inspired by <a href="https://impeccable.style">impeccable</a>'s minimalism.</p>
+  </footer>
+</body>
+</html>
