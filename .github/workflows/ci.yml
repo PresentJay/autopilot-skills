@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  skill-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 20
+
+      - name: Verify skill discovery
+        run: npx -y skills add . --list
+
+      - name: Frontmatter sanity
+        run: |
+          for f in $(find skills -name SKILL.md); do
+            echo "checking $f"
+            grep -q '^name:' "$f"           || (echo "$f missing name" && exit 1)
+            grep -q '^description:' "$f"    || (echo "$f missing description" && exit 1)
+            grep -q '^version:' "$f"        || (echo "$f missing version" && exit 1)
+          done
+
+      - name: Reject TODO / FIXME in SKILL.md
+        run: |
+          if grep -rn "TODO\|FIXME" skills/; then
+            echo "SKILL.md must not ship with TODOs"; exit 1
+          fi
