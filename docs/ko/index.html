@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <title>autopilot-skills — AI 코딩 에이전트를 위한 자율주행 미션 러너</title>
+  <meta name="description" content="AI 코딩 에이전트(Claude Code, Codex, Cursor, Gemini ...)를 위한 범용 자율주행 미션 러너. 한 명령. 끝없는 사이클. 모든 단계에서 안전 보장." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <meta property="og:title" content="autopilot-skills" />
+  <meta property="og:description" content="AI 코딩 에이전트를 위한 범용 자율주행 미션 러너." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://presentjay.github.io/autopilot-skills/ko/" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="getting-started.html">시작하기</a>
+    <a href="mission-schema.html">미션</a>
+    <a href="safety.html">안전</a>
+    <a href="cadence.html">주기</a>
+    <a href="milestones.html">마일스톤</a>
+    <a href="https://github.com/PresentJay/autopilot-skills">GitHub</a>
+    <span class="lang-switch">
+      <a href="/autopilot-skills/">EN</a>
+      <a href="/autopilot-skills/ko/" class="active">한</a>
+      <a href="/autopilot-skills/zh/">中</a>
+      <a href="/autopilot-skills/ja/">日</a>
+    </span>
+  </nav>
+
+  <h1>AI 코딩 에이전트를 위한 자율주행 미션 러너.</h1>
+  <p class="lead">한 명령. 끝없는 사이클. 모든 단계에서 안전을 강제. Claude Code, Codex, Cursor, Gemini 외 40+ AI 하니스에서 동작.</p>
+
+  <div class="install" id="install">
+    <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
+    <button onclick="navigator.clipboard.writeText('npx skills add PresentJay/autopilot-skills'); this.textContent='복사됨'; setTimeout(()=>this.textContent='복사', 1500);">복사</button>
+  </div>
+
+  <h2>무엇을 하나</h2>
+  <p>당신이 평문 한 줄로 미션을 건네면, <code>discover → analyze → plan → execute → verify → learn</code> 자율 사이클을 돌리고 다음 사이클까지 잠들었다가 깨어납니다 — 멈추라 할 때까지, 또는 미션이 완료될 때까지.</p>
+
+  <h2>하지 않는 것</h2>
+  <ul>
+    <li><code>main</code> / <code>master</code> 에 직접 push 금지.</li>
+    <li>허용하지 않은 <code>.env</code>, secrets, infra, workflow 접근 금지.</li>
+    <li>허용 경로 밖에서 <code>--force</code>, <code>--no-verify</code>, <code>git reset --hard</code>, <code>rm -rf</code> 실행 금지.</li>
+    <li>이미 실패가 학습된 패턴 재시도 금지 (NOT-OK auto-grow).</li>
+  </ul>
+
+  <h2>주기는 당신의 것</h2>
+  <p>공격적 정도를 직접 선택: <code>immediate</code> · <code>2m</code> · <code>5m</code> · <code>15m</code> (기본값) · <code>30m</code> · <code>1h+</code> (cron 자동 승격). 유휴 사이클이 누적되면 자동으로 주기가 느려집니다.</p>
+
+  <h2>마일스톤은 보존</h2>
+  <p>저널은 <code>.autopilot.log/</code> (가변)에 쌓이고, 의미 있는 사건들 — PR 머지, bounded 미션 완료, 첫 zero-defect 달성 — 은 <code>.autopilot.milestones/</code> (고정·불변)에 자동 승격됩니다.</p>
+
+  <hr />
+
+  <h2>더 읽기</h2>
+  <ul>
+    <li><a href="getting-started.html">60초 안에 시작하기</a></li>
+    <li><a href="mission-schema.html">미션 스키마 (Q1–Q8)</a></li>
+    <li><a href="safety.html">안전 정책</a></li>
+    <li><a href="cadence.html">주기 메뉴</a></li>
+    <li><a href="milestones.html">마일스톤 트리거</a></li>
+    <li><a href="https://github.com/PresentJay/autopilot-skills/blob/main/CHANGELOG.md">Changelog</a></li>
+    <li><a href="https://github.com/PresentJay/autopilot-skills">GitHub 레포</a></li>
+  </ul>
+
+  <footer>
+    <p>MIT 라이선스. <a href="https://github.com/PresentJay">PresentJay</a> 제작. <a href="https://impeccable.style">impeccable</a>의 미니멀리즘에서 영감.</p>
+  </footer>
+</body>
+</html>

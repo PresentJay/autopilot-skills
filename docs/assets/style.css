@@ -155,3 +155,21 @@ ul li {
 .nav a:hover {
   color: var(--fg);
 }
+.lang-switch {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+.lang-switch a {
+  color: var(--muted);
+  border-bottom: none;
+  padding: 0 0.25rem;
+}
+.lang-switch a.active {
+  color: var(--fg);
+  font-weight: 600;
+}
+.lang-switch a:hover {
+  color: var(--fg);
+}
