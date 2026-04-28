@@ -1,0 +1,14 @@
+name: Question
+description: How do I do X with autopilot?
+labels: ["question"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: What are you trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?

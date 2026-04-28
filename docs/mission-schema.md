@@ -1,0 +1,50 @@
+---
+title: Mission schema
+---
+
+# Mission schema
+
+Each section is a question answered during the boot interview. The full template lives at [`skills/autopilot/templates/mission.md`](https://github.com/PresentJay/autopilot-skills/blob/main/skills/autopilot/templates/mission.md).
+
+## Q1. Mission
+
+One line. The single objective the loop pursues.
+
+## Q2. Operating mode
+
+- `continuous` — until told to stop
+- `bounded:N` — at most N cycles
+- `monitor` — react to external events only
+
+## Q3. Allow paths
+
+Glob patterns the loop may modify. Anything not listed is read-only.
+
+## Q4. Forbidden zones (absolute)
+
+Branches, files, flags that are never touched. Default block-list:
+
+- `main`, `master`, `release/*`
+- `.env`, `*credentials*`, `secrets/*`, `*.pem`, `*.key`
+- `infra/`, `terraform/`, `.github/workflows/`
+- `--force`, `--no-verify`, `git reset --hard`, `rm -rf` outside allow paths
+- external API writes other than `gh` and `npm`
+
+## Q5. Risk tier
+
+- **L1** — discover + propose only
+- **L2** — small PRs (≤300 lines, ≤10 files) — *default*
+- **L3** — merge after green
+- **L4** — free mode (forbidden zones still absolute)
+
+## Q6. Cadence
+
+See [Cadence menu](cadence.html).
+
+## Q7. Escalation triggers
+
+Default thresholds: 3 consecutive failures, diff cap exceeded, irreversible action, no-candidate behavior (`end` or `ask`).
+
+## Q8. Auto-compaction
+
+Threshold (60/70/80/90, default 80) and frequency (`every-cycle`, `threshold-only`, `off`).
