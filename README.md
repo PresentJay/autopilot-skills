@@ -2,6 +2,8 @@
 
 Universal self-driving mission runner for AI coding agents.
 
+> 📘 Docs and quickstart: [presentjay.github.io/autopilot-skills](https://presentjay.github.io/autopilot-skills)
+
 Once you start `/autopilot`, it runs an endless **discover → analyze → plan → execute → verify → learn** cycle on your mission until you tell it to stop. Domain-agnostic — code self-improvement, doc grooming, ops sweeps, anything you can describe in one line.
 
 Works on Claude Code, Codex CLI, Cursor, Gemini CLI, and 50+ other AI coding agents (via the [`skills`](https://github.com/vercel-labs/skills) ecosystem).

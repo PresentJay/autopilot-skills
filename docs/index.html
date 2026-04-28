@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>autopilot-skills — self-driving mission runner</title>
+  <meta name="description" content="Universal self-driving mission runner for AI coding agents. One command. Endless cycle. Safety enforced every phase." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <meta property="og:title" content="autopilot-skills" />
+  <meta property="og:description" content="Universal self-driving mission runner for AI coding agents." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://presentjay.github.io/autopilot-skills" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="getting-started.html">Get started</a>
+    <a href="mission-schema.html">Mission</a>
+    <a href="safety.html">Safety</a>
+    <a href="cadence.html">Cadence</a>
+    <a href="milestones.html">Milestones</a>
+    <a href="https://github.com/PresentJay/autopilot-skills">GitHub</a>
+  </nav>
+
+  <h1>Self-driving mission runner for AI coding agents.</h1>
+  <p class="lead">One command. Endless cycle. Safety enforced every phase. Works on Claude Code, Codex, Cursor, Gemini, and 40+ other harnesses.</p>
+
+  <div class="install" id="install">
+    <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
+    <button onclick="navigator.clipboard.writeText('npx skills add PresentJay/autopilot-skills'); this.textContent='copied'; setTimeout(()=>this.textContent='copy', 1500);">copy</button>
+  </div>
+
+  <h2>What it does</h2>
+  <p>You hand it a mission in plain text. It runs an autonomous <code>discover → analyze → plan → execute → verify → learn</code> cycle and sleeps until the next one — until you tell it to stop, or until the mission is complete.</p>
+
+  <h2>What it won't do</h2>
+  <ul>
+    <li>Push to <code>main</code> / <code>master</code> directly.</li>
+    <li>Touch <code>.env</code>, secrets, infra, or workflows you didn't allow.</li>
+    <li>Run <code>--force</code>, <code>--no-verify</code>, <code>git reset --hard</code>, or <code>rm -rf</code> outside allow paths.</li>
+    <li>Re-attempt patterns it has already learned to fail (NOT-OK auto-grow).</li>
+  </ul>
+
+  <h2>Cadence is yours</h2>
+  <p>Pick how aggressive: <code>immediate</code> · <code>2m</code> · <code>5m</code> · <code>15m</code> (default) · <code>30m</code> · <code>1h+</code> (auto-promotes to a cron). Idle cycles auto-throttle.</p>
+
+  <h2>Milestones, kept</h2>
+  <p>The journal lives in <code>.autopilot.log/</code> (mutable). Significant moments — PR merged, bounded mission complete, first zero-defect — auto-promote into <code>.autopilot.milestones/</code>, which is fixed and immutable.</p>
+
+  <hr />
+
+  <h2>Read more</h2>
+  <ul>
+    <li><a href="getting-started.html">Get started in 60 seconds</a></li>
+    <li><a href="mission-schema.html">Mission schema (Q1–Q8)</a></li>
+    <li><a href="safety.html">Safety policy</a></li>
+    <li><a href="cadence.html">Cadence menu</a></li>
+    <li><a href="milestones.html">Milestone triggers</a></li>
+    <li><a href="https://github.com/PresentJay/autopilot-skills/blob/main/CHANGELOG.md">Changelog</a></li>
+    <li><a href="https://github.com/PresentJay/autopilot-skills">GitHub repo</a></li>
+  </ul>
+
+  <footer>
+    <p>MIT-licensed. Built by <a href="https://github.com/PresentJay">PresentJay</a>. Inspired by <a href="https://impeccable.style">impeccable</a>'s minimalism.</p>
+  </footer>
+</body>
+</html>
