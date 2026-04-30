@@ -33,9 +33,13 @@ Branches, files, flags that are never touched. Default block-list:
 ## Q5. Risk tier
 
 - **L1** — discover + propose only
+  - When? Audit-only setups, regulated environments, first-time mission for an unfamiliar repo.
 - **L2** — small PRs (≤300 lines, ≤10 files) — *default*
+  - When? Most repos. Reviewable diffs, CI gating, no auto-merge.
 - **L3** — merge after green
+  - When? Trusted infra, strong CI, repo where bot PRs can self-merge.
 - **L4** — free mode (forbidden zones still absolute)
+  - When? Large refactors planned with the user, multi-PR experiments. Q4 still blocks destructive ops.
 
 ## Q6. Cadence
 
