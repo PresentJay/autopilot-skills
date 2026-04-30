@@ -51,6 +51,15 @@
 - threshold: 80 <!-- 60 | 70 | 80 | 90 -->
 - frequency: every-cycle <!-- every-cycle | threshold-only | off -->
 
+## Q9. Update policy
+- check: every-24h <!-- every-boot | every-24h | weekly | off -->
+- on_update_available: prompt <!-- notify | prompt | silent-auto -->
+- repo: PresentJay/autopilot-skills
+
+## Q10. Resume policy
+- stale_threshold: 2x-cadence <!-- 2x-cadence | 4x-cadence | 8x-cadence -->
+- on_resume: auto-resume <!-- auto-resume | prompt-confirm | manual-only -->
+
 ## Storage
 - journal_root: .autopilot.log/         <!-- mutable; you may change to e.g. docs/improvement/ or .claude/autopilot/ -->
 - milestones_root: .autopilot.milestones/  <!-- FIXED — do not edit; the skill ignores changes -->
@@ -65,6 +74,8 @@
 - Q6: default
 - Q7: default
 - Q8: default
+- Q9: default
+- Q10: default
 
 ## Tools (auto-discover commands — add/remove for your domain)
 - `npm run lint`

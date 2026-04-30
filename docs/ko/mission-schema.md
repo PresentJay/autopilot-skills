@@ -48,3 +48,29 @@ title: 미션 스키마
 ## Q8. 자동 컴팩션 (Auto-compaction)
 
 임계값(60/70/80/90, 기본 80)과 빈도(`every-cycle`, `threshold-only`, `off`).
+
+## Q9. 업데이트 정책 (Update policy)
+
+스킬은 `PresentJay/autopilot-skills` 의 GitHub releases 를 주기적으로 확인합니다.
+
+- **check**: `every-boot` / `every-24h` / `weekly` / `off` — 기본 `every-24h`
+- **on_update_available**:
+  - `notify` — 사이클 출력 끝에 한 줄 알림
+  - `prompt` *(기본)* — 알림 + "지금 갱신할까요?" 확인. yes 시 `npx skills update PresentJay/autopilot-skills --yes` 실행
+  - `silent-auto` — 묻지 않고 자동 실행
+
+체크는 fail-open: GitHub API 오류 또는 5초 타임아웃 시 조용히 skip 하고 다음 주기에 재시도. 사이클을 절대 막지 않음.
+
+## Q10. 재개 정책 (Resume policy)
+
+호스트 sleep, 세션 크래시, ScheduleWakeup 누락, cycle 중단 등 인터럽트로부터 어떻게 복구할지 제어.
+
+- **stale_threshold**: `2x-cadence` *(기본)* / `4x-cadence` / `8x-cadence` — `next_wakeup_at` 이후 얼마나 지나면 stalled 로 판정할지
+- **on_resume**:
+  - `auto-resume` *(기본)* — stale 감지 시 조용히 새 사이클 실행
+  - `prompt-confirm` — 진단 표시("N 사이클 missed. 재개?") + 확인 후 진행
+  - `manual-only` — `/autopilot resume` 또는 `/autopilot heal` 명시 신호에만 재개
+
+Phase 0.5 가 5가지 패턴을 감지: crashed mid-cycle, missed wakeups, schedule lost, paused, escalated.
+
+사용자 신호: `/autopilot resume`, `/autopilot heal`, `/autopilot status`.

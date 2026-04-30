@@ -48,3 +48,29 @@ title: ミッションスキーマ
 ## Q8. 自動コンパクション (Auto-compaction)
 
 閾値(60/70/80/90、デフォルト 80)と頻度(`every-cycle`、`threshold-only`、`off`)。
+
+## Q9. アップデートポリシー (Update policy)
+
+スキルは `PresentJay/autopilot-skills` の GitHub releases を定期的にチェックします。
+
+- **check**: `every-boot` / `every-24h` / `weekly` / `off` — デフォルト `every-24h`
+- **on_update_available**:
+  - `notify` — サイクル出力の末尾に 1 行通知を追加
+  - `prompt` *(デフォルト)* — 通知 + 「今すぐアップデート?」を確認。承認後 `npx skills update PresentJay/autopilot-skills --yes` を実行
+  - `silent-auto` — 確認なしで自動実行
+
+チェックは fail-open: GitHub API エラーまたは 5 秒タイムアウトの場合は静かにスキップし、次回リトライ。サイクルを絶対にブロックしません。
+
+## Q10. 再開ポリシー (Resume policy)
+
+中断(ホスト sleep、セッションクラッシュ、ScheduleWakeup 取りこぼし、サイクル中断)からどのように復旧するかを制御。
+
+- **stale_threshold**: `2x-cadence` *(デフォルト)* / `4x-cadence` / `8x-cadence` — `next_wakeup_at` からどれだけ経過したら stalled と判定するか
+- **on_resume**:
+  - `auto-resume` *(デフォルト)* — stale 検出時、静かに新サイクルを実行
+  - `prompt-confirm` — 診断("Missed N cycles. Resume?")表示 → 確認後に続行
+  - `manual-only` — `/autopilot resume` または `/autopilot heal` の明示シグナル時のみ復旧
+
+Phase 0.5 が 5 つのパターンを検出: crashed mid-cycle、missed wakeups、schedule lost、paused、escalated。
+
+ユーザーシグナル: `/autopilot resume`、`/autopilot heal`、`/autopilot status`。

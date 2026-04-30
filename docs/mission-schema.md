@@ -48,3 +48,29 @@ Default thresholds: 3 consecutive failures, diff cap exceeded, irreversible acti
 ## Q8. Auto-compaction
 
 Threshold (60/70/80/90, default 80) and frequency (`every-cycle`, `threshold-only`, `off`).
+
+## Q9. Update policy
+
+The skill checks GitHub releases for newer versions of `PresentJay/autopilot-skills`.
+
+- **check**: `every-boot` / `every-24h` / `weekly` / `off` — default `every-24h`
+- **on_update_available**:
+  - `notify` — append a one-line notice to the cycle output
+  - `prompt` *(default)* — show notice and ask "update now?"; on confirm, run `npx skills update PresentJay/autopilot-skills --yes`
+  - `silent-auto` — run the update without asking
+
+The check fails open: if the GitHub API errors or times out (5s), the cycle continues without blocking.
+
+## Q10. Resume policy
+
+Controls how the skill recovers from interruptions (host sleep, session crash, missed `ScheduleWakeup`, mid-cycle abort).
+
+- **stale_threshold**: `2x-cadence` *(default)* / `4x-cadence` / `8x-cadence` — how long after `next_wakeup_at` to consider the loop stalled
+- **on_resume**:
+  - `auto-resume` *(default)* — silently detect stale state and run a fresh cycle
+  - `prompt-confirm` — show diagnosis ("Missed N cycles. Resume?") and confirm before continuing
+  - `manual-only` — only resume on explicit `/autopilot resume` or `/autopilot heal`
+
+Phase 0.5 detects 5 patterns: crashed mid-cycle, missed wakeups, schedule lost, paused, escalated.
+
+User signals: `/autopilot resume`, `/autopilot heal`, `/autopilot status`.

@@ -48,3 +48,29 @@ title: 任务结构
 ## Q8. 自动压缩 (Auto-compaction)
 
 阈值(60/70/80/90,默认 80)和频率(`every-cycle`、`threshold-only`、`off`)。
+
+## Q9. 更新策略 (Update policy)
+
+技能会定期检查 `PresentJay/autopilot-skills` 的 GitHub releases。
+
+- **check**: `every-boot` / `every-24h` / `weekly` / `off` — 默认 `every-24h`
+- **on_update_available**:
+  - `notify` — 在循环输出末尾追加一行通知
+  - `prompt` *(默认)* — 通知 + "立即更新?" 确认。确认后执行 `npx skills update PresentJay/autopilot-skills --yes`
+  - `silent-auto` — 不询问,自动执行
+
+检查 fail-open: GitHub API 报错或 5 秒超时时静默跳过,下次再试。绝不阻塞循环。
+
+## Q10. 恢复策略 (Resume policy)
+
+控制技能如何从中断(主机 sleep、会话崩溃、ScheduleWakeup 丢失、循环中断)中恢复。
+
+- **stale_threshold**: `2x-cadence` *(默认)* / `4x-cadence` / `8x-cadence` — `next_wakeup_at` 之后多久判定为 stalled
+- **on_resume**:
+  - `auto-resume` *(默认)* — 检测到 stale 时静默运行新循环
+  - `prompt-confirm` — 显示诊断("Missed N cycles. Resume?")并确认后继续
+  - `manual-only` — 仅在显式信号 `/autopilot resume` 或 `/autopilot heal` 时恢复
+
+Phase 0.5 检测 5 种模式: crashed mid-cycle、missed wakeups、schedule lost、paused、escalated。
+
+用户信号: `/autopilot resume`、`/autopilot heal`、`/autopilot status`。
