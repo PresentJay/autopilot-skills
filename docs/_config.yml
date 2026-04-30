@@ -1,7 +1,7 @@
 title: autopilot-skills
 description: Universal self-driving mission runner for AI coding agents.
 theme: minima
-baseurl: ""
+baseurl: "/autopilot-skills"
 url: "https://presentjay.github.io/autopilot-skills"
 markdown: kramdown
 defaults:

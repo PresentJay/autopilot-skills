@@ -2,12 +2,12 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <title>autopilot-skills — AIコーディングエージェント向け自律走行ミッションランナー</title>
-  <meta name="description" content="AIコーディングエージェント(Claude Code、Codex、Cursor、Gemini ...)向けの汎用自律走行ミッションランナー。1つのコマンド。終わりなきサイクル。すべてのフェーズでセーフティを強制。" />
+  <title>autopilot-skills — AI コーディングエージェントを自律走行に</title>
+  <meta name="description" content="一行のコマンドで、AI コーディングエージェント(Claude Code・Codex・Cursor・Gemini ほか)を自律走行モードに。すべてのフェーズで安全を強制、中断後も自動で復旧。" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../assets/style.css" />
   <meta property="og:title" content="autopilot-skills" />
-  <meta property="og:description" content="AIコーディングエージェント向けの汎用自律走行ミッションランナー。" />
+  <meta property="og:description" content="AI コーディングエージェントを自律走行に。" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://presentjay.github.io/autopilot-skills/ja/" />
 </head>
@@ -27,8 +27,8 @@
     </span>
   </nav>
 
-  <h1>AIコーディングエージェントのための自律走行ミッションランナー。</h1>
-  <p class="lead">1つのコマンド。終わりなきサイクル。すべてのフェーズでセーフティを強制。Claude Code、Codex、Cursor、Gemini ほか 40+ AI ハーネスで動作。</p>
+  <h1>AI コーディングエージェントを、自律走行に。</h1>
+  <p class="lead">一行のミッションを渡せば、止めるまでサイクルが回り続けます。すべてのフェーズで安全を強制、中断後も自動で復旧。Claude Code・Codex・Cursor・Gemini ほか 40+ AI ハーネスで動作。</p>
 
   <div class="install" id="install">
     <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
@@ -36,28 +36,31 @@
   </div>
 
   <h2>何をするか</h2>
-  <p>あなたが平文で 1 行のミッションを渡すと、<code>discover → analyze → plan → execute → verify → learn</code> の自律サイクルを回し、次のサイクルまでスリープします — 停止指示があるか、ミッションが完了するまで。</p>
+  <p>一行のミッションを渡すと、<code>discover → analyze → plan → execute → verify → learn</code> の自律サイクルを回し、次のサイクルまでスリープします。停止指示があるか、ミッションが完了するまで。</p>
 
   <h2>やらないこと</h2>
   <ul>
-    <li><code>main</code> / <code>master</code> への直接 push をしない。</li>
-    <li>許可していない <code>.env</code>、シークレット、インフラ、ワークフローには触れない。</li>
-    <li>許可パス外で <code>--force</code>、<code>--no-verify</code>、<code>git reset --hard</code>、<code>rm -rf</code> を実行しない。</li>
-    <li>失敗が学習済みのパターンを再試行しない (NOT-OK 自動蓄積)。</li>
+    <li><code>main</code>・<code>master</code> への直接 push をしません。</li>
+    <li>許可していない <code>.env</code>、シークレット、インフラ、ワークフローには触れません。</li>
+    <li>許可パス外で <code>--force</code>・<code>--no-verify</code>・<code>git reset --hard</code>・<code>rm -rf</code> を実行しません。</li>
+    <li>失敗が学習されたパターンは再試行しません(NOT-OK 自動蓄積)。</li>
   </ul>
 
   <h2>サイクルはあなた次第</h2>
-  <p>積極度を選択: <code>immediate</code> · <code>2m</code> · <code>5m</code> · <code>15m</code> (デフォルト) · <code>30m</code> · <code>1h+</code> (cron に自動昇格)。アイドルが続くと自動で減速します。</p>
+  <p><code>immediate</code>・<code>2m</code>・<code>5m</code>・<code>15m</code>(デフォルト)・<code>30m</code>・<code>1h+</code> から選択。<code>1h+</code> は cron に自動昇格し、セッションを閉じても動き続けます。アイドルが続けばサイクルは自動で減速します。</p>
 
-  <h2>マイルストーンは保存</h2>
-  <p>ジャーナルは <code>.autopilot.log/</code> (可変)に蓄積され、重要な瞬間 — PR マージ、bounded ミッション完了、初めての zero-defect — は <code>.autopilot.milestones/</code> (固定・不変)に自動昇格されます。</p>
+  <h2>重要な瞬間は保存</h2>
+  <p>ジャーナルは <code>.autopilot.log/</code> に蓄積され(場所は変更可)、PR マージ・bounded ミッション完了・初回 zero-defect といった意味のある瞬間は <code>.autopilot.milestones/</code>(固定・不変)に自動昇格されます。</p>
+
+  <h2>中断後も自動で復旧</h2>
+  <p>ホスト sleep・セッションクラッシュ・wakeup の取りこぼしでサイクルが止まっても、次の呼び出し時に自動で診断し、作業ブランチを片付けてから新しいサイクルを始めます。<code>/autopilot status</code> で現在の状態だけ確認することもできます。</p>
 
   <hr />
 
   <h2>続きを読む</h2>
   <ul>
     <li><a href="getting-started.html">60 秒ではじめる</a></li>
-    <li><a href="mission-schema.html">ミッションスキーマ (Q1–Q8)</a></li>
+    <li><a href="mission-schema.html">ミッションスキーマ (Q1–Q10)</a></li>
     <li><a href="safety.html">セーフティポリシー</a></li>
     <li><a href="cadence.html">サイクルメニュー</a></li>
     <li><a href="milestones.html">マイルストーン トリガー</a></li>
@@ -66,7 +69,7 @@
   </ul>
 
   <footer>
-    <p>MIT ライセンス。<a href="https://github.com/PresentJay">PresentJay</a> が制作。<a href="https://impeccable.style">impeccable</a> のミニマリズムから着想。</p>
+    <p>MIT ライセンス · <a href="https://github.com/PresentJay">PresentJay</a> 制作 · <a href="https://impeccable.style">impeccable</a> のミニマリズムから着想。</p>
   </footer>
 </body>
 </html>
