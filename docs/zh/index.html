@@ -2,12 +2,12 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
-  <title>autopilot-skills — 让 AI 编程代理自主驾驶</title>
-  <meta name="description" content="一行命令,让 AI 编程代理(Claude Code、Codex、Cursor、Gemini 等)进入自主驾驶模式。每个阶段强制安全,中断后自动恢复。" />
+  <title>autopilot-skills — 让 AI 编程代理自己跑起来</title>
+  <meta name="description" content="一行命令,AI 编程代理(Claude Code、Codex、Cursor、Gemini 等)就开始自己跑。每一步都把关安全,中断后自动接着跑。" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../assets/style.css" />
   <meta property="og:title" content="autopilot-skills" />
-  <meta property="og:description" content="让 AI 编程代理自主驾驶。" />
+  <meta property="og:description" content="让 AI 编程代理自己跑起来。" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://presentjay.github.io/autopilot-skills/zh/" />
 </head>
@@ -27,8 +27,8 @@
     </span>
   </nav>
 
-  <h1>让 AI 编程代理自主驾驶。</h1>
-  <p class="lead">一行命令,代理就开始永续循环。每个阶段强制安全,中断后自动恢复。支持 Claude Code、Codex、Cursor、Gemini 等 40+ AI 编程代理。</p>
+  <h1>让 AI 编程代理自己跑起来。</h1>
+  <p class="lead">给一行任务,代理就一直跑下去 —— 直到你叫停,或者任务完成。每一步都把关安全,中断了也能自动接着跑。Claude Code、Codex、Cursor、Gemini 等 40 多种 AI 编程工具上都能用。</p>
 
   <div class="install" id="install">
     <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
@@ -36,24 +36,24 @@
   </div>
 
   <h2>它做什么</h2>
-  <p>你给一行任务描述,代理就跑 <code>discover → analyze → plan → execute → verify → learn</code> 循环,然后睡到下一轮。直到你叫停,或者任务完成。</p>
+  <p>你给一行任务描述,代理就跑 <code>discover → analyze → plan → execute → verify → learn</code> 这一整圈,然后睡到下一轮再接着跑。直到你叫停,或者任务完成。</p>
 
   <h2>它不做什么</h2>
   <ul>
     <li>不直接 push 到 <code>main</code> 或 <code>master</code>。</li>
-    <li>不触碰未授权的 <code>.env</code>、密钥、基础设施、workflow。</li>
-    <li>允许路径外不执行 <code>--force</code>、<code>--no-verify</code>、<code>git reset --hard</code>、<code>rm -rf</code>。</li>
-    <li>不重试已学习失败的模式 (NOT-OK 自动累积)。</li>
+    <li>没你授权的 <code>.env</code>、密钥、基础设施、workflow,一律不碰。</li>
+    <li>允许路径以外,不跑 <code>--force</code>、<code>--no-verify</code>、<code>git reset --hard</code>、<code>rm -rf</code>。</li>
+    <li>已经学到失败的模式,不再重试 (NOT-OK 自动累积)。</li>
   </ul>
 
-  <h2>节奏由你掌控</h2>
-  <p>从 <code>immediate</code> · <code>2m</code> · <code>5m</code> · <code>15m</code> (默认) · <code>30m</code> · <code>1h+</code> 中选。<code>1h+</code> 自动升级为 cron,会话关闭后仍能运行。空闲循环累积时,节奏自动放慢。</p>
+  <h2>节奏你说了算</h2>
+  <p>从 <code>immediate</code>、<code>2m</code>、<code>5m</code>、<code>15m</code>(默认)、<code>30m</code>、<code>1h+</code> 里选。<code>1h+</code> 自动升级成 cron,关掉会话也照样跑。空跑攒多了,节奏会自动放慢。</p>
 
-  <h2>关键时刻被保留</h2>
-  <p>日志写入 <code>.autopilot.log/</code> (位置可改),PR 合并、bounded 任务完成、首次 zero-defect 这类有意义的事件,会自动晋升到 <code>.autopilot.milestones/</code>(固定路径,不可变)。</p>
+  <h2>关键时刻另存一份</h2>
+  <p>日志写在 <code>.autopilot.log/</code>(位置可以改);PR 合并、bounded 任务完成、首次 zero-defect 这种关键事件,自动晋升到 <code>.autopilot.milestones/</code>(这个路径是固定的、改不了)。</p>
 
-  <h2>中断后会自我修复</h2>
-  <p>主机 sleep、会话崩溃、wakeup 丢失等导致循环停下,下次调用时会自动诊断、清理工作分支,然后开始新循环。也可用 <code>/autopilot status</code> 单独查看当前状态。</p>
+  <h2>断了能自己接上</h2>
+  <p>主机 sleep、会话崩溃、wakeup 丢了 —— 下次调用时它会自己诊断、清理工作分支,然后继续新一轮。只想看现在状态用 <code>/autopilot status</code>。</p>
 
   <hr />
 

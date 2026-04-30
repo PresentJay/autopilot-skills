@@ -2,12 +2,12 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <title>autopilot-skills — AI コーディングエージェントを自律走行に</title>
-  <meta name="description" content="一行のコマンドで、AI コーディングエージェント(Claude Code・Codex・Cursor・Gemini ほか)を自律走行モードに。すべてのフェーズで安全を強制、中断後も自動で復旧。" />
+  <title>autopilot-skills — AI エージェントを、走らせ続ける</title>
+  <meta name="description" content="一行のミッションを渡せば、AI エージェント(Claude Code・Codex・Cursor・Gemini …)が自走し続けます。各フェーズで安全をガード、止まっても自動で再起動。" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../assets/style.css" />
   <meta property="og:title" content="autopilot-skills" />
-  <meta property="og:description" content="AI コーディングエージェントを自律走行に。" />
+  <meta property="og:description" content="AI エージェントを、走らせ続ける。" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://presentjay.github.io/autopilot-skills/ja/" />
 </head>
@@ -27,8 +27,8 @@
     </span>
   </nav>
 
-  <h1>AI コーディングエージェントを、自律走行に。</h1>
-  <p class="lead">一行のミッションを渡せば、止めるまでサイクルが回り続けます。すべてのフェーズで安全を強制、中断後も自動で復旧。Claude Code・Codex・Cursor・Gemini ほか 40+ AI ハーネスで動作。</p>
+  <h1>AI エージェントを、走らせ続ける。</h1>
+  <p class="lead">一行のミッションを渡すだけ。あなたが止めるまで、サイクルが回り続けます。各フェーズで安全をガード、止まっても自動で再起動。Claude Code・Codex・Cursor・Gemini ほか 40 種類以上のコーディング AI で動きます。</p>
 
   <div class="install" id="install">
     <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
@@ -36,24 +36,24 @@
   </div>
 
   <h2>何をするか</h2>
-  <p>一行のミッションを渡すと、<code>discover → analyze → plan → execute → verify → learn</code> の自律サイクルを回し、次のサイクルまでスリープします。停止指示があるか、ミッションが完了するまで。</p>
+  <p>一行のミッションを渡すと、<code>discover → analyze → plan → execute → verify → learn</code> という自律サイクルを回します。1 周終わったら次のサイクルまでスリープして、起きてからまた続きをやる。あなたが止めるまで、もしくはミッションが終わるまで。</p>
 
   <h2>やらないこと</h2>
   <ul>
-    <li><code>main</code>・<code>master</code> への直接 push をしません。</li>
-    <li>許可していない <code>.env</code>、シークレット、インフラ、ワークフローには触れません。</li>
+    <li><code>main</code>・<code>master</code> に直接 push しません。</li>
+    <li>許可していない <code>.env</code>・シークレット・インフラ・ワークフローには触りません。</li>
     <li>許可パス外で <code>--force</code>・<code>--no-verify</code>・<code>git reset --hard</code>・<code>rm -rf</code> を実行しません。</li>
-    <li>失敗が学習されたパターンは再試行しません(NOT-OK 自動蓄積)。</li>
+    <li>すでに失敗を学習したパターンは、もう試しません(NOT-OK 自動蓄積)。</li>
   </ul>
 
   <h2>サイクルはあなた次第</h2>
-  <p><code>immediate</code>・<code>2m</code>・<code>5m</code>・<code>15m</code>(デフォルト)・<code>30m</code>・<code>1h+</code> から選択。<code>1h+</code> は cron に自動昇格し、セッションを閉じても動き続けます。アイドルが続けばサイクルは自動で減速します。</p>
+  <p><code>immediate</code>・<code>2m</code>・<code>5m</code>・<code>15m</code>(デフォルト)・<code>30m</code>・<code>1h+</code> から選びます。<code>1h+</code> は cron に自動昇格するので、セッションを閉じても動き続けます。空サイクルが続けば、テンポは自動で落ちます。</p>
 
-  <h2>重要な瞬間は保存</h2>
-  <p>ジャーナルは <code>.autopilot.log/</code> に蓄積され(場所は変更可)、PR マージ・bounded ミッション完了・初回 zero-defect といった意味のある瞬間は <code>.autopilot.milestones/</code>(固定・不変)に自動昇格されます。</p>
+  <h2>大事な瞬間は別建て</h2>
+  <p>ジャーナルは <code>.autopilot.log/</code> に貯まります(場所は変えられます)。PR マージ・bounded ミッション完了・初回 zero-defect のような重要な瞬間は、自動で <code>.autopilot.milestones/</code> へ昇格します(こちらは固定で動かせません)。</p>
 
-  <h2>中断後も自動で復旧</h2>
-  <p>ホスト sleep・セッションクラッシュ・wakeup の取りこぼしでサイクルが止まっても、次の呼び出し時に自動で診断し、作業ブランチを片付けてから新しいサイクルを始めます。<code>/autopilot status</code> で現在の状態だけ確認することもできます。</p>
+  <h2>止まっても自分で立ち上がる</h2>
+  <p>ホスト sleep・セッションクラッシュ・wakeup の取りこぼしでサイクルが止まっても、次の呼び出しで自動で診断し、作業ブランチを片付けてから新しいサイクルを始めます。状態だけ確認したいときは <code>/autopilot status</code>。</p>
 
   <hr />
 
