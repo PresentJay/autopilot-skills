@@ -2,12 +2,12 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <title>autopilot-skills — AI 코딩 에이전트의 자율주행</title>
-  <meta name="description" content="AI 코딩 에이전트(Claude Code · Codex · Cursor · Gemini 등)에 한 줄 명령으로 자율주행을 부여하는 스킬. 모든 단계에서 안전을 강제, 인터럽트 후 자가복구." />
+  <title>autopilot-skills — AI 코딩 에이전트가 알아서 돌아가게</title>
+  <meta name="description" content="한 줄짜리 미션을 주면, AI 코딩 에이전트(Claude Code · Codex · Cursor · Gemini …)가 알아서 사이클을 돌립니다. 단계마다 안전 가드, 끊겨도 자동으로 이어 갑니다." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../assets/style.css" />
   <meta property="og:title" content="autopilot-skills" />
-  <meta property="og:description" content="AI 코딩 에이전트의 자율주행 스킬." />
+  <meta property="og:description" content="AI 코딩 에이전트, 알아서 돌아가게." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://presentjay.github.io/autopilot-skills/ko/" />
 </head>
@@ -27,39 +27,39 @@
     </span>
   </nav>
 
-  <h1>AI 코딩 에이전트를 자율주행으로 운영하세요.</h1>
-  <p class="lead">미션을 한 줄로 건네면, 멈추라 할 때까지 사이클이 돕니다. 모든 단계에서 안전 강제, 인터럽트 후 자가복구. Claude Code · Codex · Cursor · Gemini 등 40개 이상 AI 하니스에서 동작.</p>
+  <h1>AI 코딩 에이전트, 알아서 돌게.</h1>
+  <p class="lead">한 줄짜리 미션만 주세요. 멈추라 할 때까지 사이클이 알아서 돕니다. 단계마다 안전 가드, 끊겨도 자동으로 이어 갑니다. Claude Code · Codex · Cursor · Gemini 등 40여 종 AI 도구에서 동작.</p>
 
   <div class="install" id="install">
     <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
     <button onclick="navigator.clipboard.writeText('npx skills add PresentJay/autopilot-skills'); this.textContent='복사됨'; setTimeout(()=>this.textContent='복사', 1500);">복사</button>
   </div>
 
-  <h2>무엇을 합니까</h2>
-  <p>한 줄짜리 미션을 받으면 <code>discover → analyze → plan → execute → verify → learn</code> 자율 사이클을 돕니다. 사이클이 끝나면 다음 사이클까지 잠들고, 다시 깨어나 작업을 이어 갑니다. 멈추라 할 때까지, 또는 미션이 끝날 때까지.</p>
+  <h2>무엇을 하느냐</h2>
+  <p>미션을 받으면 <code>discover → analyze → plan → execute → verify → learn</code> 사이클을 자율로 돌립니다. 한 사이클 끝나면 다음 사이클까지 잠들고, 다시 깨어 작업을 이어 갑니다. 멈추라 할 때까지, 또는 미션이 끝날 때까지.</p>
 
-  <h2>하지 않는 것</h2>
+  <h2>건드리지 않는 것</h2>
   <ul>
-    <li><code>main</code>, <code>master</code> 직접 푸시 금지.</li>
-    <li>허용하지 않은 <code>.env</code>, 비밀, 인프라, 워크플로우는 절대 건드리지 않음.</li>
-    <li>허용 경로 밖에서 <code>--force</code>, <code>--no-verify</code>, <code>git reset --hard</code>, <code>rm -rf</code> 실행 금지.</li>
-    <li>한 번 실패가 학습된 패턴은 다시 시도하지 않음 (NOT-OK 자동 누적).</li>
+    <li><code>main</code>, <code>master</code> 에는 직접 push 안 함.</li>
+    <li>허용 안 한 <code>.env</code>, 비밀, 인프라, 워크플로우는 절대 손대지 않음.</li>
+    <li>허용 경로 밖에서 <code>--force</code>, <code>--no-verify</code>, <code>git reset --hard</code>, <code>rm -rf</code> 안 씀.</li>
+    <li>한 번 실패한 패턴은 다시 시도 안 함 (NOT-OK 자동 누적).</li>
   </ul>
 
-  <h2>주기는 직접 정하세요</h2>
-  <p><code>immediate</code> · <code>2m</code> · <code>5m</code> · <code>15m</code> (기본값) · <code>30m</code> · <code>1h+</code> 중 선택. <code>1h+</code> 는 cron 으로 자동 승격되어 세션이 닫혀도 동작합니다. 빈 사이클이 누적되면 주기는 자동으로 느려집니다.</p>
+  <h2>주기는 직접 정해</h2>
+  <p><code>immediate</code> · <code>2m</code> · <code>5m</code> · <code>15m</code> (기본) · <code>30m</code> · <code>1h+</code> 중 골라 쓰세요. <code>1h+</code> 는 cron 으로 자동 승격되어 세션을 닫아도 계속 돕니다. 빈 사이클이 쌓이면 주기는 알아서 느려집니다.</p>
 
-  <h2>중요 순간은 보존됩니다</h2>
-  <p>저널은 <code>.autopilot.log/</code> 에 쌓이고 (위치 변경 가능), PR 머지 · 미션 완료 · 첫 zero-defect 같은 의미 있는 사건은 <code>.autopilot.milestones/</code> (고정·불변) 에 자동 승격됩니다.</p>
+  <h2>중요한 순간은 따로 보관</h2>
+  <p>저널은 <code>.autopilot.log/</code> 에 쌓이고 (위치 변경 가능), PR 머지 · 미션 완료 · 첫 zero-defect 같은 핵심 사건은 <code>.autopilot.milestones/</code> 에 자동 승격됩니다 (이쪽은 고정·불변).</p>
 
-  <h2>인터럽트 후에도 알아서 복구</h2>
-  <p>호스트 sleep, 세션 크래시, 누락된 wakeup 등으로 사이클이 중단되어도, 다음 호출 때 자동으로 진단하고 작업 브랜치를 정리한 뒤 새 사이클을 돕니다. <code>/autopilot status</code> 로 현재 상태만 점검할 수도 있습니다.</p>
+  <h2>끊겨도 알아서 복구</h2>
+  <p>호스트 sleep, 세션 크래시, 누락된 wakeup 으로 사이클이 멈춰도 다음 호출 때 알아서 진단하고 작업 브랜치를 정리한 뒤 새 사이클을 시작합니다. 상태만 보고 싶을 땐 <code>/autopilot status</code>.</p>
 
   <hr />
 
-  <h2>더 읽기</h2>
+  <h2>더 보기</h2>
   <ul>
-    <li><a href="getting-started.html">60초 안에 시작하기</a></li>
+    <li><a href="getting-started.html">60초 만에 시작</a></li>
     <li><a href="mission-schema.html">미션 스키마 (Q1–Q10)</a></li>
     <li><a href="safety.html">안전 정책</a></li>
     <li><a href="cadence.html">주기 메뉴</a></li>

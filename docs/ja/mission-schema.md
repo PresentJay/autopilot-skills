@@ -4,21 +4,21 @@ title: ミッションスキーマ
 
 # ミッションスキーマ
 
-各セクションは起動インタビューの 1 問です。完全なテンプレートは [`skills/autopilot/templates/mission.md`](https://github.com/PresentJay/autopilot-skills/blob/main/skills/autopilot/templates/mission.md) にあります。
+各セクションがセットアップで答える 1 問にあたります。完全なテンプレートは [`skills/autopilot/templates/mission.md`](https://github.com/PresentJay/autopilot-skills/blob/main/skills/autopilot/templates/mission.md) にあります。
 
 ## Q1. ミッション
 
-一行。ループが追求する単一の目標。
+一行。サイクルが追いかける単一の目標。
 
 ## Q2. 動作モード
 
-- `continuous` — 停止指示まで継続
+- `continuous` — 止めるまで続ける
 - `bounded:N` — 最大 N サイクル
-- `monitor` — 外部イベントにのみ反応
+- `monitor` — 外部イベントにだけ反応する
 
 ## Q3. 許可パス
 
-ループが変更可能な glob パターン。リストにないパスは read-only。
+サイクルが触れる glob パターン。リストにないものは read-only。
 
 ## Q4. 禁止ゾーン
 
@@ -32,9 +32,9 @@ title: ミッションスキーマ
 
 ## Q5. リスク階層
 
-- **L1** — 発見と提案のみ
-- **L2** — 小さな PR (≤300 行、≤10 ファイル) — *デフォルト*
-- **L3** — グリーンになり次第マージ
+- **L1** — 発見と提案だけ
+- **L2** — 小さな PR (≤300 行・≤10 ファイル) — *デフォルト*
+- **L3** — 通ったら自動マージ
 - **L4** — 自由モード(Q4 禁止ゾーンは依然として絶対)
 
 ## Q6. サイクル
@@ -43,34 +43,34 @@ title: ミッションスキーマ
 
 ## Q7. エスカレーション トリガー
 
-デフォルトの閾値: 連続失敗 3 回、diff cap 超過、不可逆操作、候補なし時の動作 (`end` / `ask`)。
+デフォルト: 連続失敗 3 回、diff cap 超過、不可逆操作、候補なし時の動作 (`end` / `ask`)。
 
 ## Q8. 自動コンパクション
 
-閾値(60 / 70 / 80 / 90、デフォルト 80)と頻度 (`every-cycle`・`threshold-only`・`off`)。
+閾値(60 / 70 / 80 / 90、デフォルト 80)・頻度 (`every-cycle`・`threshold-only`・`off`)。
 
 ## Q9. アップデートポリシー
 
-スキルは GitHub releases を定期的にチェックします。
+GitHub releases で新バージョンが出ていないか、定期的に確認します。
 
 - **check**: `every-boot` / `every-24h` / `weekly` / `off` — デフォルト `every-24h`
 - **on_update_available**:
-  - `notify` — サイクル出力の末尾に 1 行の通知を追加
-  - `prompt` *(デフォルト)* — 通知 + 「今すぐアップデート?」を確認。承認後 `npx skills update PresentJay/autopilot-skills --yes` を実行
+  - `notify` — サイクル出力の末尾に 1 行通知を追加
+  - `prompt` *(デフォルト)* — 通知を出して「今すぐアップデート?」を確認。承認すれば `npx skills update PresentJay/autopilot-skills --yes` を実行
   - `silent-auto` — 確認なしで自動実行
 
-チェックは fail-open: GitHub API エラーまたは 5 秒タイムアウトの場合は静かにスキップし、次回リトライ。サイクルを絶対にブロックしません。
+チェックは fail-open: GitHub API エラーや 5 秒タイムアウトのときは静かにスキップして、次回リトライします。サイクルを絶対に止めません。
 
 ## Q10. 再開ポリシー
 
-中断(ホスト sleep、セッションクラッシュ、ScheduleWakeup の取りこぼし、サイクル中断)からどう復旧するかを制御します。
+ホスト sleep・セッションクラッシュ・ScheduleWakeup の取りこぼし・サイクル中断 —— こうした中断からどう立ち直るかを決めます。
 
-- **stale_threshold**: `2x-cadence` *(デフォルト)* / `4x-cadence` / `8x-cadence` — `next_wakeup_at` からどれだけ経過したら stalled と判定するか
+- **stale_threshold**: `2x-cadence` *(デフォルト)* / `4x-cadence` / `8x-cadence` — `next_wakeup_at` からどれだけ経過したら stalled とみなすか
 - **on_resume**:
-  - `auto-resume` *(デフォルト)* — stale 検出時、静かに新サイクルを実行
-  - `prompt-confirm` — 診断(「N サイクルが取りこぼされました。再開?」)を表示し、確認後に続行
-  - `manual-only` — `/autopilot resume` または `/autopilot heal` の明示シグナル時のみ復旧
+  - `auto-resume` *(デフォルト)* — stale を見つけたら静かに新サイクルを開始
+  - `prompt-confirm` — 診断を出して(「N サイクル取りこぼし。再開?」)確認後に続行
+  - `manual-only` — `/autopilot resume` または `/autopilot heal` の明示シグナルがあるときだけ復旧
 
-Phase 0.5 が 5 つのパターンを検出します: crashed mid-cycle、missed wakeups、schedule lost、paused、escalated。
+Phase 0.5 が 5 つのパターンを拾います: crashed mid-cycle・missed wakeups・schedule lost・paused・escalated。
 
-ユーザーシグナル: `/autopilot resume`、`/autopilot heal`、`/autopilot status`。
+ユーザーシグナル: `/autopilot resume`・`/autopilot heal`・`/autopilot status`。
