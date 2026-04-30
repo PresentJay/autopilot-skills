@@ -1,14 +1,14 @@
 ---
 name: autopilot
-description: Self-driving mission runner — once started, runs an endless discover→analyze→plan→execute→verify→learn cycle on a user-defined mission until told to stop. Boot interview captures mission, allow/forbidden paths, risk tier, cadence, auto-compact threshold, escalation. Safety policy blocks forbidden zones at every phase, forces dry-run for risky ops, learns NOT-OK patterns from failures. Universal across AI coding agents (Claude Code, Codex, Cursor, Gemini, ...). Triggers - "autopilot", "self-drive", "자율주행", "auto drive", "autonomous mode", "run cycle".
-version: 1.0.0
+description: Self-driving mission runner — once started, runs an endless discover→analyze→plan→execute→verify→learn cycle on a user-defined mission until told to stop. Boot interview captures mission, allow/forbidden paths, risk tier, cadence, auto-compact threshold, escalation, update policy, resume policy. Safety policy blocks forbidden zones at every phase, forces dry-run for risky ops, learns NOT-OK patterns from failures. Self-heals after interrupted cycles or missed wakeups. Universal across AI coding agents (Claude Code, Codex, Cursor, Gemini, ...). Triggers - "autopilot", "self-drive", "자율주행", "auto drive", "autonomous mode", "run cycle", "resume autopilot", "heal autopilot".
+version: 1.1.0
 ---
 
 # Autopilot — Self-driving mission runner
 
 You receive a mission from the user and run an autonomous loop until they tell you to stop. The domain is whatever the user defines in the mission file — code self-improvement, doc grooming, research synthesis, ops sweeps, anything that benefits from a tight discover→execute→learn cadence.
 
-This skill replaces ad-hoc loops (ralph-loop, improve-airops) with a domain-agnostic orchestrator: per-project mission, mission-bound governance, idle-aware self-pacing via `ScheduleWakeup`, immutable milestone trail.
+This skill replaces ad-hoc loops (ralph-loop, improve-airops) with a domain-agnostic orchestrator: per-project mission, mission-bound governance, idle-aware self-pacing via `ScheduleWakeup`, immutable milestone trail, **self-healing on interruption**, and **opt-in update notifications**.
 
 ## Boot check
 
@@ -22,11 +22,24 @@ Decision:
 
 - **Missing** → run "Boot interview" below.
 - **Exists, user explicitly says "new mission" / "reset" / "redo"** → back up to `mission.md.bak.<timestamp>`, run interview again.
-- **Exists, normal call** → enter "Operating cycle".
+- **Exists, normal call or `/autopilot resume` / `/autopilot heal` / `/autopilot status`** → enter "Phase 0.5 — Resume + update check", then "Operating cycle".
+
+## User signals
+
+| Signal | Effect |
+|---|---|
+| `/autopilot` | Auto-detect stale state, then run a cycle (or no-op if mission complete) |
+| `/autopilot resume` | Force `Mode: paused` → `active`, run a cycle |
+| `/autopilot heal` | Force interruption recovery (clean working branch, mark crashed cycle, start fresh) |
+| `/autopilot status` | Print current state from `state.json` + last journal entry; do **not** run a cycle |
+| `/autopilot stop` / "멈춰" / "pause" | Set `Mode: paused`, no `ScheduleWakeup` |
+| `/autopilot mission="X" risk=L2 cadence=15m ...` | Args parsed into Q1–Q10 pre-fills |
+
+---
 
 ## Boot interview (mission contract)
 
-Goal: capture mission, scope, risk, cadence, compaction, escalation in 8 short questions. Use `AskUserQuestion`, one question per turn, narrowing if the answer is unclear.
+Goal: capture mission, scope, risk, cadence, compaction, escalation, update policy, resume policy in 10 short questions. Use `AskUserQuestion`, one question per turn, narrowing if the answer is unclear.
 
 **Inference from invocation args**: if the user passes hints in the same turn (e.g. `/autopilot mission="lint cleanup" risk=L2 cadence=15m`), parse `key=value` pairs and pre-fill matching answers. Show the pre-filled draft once and offer:
 
@@ -116,15 +129,103 @@ Long-running loops bump into the prompt-too-long ceiling. Compaction trims the c
   - `threshold-only` — compact only when threshold is crossed
   - `off` — no compaction (user accepts the risk)
 
+### Q9. Update policy (new in v1.1.0)
+
+The skill ships with a `version` field in its frontmatter. Newer releases on `PresentJay/autopilot-skills` are detected by an unauthenticated GitHub releases API call (cached for 24h in `state.json.last_update_check_at`).
+
+- **check**: `every-boot` / `every-24h` / `weekly` / `off` — default **`every-24h`**
+- **on-update-available**:
+  - `notify` — append a one-line notice to the cycle output (passive)
+  - `prompt` *(default)* — show notice and ask "update now?"; on confirm, run `npx skills update PresentJay/autopilot-skills --yes` via Bash, then ask user to re-invoke `/autopilot`
+  - `silent-auto` — run the update without asking (least recommended; only for trusted setups)
+
+The check fails open: if GitHub API errors or times out (5s cap), skip silently and retry next interval. The skill never blocks on this check.
+
+### Q10. Resume policy (new in v1.1.0)
+
+Controls how the skill recovers from interruptions (host sleep, session crash, missed `ScheduleWakeup`, mid-cycle abort).
+
+- **stale_threshold**: `2x-cadence` *(default)* / `4x-cadence` / `8x-cadence` — how long after `next_wakeup_at` to consider the loop stalled
+- **on_resume**:
+  - `auto-resume` *(default)* — silently detect stale state and run a fresh cycle
+  - `prompt-confirm` — show diagnosis ("Missed N cycles. Resume?") and confirm before continuing
+  - `manual-only` — only resume on explicit `/autopilot resume` or `/autopilot heal`
+
 ### Wrap
 
 Render the proposed `mission.md` to the user. Wait for one explicit confirm before starting the first cycle. Save mission.md, state.json, and create `.autopilot.log/` and `.autopilot.milestones/` directories.
 
 ---
 
+## Phase 0.5 — Resume + update check (new in v1.1.0)
+
+Runs **after** boot check, **before** Phase 1 DISCOVER. Two independent sub-checks:
+
+### Resume check
+
+Read `state.json`:
+
+```
+status            : idle | running | interrupted | escalated | paused
+last_run_at       : ISO timestamp or null
+next_wakeup_at    : ISO timestamp or null
+cycle_started_at  : ISO timestamp or null
+```
+
+Decision matrix (apply per `Q10.on_resume`):
+
+| Condition | Diagnosis | Action |
+|---|---|---|
+| `cycle_started_at` is set AND `last_run_at` < `cycle_started_at` (or null) | Crashed mid-cycle | On `autopilot/<slug>` branch: `git restore .` + `git clean -fd`. Append `interrupted` entry to journal. Reset `status: idle`, `cycle_started_at: null`. Continue. |
+| `next_wakeup_at` set AND `now - next_wakeup_at` > `Q10.stale_threshold × cadence` | Missed wakeups | Compute missed count = floor((now - next_wakeup_at) / cadence). Surface "🔁 Resumed after N missed cycles." per `Q10.on_resume`. Continue. |
+| `next_wakeup_at` is null AND `Mode: active` | Schedule lost (post-failure with no record) | Surface "🔁 Schedule lost — re-arming." Continue and re-arm at end. |
+| `Mode: paused` AND user signal != `/autopilot resume` | Intentionally paused | Print state, ask "resume?" If yes, set `Mode: active`. If no, exit. |
+| `Mode: paused` AND user signal = `/autopilot resume` | Explicit resume | Set `Mode: active`. Continue. |
+| `/autopilot heal` (any state) | Forced recovery | Treat as crashed-mid-cycle: `git restore .` + journal interrupted entry + status reset, regardless of detected state. |
+| `/autopilot status` | Diagnostic only | Print state, last 3 journal entries, next_wakeup_at, missed count. **Do not** run a cycle. Exit. |
+| All clean | Normal | Continue silently. |
+
+Append every recovery to `state.json.interruption_history`:
+
+```json
+{ "at": "<ISO>", "type": "crashed-mid-cycle | missed-wakeups | schedule-lost | manual-heal", "recovered": true, "details": "..." }
+```
+
+### Update check
+
+Run when (a) Q9.check ≠ `off` AND (b) `now - state.json.last_update_check_at > Q9.check interval` (or `last_update_check_at` is null).
+
+```bash
+LATEST=$(curl -s --max-time 5 https://api.github.com/repos/PresentJay/autopilot-skills/releases/latest | sed -nE 's/.*"tag_name": "v?([^"]+)".*/\1/p')
+```
+
+If LATEST is empty (network/API error), fail-open: skip and retry next interval.
+
+If LATEST > current SKILL.md `version` (semver compare):
+- `Q9.on-update-available = notify`: append "📦 Update v{current} → v{latest}: `npx skills update PresentJay/autopilot-skills`" to cycle output.
+- `prompt`: show notice, ask "update now?". If yes:
+  ```bash
+  npx -y skills update PresentJay/autopilot-skills --yes
+  ```
+  Then surface "Updated. Re-invoke `/autopilot` to use v{latest}." and exit (do **not** continue cycle on stale skill code).
+- `silent-auto`: run the update Bash command, exit with the same re-invoke prompt.
+
+Cache result regardless of outcome:
+
+```json
+state.json.last_update_check_at = <now ISO>
+state.json.available_version    = <latest tag or null>
+```
+
+---
+
 ## Operating cycle (one cycle per invocation)
 
 8 phases. Bail-out rule: if the per-cycle token budget exceeds 70%, save partial state under "split-cycle" and resume at the failed phase next time.
+
+**Heartbeat (every cycle):**
+- At Phase 1 start: `state.json.cycle_started_at = now`, `status = running`.
+- At Phase 8 end: `state.json.last_run_at = now`, `next_wakeup_at = now + cadence`, `cycle_started_at = null`, `status = idle`.
 
 ### Phase 1 — DISCOVER
 
@@ -203,7 +304,7 @@ Append to `journal/YYYY-MM-DD.md`:
 - **Plan**: <expected diff, verify, rollback>
 - **Execute**: <commit hash or dry-run only>
 - **Verify**: <green/red, which check, how>
-- **결과**: success | failed | skipped | escalated
+- **결과**: success | failed | skipped | escalated | interrupted
 - **Lesson**: <one line — what the next cycle must know>
 - **NOT-OK 갱신**: <pattern added, if any>
 - **Cycle counter**: <after this cycle>
@@ -227,12 +328,13 @@ If the cycle hits any of these, copy the journal entry into `.autopilot.mileston
 
 In this order:
 
-1. Q8 frequency:
+1. Update heartbeat (see "Heartbeat" above).
+2. Q8 frequency:
    - `every-cycle` → call built-in `/compact` now
    - `threshold-only` → call `/compact` if estimated token usage ≥ Q8 threshold
    - `off` → skip
-2. Append a record to `state.json` `compaction_history`.
-3. Q2 routing:
+3. Append a record to `state.json.compaction_history`.
+4. Q2 routing:
    - `continuous` / `monitor` → `ScheduleWakeup({ prompt: "/autopilot", delaySeconds: <Q6 mapping>, reason: "<why this delay>" })`
      - On 3+ consecutive idle cycles, bump cadence one tier (15m → 30m → 1h-cron → manual)
    - `bounded` and cycle ≥ N → terminate; mark `Mode: done`
@@ -249,6 +351,7 @@ In this order:
 5. **Idle limit**: 3 consecutive empty cycles → cadence +1 tier. 10 cumulative idle cycles → propose termination.
 6. **Token budget**: 70% per-cycle ceiling triggers split-cycle save instead of fail.
 7. **External tools**: only `gh` CLI and `npm` registry. Anything else requires explicit mission.md opt-in.
+8. **Update auto-run (Q9 silent-auto)**: only runs `npx skills update <repo> --yes`. No other commands.
 
 ---
 
@@ -264,11 +367,12 @@ End every cycle with ≤8 lines:
 
 - Phase 1 tool used
 - candidate id / title
-- result (success / failed / escalated / idle)
+- result (success / failed / escalated / idle / interrupted-recovered)
 - diff or PR link if any
 - one-line lesson
 - next cycle ETA (cadence)
-- last line: exactly one of `AUTOPILOT_CYCLE_DONE`, `AUTOPILOT_PAUSED`, `AUTOPILOT_DONE`, `AUTOPILOT_ESCALATED`
+- (if applicable) update notice or resume diagnosis
+- last line: exactly one of `AUTOPILOT_CYCLE_DONE`, `AUTOPILOT_PAUSED`, `AUTOPILOT_DONE`, `AUTOPILOT_ESCALATED`, `AUTOPILOT_RESUMED`, `AUTOPILOT_UPDATED`
 
 ## Termination
 
@@ -300,6 +404,6 @@ The user can rename `journal_root` (e.g. to `docs/improvement/` or `.claude/auto
 
 ## Mission.md schema (shipped templates/mission.md is authoritative)
 
-Sections, in order: created/mode/cycle counter, Q1 mission, Q2 operating mode, Q3 allow paths, Q4 forbidden, Q5 risk tier + diff cap, Q6 cadence, Q7 escalation, Q8 auto-compaction, Storage (journal_root, milestones_root), Inference provenance, Tools, Verify commands, NOT-OK patterns, Branch / PR convention.
+Sections, in order: created/mode/cycle counter, Q1 mission, Q2 operating mode, Q3 allow paths, Q4 forbidden, Q5 risk tier + diff cap, Q6 cadence, Q7 escalation, Q8 auto-compaction, **Q9 update policy**, **Q10 resume policy**, Storage (journal_root, milestones_root), Inference provenance, Tools, Verify commands, NOT-OK patterns, Branch / PR convention.
 
 See `templates/mission.md` for the canonical schema and `templates/state.json`, `templates/journal-entry.md`, `templates/proposal.md`, `templates/milestone.md` for the rest.
