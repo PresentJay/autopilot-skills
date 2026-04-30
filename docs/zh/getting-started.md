@@ -14,13 +14,13 @@ npx skills add PresentJay/autopilot-skills
 
 ## 启动任务
 
-在你的代理(Claude Code、Codex、Cursor 等)中:
+在你使用的代理(Claude Code、Codex、Cursor 等)中:
 
 ```
 /autopilot
 ```
 
-首次调用会进入 8 题问答。已经决定的答案可以通过参数传入,跳过对应问题:
+首次调用会进入 10 题问答。已经决定的答案可以通过参数传入,跳过对应问题。
 
 ```
 /autopilot mission="lint cleanup" risk=L2 cadence=15m
