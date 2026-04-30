@@ -26,8 +26,10 @@ jobs:
             grep -q '^version:' "$f"        || (echo "$f missing version" && exit 1)
           done
 
-      - name: Reject TODO / FIXME in SKILL.md
+      - name: Reject unresolved TODO / FIXME comments in SKILL.md
         run: |
-          if grep -rn "TODO\|FIXME" skills/; then
-            echo "SKILL.md must not ship with TODOs"; exit 1
+          # Match comment-style TODO:/FIXME: (with colon) — actual unresolved markers,
+          # not literal mentions in example code blocks like `grep "TODO\|FIXME"`.
+          if grep -rnE "TODO:|FIXME:" skills/; then
+            echo "SKILL.md must not ship with unresolved TODO:/FIXME: comments"; exit 1
           fi
