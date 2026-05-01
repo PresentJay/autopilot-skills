@@ -73,10 +73,11 @@ Long missions hit prompt-too-long if context never gets trimmed. Compaction call
 The skill checks GitHub releases for newer versions of `PresentJay/autopilot-skills`.
 
 - **check**: `every-boot` / `every-24h` / `weekly` / `off` — default `every-24h`
+  - When? `every-24h` for daily-active repos; `every-boot` if you upgrade frequently and want zero lag; `weekly` for slower release cadences; `off` if you'll update manually.
 - **on_update_available**:
-  - `notify` — append a one-line notice to the cycle output
-  - `prompt` *(default)* — show notice and ask "update now?"; on confirm, run `npx skills update PresentJay/autopilot-skills --yes`
-  - `silent-auto` — run the update without asking
+  - `notify` — append a one-line notice to the cycle output. *When?* You read every cycle's output anyway.
+  - `prompt` *(default)* — show notice and ask "update now?"; on confirm, run `npx skills update PresentJay/autopilot-skills --yes`. *When?* Watching occasionally and want explicit consent.
+  - `silent-auto` — run the update without asking. *When?* Trusted setup, you don't review logs in detail.
 
 The check fails open: if the GitHub API errors or times out (5s), the cycle continues without blocking.
 

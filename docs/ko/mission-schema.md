@@ -73,10 +73,11 @@ title: 미션 스키마
 GitHub releases 에서 새 버전이 나왔는지 주기적으로 확인합니다.
 
 - **check**: `every-boot` / `every-24h` / `weekly` / `off` — 기본 `every-24h`
+  - 언제? 매일 작업하는 레포는 `every-24h`. 새 버전 빨리 받고 싶으면 `every-boot`. 릴리즈 주기 긴 도구는 `weekly`. 직접 업데이트할 거면 `off`.
 - **on_update_available**:
-  - `notify` — 사이클 출력 끝에 한 줄 알림
-  - `prompt` *(기본)* — 알림 + "지금 갱신할까요?" 물어보고, 동의 시 `npx skills update PresentJay/autopilot-skills --yes` 실행
-  - `silent-auto` — 묻지 않고 바로 갱신
+  - `notify` — 사이클 출력 끝에 한 줄 알림. *언제?* 매 사이클 출력 어차피 읽는 경우.
+  - `prompt` *(기본)* — 알림 + "지금 갱신할까요?" 물어보고, 동의 시 `npx skills update PresentJay/autopilot-skills --yes` 실행. *언제?* 가끔 보면서 동의 한 번 받고 싶을 때.
+  - `silent-auto` — 묻지 않고 바로 갱신. *언제?* 신뢰하는 셋업, 로그 일일이 안 볼 때.
 
 체크 실패는 fail-open: GitHub API 오류나 5초 타임아웃 시 조용히 건너뛰고 다음 주기에 다시 시도. 사이클을 절대 막지 않습니다.
 

@@ -73,10 +73,11 @@ title: 任务结构
 技能会定期看一眼 GitHub releases 有没有新版。
 
 - **check**: `every-boot` / `every-24h` / `weekly` / `off` — 默认 `every-24h`
+  - 什么时候? 每天都在用的仓库选 `every-24h`;想第一时间拿到新版选 `every-boot`;发布慢的项目选 `weekly`;打算手动更新选 `off`。
 - **on_update_available**:
-  - `notify` — 在循环输出末尾加一行通知
-  - `prompt` *(默认)* — 提示一下,问"现在更新吗?",同意就跑 `npx skills update PresentJay/autopilot-skills --yes`
-  - `silent-auto` — 不问,直接跑
+  - `notify` — 在循环输出末尾加一行通知。*什么时候?* 每轮输出本来就会看。
+  - `prompt` *(默认)* — 提示一下,问"现在更新吗?",同意就跑 `npx skills update PresentJay/autopilot-skills --yes`。*什么时候?* 偶尔看一眼、想要明确同意。
+  - `silent-auto` — 不问,直接跑。*什么时候?* 信任的环境,不会逐条看日志。
 
 检查是 fail-open: GitHub API 报错或 5 秒超时就静默跳过,下次再试。绝对不会卡住循环。
 

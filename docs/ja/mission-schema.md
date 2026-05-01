@@ -73,10 +73,11 @@ title: ミッションスキーマ
 GitHub releases で新バージョンが出ていないか、定期的に確認します。
 
 - **check**: `every-boot` / `every-24h` / `weekly` / `off` — デフォルト `every-24h`
+  - いつ? 毎日触るリポは `every-24h`。新バージョンをすぐほしいなら `every-boot`。リリースサイクルが緩いなら `weekly`。手動で更新する派なら `off`。
 - **on_update_available**:
-  - `notify` — サイクル出力の末尾に 1 行通知を追加
-  - `prompt` *(デフォルト)* — 通知を出して「今すぐアップデート?」を確認。承認すれば `npx skills update PresentJay/autopilot-skills --yes` を実行
-  - `silent-auto` — 確認なしで自動実行
+  - `notify` — サイクル出力の末尾に 1 行通知を追加。*いつ?* 毎サイクル出力を読む運用。
+  - `prompt` *(デフォルト)* — 通知を出して「今すぐアップデート?」を確認。承認すれば `npx skills update PresentJay/autopilot-skills --yes` を実行。*いつ?* たまに眺める運用で、明示的な同意がほしいとき。
+  - `silent-auto` — 確認なしで自動実行。*いつ?* 信頼できるセットアップで、ログを細かく見ないとき。
 
 チェックは fail-open: GitHub API エラーや 5 秒タイムアウトのときは静かにスキップして、次回リトライします。サイクルを絶対に止めません。
 
