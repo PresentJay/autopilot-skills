@@ -6,6 +6,19 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 
 ## [Unreleased]
 
+## [1.2.0] — 2026-05-02
+
+### Added
+- **`/autopilot version` user signal** (aliases: `--version`, `-v`) — prints installed version from frontmatter, latest available from GitHub releases (uses Q9 24h cache, falls back to one live 5s call), source URL, and an update hint. Diagnostic-only: does not run a cycle, schedule a wakeup, or modify files.
+- **Version line in `/autopilot status`** — first line of status output now shows `autopilot v<installed>` for at-a-glance version visibility.
+
+### Changed
+- SKILL.md frontmatter `version`: 1.1.0 → 1.2.0.
+
+### Notes
+- The version check reuses the same `state.json.last_update_check_at` / `available_version` cache as Q9, so calling `/autopilot version` does not trigger an extra API request when the cache is fresh.
+- Fail-open: if the live GitHub API call errors or times out, output prints `latest: unknown (offline)` and skips the update hint instead of blocking.
+
 ## [1.1.0] — 2026-04-28
 
 ### Added
@@ -37,6 +50,7 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 - Cadence menu: immediate / 2m / 5m / 15m (default) / 30m / 1h+ → /schedule cron / manual.
 - Templates: `mission.md`, `state.json`, `journal-entry.md`, `proposal.md`, `milestone.md`.
 
-[Unreleased]: https://github.com/PresentJay/autopilot-skills/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/PresentJay/autopilot-skills/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/PresentJay/autopilot-skills/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/PresentJay/autopilot-skills/compare/v0.1.0...v1.1.0
 [0.1.0]: https://github.com/PresentJay/autopilot-skills/releases/tag/v0.1.0

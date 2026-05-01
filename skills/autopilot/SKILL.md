@@ -1,7 +1,7 @@
 ---
 name: autopilot
 description: Self-driving mission runner — once started, runs an endless discover→analyze→plan→execute→verify→learn cycle on a user-defined mission until told to stop. Boot interview captures mission, allow/forbidden paths, risk tier, cadence, auto-compact threshold, escalation, update policy, resume policy. Safety policy blocks forbidden zones at every phase, forces dry-run for risky ops, learns NOT-OK patterns from failures. Self-heals after interrupted cycles or missed wakeups. Universal across AI coding agents (Claude Code, Codex, Cursor, Gemini, ...). Triggers - "autopilot", "self-drive", "자율주행", "auto drive", "autonomous mode", "run cycle", "resume autopilot", "heal autopilot".
-version: 1.1.0
+version: 1.2.0
 ---
 
 # Autopilot — Self-driving mission runner
@@ -31,9 +31,47 @@ Decision:
 | `/autopilot` | Auto-detect stale state, then run a cycle (or no-op if mission complete) |
 | `/autopilot resume` | Force `Mode: paused` → `active`, run a cycle |
 | `/autopilot heal` | Force interruption recovery (clean working branch, mark crashed cycle, start fresh) |
-| `/autopilot status` | Print current state from `state.json` + last journal entry; do **not** run a cycle |
+| `/autopilot status` | Print current state from `state.json` + last journal entry (includes installed version line); do **not** run a cycle |
+| `/autopilot version` (or `--version`, `-v`) | Print installed `version` from frontmatter, latest available from GitHub releases (cached), source URL; do **not** run a cycle |
 | `/autopilot stop` / "멈춰" / "pause" | Set `Mode: paused`, no `ScheduleWakeup` |
 | `/autopilot mission="X" risk=L2 cadence=15m ...` | Args parsed into Q1–Q10 pre-fills |
+
+---
+
+## Version display (new in v1.2.0)
+
+`/autopilot version` (aliases: `--version`, `-v`) is a diagnostic-only signal. It does **not** run a cycle, ScheduleWakeup, or modify any file. Run order:
+
+1. Read installed `version:` from this SKILL.md frontmatter.
+2. Read `last_update_check_at` and `available_version` from `state.json` (if present).
+3. If the cache is older than `Q9.check` interval (or missing), do **one** GitHub releases call (5s timeout, fail-open):
+
+   ```bash
+   curl -s --max-time 5 https://api.github.com/repos/PresentJay/autopilot-skills/releases/latest
+   ```
+
+   Update the cache fields on success; leave them on failure.
+4. Print:
+
+   ```
+   autopilot v<installed>
+     installed at: <SKILL.md absolute path>
+     latest:       v<latest> (checked <ISO>, <fresh|cached|unknown>)
+     source:       https://github.com/PresentJay/autopilot-skills
+
+   Update: up-to-date
+   ```
+
+   When `latest > installed` (semver compare), replace the last line with:
+
+   ```
+   Update: v<installed> → v<latest> — npx skills update PresentJay/autopilot-skills
+   ```
+
+   When the cache is missing AND the live call failed, print `latest: unknown (offline)` and `Update: check skipped`.
+5. Exit. Do not append to journal, do not bump heartbeat, do not call `ScheduleWakeup`.
+
+`/autopilot status` reuses step 1 and step 4's first line so the installed version appears at the top of its diagnosis output too.
 
 ---
 

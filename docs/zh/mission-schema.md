@@ -97,4 +97,4 @@ title: 任务结构
 
 Phase 0.5 检测五种情况: crashed mid-cycle、missed wakeups、schedule lost、paused、escalated。
 
-用户信号: `/autopilot resume`、`/autopilot heal`、`/autopilot status`。
+用户信号: `/autopilot resume`、`/autopilot heal`、`/autopilot status`、`/autopilot version`。

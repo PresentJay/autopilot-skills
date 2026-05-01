@@ -97,4 +97,4 @@ Controls how the skill recovers from interruptions (host sleep, session crash, m
 
 Phase 0.5 detects 5 patterns: crashed mid-cycle, missed wakeups, schedule lost, paused, escalated.
 
-User signals: `/autopilot resume`, `/autopilot heal`, `/autopilot status`.
+User signals: `/autopilot resume`, `/autopilot heal`, `/autopilot status`, `/autopilot version`.
