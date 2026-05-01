@@ -59,7 +59,14 @@ When the loop should stop and ping you instead of pushing through.
 
 ## Q8. Auto-compaction
 
-Threshold (60/70/80/90, default 80) and frequency (`every-cycle`, `threshold-only`, `off`).
+Long missions hit prompt-too-long if context never gets trimmed. Compaction calls `/compact` to reset older history while keeping recent state.
+
+- **threshold** — pause-and-compact when token usage crosses this percent.
+  - When? Lower (60-70) for token-heavy work (large diffs, big files); higher (80-90) for normal docs/code cycles. Default **80**.
+- **frequency**:
+  - `every-cycle` *(default)* — light compact every cycle. Predictable cost, safest for long sessions.
+  - `threshold-only` — compact only when the threshold is crossed. Saves tokens on short sessions.
+  - `off` — no compaction. Use only for short bounded missions or when you handle context manually.
 
 ## Q9. Update policy
 

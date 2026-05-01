@@ -59,7 +59,14 @@ title: 任务结构
 
 ## Q8. 自动压缩
 
-阈值(60 / 70 / 80 / 90,默认 80)、频率(`every-cycle`、`threshold-only`、`off`)。
+长任务跑久了会撞 prompt-too-long,所以定期把对话裁掉。`/compact` 会把旧记录清掉、保留最近状态。
+
+- **threshold** — 令牌使用率超过这个百分比就 pause-and-compact。
+  - 什么时候? 令牌重的活(大 diff、大文件)选 60-70;一般文档/代码循环选 80-90。默认 **80**。
+- **frequency**:
+  - `every-cycle` *(默认)* — 每轮做一次轻量压缩。成本可预测,长会话最安全。
+  - `threshold-only` — 只在超阈值时压缩。短会话省令牌。
+  - `off` — 不压缩。仅适合短的 bounded 任务,或你自己管上下文。
 
 ## Q9. 更新策略
 
