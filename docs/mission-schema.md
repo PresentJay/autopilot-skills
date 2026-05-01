@@ -85,11 +85,12 @@ The check fails open: if the GitHub API errors or times out (5s), the cycle cont
 
 Controls how the skill recovers from interruptions (host sleep, session crash, missed `ScheduleWakeup`, mid-cycle abort).
 
-- **stale_threshold**: `2x-cadence` *(default)* / `4x-cadence` / `8x-cadence` — how long after `next_wakeup_at` to consider the loop stalled
+- **stale_threshold**: `2x-cadence` *(default)* / `4x-cadence` / `8x-cadence` — how long after `next_wakeup_at` to consider the loop stalled.
+  - When? `2x-cadence` for aggressive recovery (1 missed cycle = stalled). `4x-cadence` for stable infra with intermittent load. `8x-cadence` for long-cadence missions where overnight host sleep is normal.
 - **on_resume**:
-  - `auto-resume` *(default)* — silently detect stale state and run a fresh cycle
-  - `prompt-confirm` — show diagnosis ("Missed N cycles. Resume?") and confirm before continuing
-  - `manual-only` — only resume on explicit `/autopilot resume` or `/autopilot heal`
+  - `auto-resume` *(default)* — silently detect stale state and run a fresh cycle. *When?* You trust the loop and don't want to break flow.
+  - `prompt-confirm` — show diagnosis ("Missed N cycles. Resume?") and confirm before continuing. *When?* You want to know about every recovery.
+  - `manual-only` — only resume on explicit `/autopilot resume` or `/autopilot heal`. *When?* Mission paused on purpose; you'll restart it yourself.
 
 Phase 0.5 detects 5 patterns: crashed mid-cycle, missed wakeups, schedule lost, paused, escalated.
 

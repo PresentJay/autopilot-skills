@@ -85,11 +85,12 @@ title: 任务结构
 
 主机 sleep、会话崩了、ScheduleWakeup 没触发、循环中断 —— 控制怎么恢复。
 
-- **stale_threshold**: `2x-cadence` *(默认)* / `4x-cadence` / `8x-cadence` — `next_wakeup_at` 之后过多久判定 stalled
+- **stale_threshold**: `2x-cadence` *(默认)* / `4x-cadence` / `8x-cadence` — `next_wakeup_at` 之后过多久判定 stalled。
+  - 什么时候? 想激进恢复(1 轮丢失就算 stalled)选 `2x-cadence`;基础设施稳定但偶尔负载选 `4x-cadence`;周期长、主机夜间 sleep 很常见选 `8x-cadence`。
 - **on_resume**:
-  - `auto-resume` *(默认)* — 看到 stale 就静默跑新一轮
-  - `prompt-confirm` — 显示诊断("Missed N cycles. Resume?"),确认后再继续
-  - `manual-only` — 只在 `/autopilot resume` 或 `/autopilot heal` 这种明确信号下才恢复
+  - `auto-resume` *(默认)* — 看到 stale 就静默跑新一轮。*什么时候?* 信任循环、不想打断节奏。
+  - `prompt-confirm` — 显示诊断("Missed N cycles. Resume?"),确认后再继续。*什么时候?* 想知道每一次恢复。
+  - `manual-only` — 只在 `/autopilot resume` 或 `/autopilot heal` 这种明确信号下才恢复。*什么时候?* 任务是有意 pause 的,自己再决定什么时候继续。
 
 Phase 0.5 检测五种情况: crashed mid-cycle、missed wakeups、schedule lost、paused、escalated。
 
