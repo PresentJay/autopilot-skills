@@ -12,9 +12,12 @@ One line. The single objective the loop pursues.
 
 ## Q2. Operating mode
 
-- `continuous` — until told to stop
-- `bounded:N` — at most N cycles
-- `monitor` — react to external events only
+- `continuous` — until told to stop.
+  - When? Open-ended quality work (lint cleanup, dead-code grooming, doc polish) where you can't predict when it'll be done.
+- `bounded:N` — at most N cycles.
+  - When? You have a finite checklist (e.g. 5 specific tasks). Loop terminates after N successful or escalated cycles.
+- `monitor` — react to external events only.
+  - When? You want the loop to wake on signals (CI completion, new PR, log line) rather than on a timer.
 
 ## Q3. Allow paths
 
