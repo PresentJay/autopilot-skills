@@ -47,7 +47,15 @@ See [Cadence menu](cadence.html).
 
 ## Q7. Escalation triggers
 
-Default thresholds: 3 consecutive failures, diff cap exceeded, irreversible action, no-candidate behavior (`end` or `ask`).
+When the loop should stop and ping you instead of pushing through.
+
+- **3 consecutive failures** — same candidate failed 3 cycles → add to NOT-OK and move on. If every candidate fails, escalate.
+- **Diff cap exceeded** — proposed change is larger than the tier allows → split into sub-tasks first, escalate if still over.
+- **Irreversible action** — DB DDL, force-push, external API write — always escalate before running.
+- **No candidate found**:
+  - `end` *(default)* — treat as mission complete, no `ScheduleWakeup`.
+  - `ask` — request more discovery tools from you.
+- **≥5 candidates outside allow paths** — propose extending mission scope.
 
 ## Q8. Auto-compaction
 
