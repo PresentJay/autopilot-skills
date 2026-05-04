@@ -108,6 +108,10 @@ MIT — see [LICENSE](LICENSE).
 
 Built after observing that ad-hoc loops (e.g. ralph-loop) had two problems: bootstrap parsing bugs that locked them into infinite mode, and single-domain hard-coding. Autopilot is the meta-loop with proper interrupt/resume, mission-bound governance, and self-pacing via the `ScheduleWakeup` primitive — no plugin dependency required.
 
+## Share your mission
+
+Ran autopilot on something interesting? [Open a Showcase issue](https://github.com/PresentJay/autopilot-skills/issues/new?template=showcase.yml) — mission, cycles, outcome. Public learning is how the loop tunes itself across repos and domains.
+
 ## Built with itself
 
 This repo's own grooming runs through autopilot. Concrete trail:

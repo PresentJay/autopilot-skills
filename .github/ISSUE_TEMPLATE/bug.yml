@@ -7,7 +7,7 @@ body:
     attributes:
       label: Skill version
       description: Found in SKILL.md frontmatter `version:`
-      placeholder: 0.1.0
+      placeholder: 1.2.0
     validations:
       required: true
   - type: dropdown

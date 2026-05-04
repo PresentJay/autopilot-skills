@@ -1,0 +1,57 @@
+name: Showcase a mission
+description: Share an autopilot mission you ran — public learning helps everyone tune their own
+labels: ["showcase"]
+title: "[Showcase] "
+body:
+  - type: input
+    id: mission
+    attributes:
+      label: Mission (one line)
+      description: What you put in Q1
+      placeholder: "self-improvement of this repo"
+    validations:
+      required: true
+  - type: dropdown
+    id: harness
+    attributes:
+      label: AI harness
+      options:
+        - Claude Code
+        - Codex CLI
+        - Cursor
+        - Gemini CLI
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk tier
+      options:
+        - L1 — discover + propose only
+        - L2 — small PRs (default)
+        - L3 — auto-merge on green
+        - L4 — free mode
+    validations:
+      required: true
+  - type: input
+    id: cycles
+    attributes:
+      label: Cycles run
+      placeholder: "12"
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: PRs merged? Defects cleared? Lessons learned? NOT-OK patterns surfaced?
+      placeholder: |
+        - 4 PRs merged
+        - lint errors 23 → 0
+        - 1 NOT-OK pattern: "do not refactor middleware in same cycle as test rewrite"
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: Links (optional)
+      description: PR / blog / repo links if public
