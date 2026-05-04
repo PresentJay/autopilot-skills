@@ -38,6 +38,14 @@
   <h2>What it does</h2>
   <p>You hand it a mission in plain text. It runs an autonomous <code>discover → analyze → plan → execute → verify → learn</code> cycle and sleeps until the next one — until you tell it to stop, or until the mission is complete.</p>
 
+  <h2>What you'd use it for</h2>
+  <ul>
+    <li><strong>Codebase self-improvement</strong> — lint cleanup, dead code, coverage gaps, follow-up PRs. <code>mission="self-improvement of this repo"</code></li>
+    <li><strong>Documentation grooming</strong> — tone consistency, broken links, missing translations, schema docs. <code>mission="documentation tone consistency"</code></li>
+    <li><strong>Post-merge sweeps</strong> — small follow-ups after a large PR merges that you would otherwise forget. <code>mission="post-merge cleanup for PR #123"</code></li>
+    <li><strong>OSS adoption</strong> — README polish, comparison pages, social previews, SEO. (This site itself was groomed by autopilot.) <code>mission="adoption — visibility and trust"</code></li>
+  </ul>
+
   <h2>What it won't do</h2>
   <ul>
     <li>Push to <code>main</code> / <code>master</code> directly.</li>

@@ -38,6 +38,14 @@
   <h2>它做什么</h2>
   <p>你给一行任务描述,代理就跑 <code>discover → analyze → plan → execute → verify → learn</code> 这一整圈,然后睡到下一轮再接着跑。直到你叫停,或者任务完成。</p>
 
+  <h2>这些场景最合适</h2>
+  <ul>
+    <li><strong>代码自我改进</strong> — 清理 lint、死代码、覆盖率盲区、后续 PR。<code>mission="改进这个仓库"</code></li>
+    <li><strong>文档梳理</strong> — 语气一致、坏链、缺失翻译、结构文档。<code>mission="文档语气统一"</code></li>
+    <li><strong>合并后清扫</strong> — 大 PR 合并后那些容易忘记的小尾巴。<code>mission="PR #123 合并后清理"</code></li>
+    <li><strong>开源推广</strong> — README 打磨、对比页、社交卡片、SEO。(这个站点本身就是 autopilot 整理的。)<code>mission="推广 —— 可见度与信任"</code></li>
+  </ul>
+
   <h2>它不做什么</h2>
   <ul>
     <li>不直接 push 到 <code>main</code> 或 <code>master</code>。</li>
