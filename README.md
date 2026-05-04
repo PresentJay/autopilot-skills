@@ -1,5 +1,11 @@
 # autopilot-skills
 
+[![Latest release](https://img.shields.io/github/v/release/PresentJay/autopilot-skills?label=release&color=4c1)](https://github.com/PresentJay/autopilot-skills/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-4c1)](LICENSE)
+[![AI harnesses: 50+](https://img.shields.io/badge/harnesses-50%2B-4c1)](https://github.com/vercel-labs/skills#supported-harnesses)
+[![Docs](https://img.shields.io/badge/docs-presentjay.github.io-4c1)](https://presentjay.github.io/autopilot-skills)
+[![Languages: en · ko · zh · ja](https://img.shields.io/badge/docs-en%20·%20ko%20·%20zh%20·%20ja-4c1)](https://presentjay.github.io/autopilot-skills)
+
 Universal self-driving mission runner for AI coding agents.
 
 > 📘 Docs and quickstart: [presentjay.github.io/autopilot-skills](https://presentjay.github.io/autopilot-skills)
