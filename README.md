@@ -36,6 +36,10 @@ cp -r autopilot-skills/skills/autopilot/* ~/.claude/skills/autopilot/
 
 Replace `~/.claude/skills/` with your harness's skills directory.
 
+## Compare with peers
+
+Already use `ralph-loop`, `impeccable`, or `gstack`? Read [the comparison page](https://presentjay.github.io/autopilot-skills/comparison.html) — what autopilot adds, what overlaps, **when not to use it**.
+
 ## Use
 
 ```
