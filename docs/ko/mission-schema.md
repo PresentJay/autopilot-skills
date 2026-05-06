@@ -60,16 +60,16 @@ title: 미션 스키마
   - `ask` — 추가 발굴 도구를 사용자에게 요청.
 - **허용 경로 밖 후보 5개 이상** — 미션 범위 확장 제안.
 
-## Q8. 자동 컴팩션
+## Q8. 컴팩션 전략 (v1.3.0 개정)
 
-장기 미션이 prompt-too-long 에 부딪히지 않도록 대화를 주기적으로 잘라줍니다. `/compact` 호출로 오래된 기록은 정리하고 최근 상태는 보존.
+장기 미션이 prompt-too-long 에 부딪히지 않도록 대화 트리밍이 필요한데, **agent 가 `/compact` 를 직접 호출할 수 없습니다** — 모든 현행 하니스(Claude Code / Codex / Cursor / Gemini)에서 사용자 입력 슬래시 명령. 스킬은 *제안*만, 실행은 사용자(또는 `/schedule` cron) 몫.
 
-- **threshold** — 토큰 사용률이 이 % 를 넘으면 pause-and-compact.
-  - 언제? 토큰 무거운 작업 (큰 diff, 대용량 파일) 은 60-70 으로 낮게, 일반 docs/코드 사이클은 80-90 으로. 기본 **80**.
-- **frequency**:
-  - `every-cycle` *(기본)* — 매 사이클 가볍게 컴팩션. 비용 예측 가능, 장기 세션에 가장 안전.
-  - `threshold-only` — threshold 넘을 때만 컴팩션. 짧은 세션에서 토큰 절약.
-  - `off` — 컴팩션 안 함. 짧은 bounded 미션이나 수동으로 컨텍스트 관리하는 경우만 권장.
+- **threshold** — 토큰 사용량이 이 비율을 넘으면 권고 메시지 출력.
+  - 언제? 큰 diff/대용량 파일 작업이면 낮게(60-70), 일반 docs/코드 사이클이면 높게(80-90). 기본 **80**.
+- **strategy**:
+  - `auto-suggest` *(기본)* — 임계점 넘으면 `📦 /compact 권고` 한 줄 출력. 사용자가 `/compact` 입력.
+  - `cron-promote` — 정말 긴 미션이면 `/schedule "<cron> /autopilot"` 추천. cron 으로 호출되는 매 사이클이 새 세션이라 컴팩션 불필요.
+  - `off` — 조용히. 짧은 bounded 미션 전용.
 
 ## Q9. 업데이트 정책
 

@@ -60,16 +60,16 @@ When the loop should stop and ping you instead of pushing through.
   - `ask` — request more discovery tools from you.
 - **≥5 candidates outside allow paths** — propose extending mission scope.
 
-## Q8. Auto-compaction
+## Q8. Compaction strategy (revised in v1.3.0)
 
-Long missions hit prompt-too-long if context never gets trimmed. Compaction calls `/compact` to reset older history while keeping recent state.
+Long missions hit prompt-too-long if context never gets trimmed. **The agent cannot programmatically call `/compact`** — it is a user-typed slash command in every current harness (Claude Code / Codex / Cursor / Gemini). The skill therefore *suggests*; you (or `/schedule` cron) act.
 
-- **threshold** — pause-and-compact when token usage crosses this percent.
+- **threshold** — surface advisory when token usage crosses this percent.
   - When? Lower (60-70) for token-heavy work (large diffs, big files); higher (80-90) for normal docs/code cycles. Default **80**.
-- **frequency**:
-  - `every-cycle` *(default)* — light compact every cycle. Predictable cost, safest for long sessions.
-  - `threshold-only` — compact only when the threshold is crossed. Saves tokens on short sessions.
-  - `off` — no compaction. Use only for short bounded missions or when you handle context manually.
+- **strategy**:
+  - `auto-suggest` *(default)* — output `📦 /compact suggested` once threshold is crossed; you type `/compact`.
+  - `cron-promote` — recommend `/schedule "<cron> /autopilot"` so each fired cycle starts in a fresh session (no compaction needed).
+  - `off` — silent. Only for short bounded missions.
 
 ## Q9. Update policy
 
