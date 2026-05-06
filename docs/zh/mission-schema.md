@@ -60,16 +60,16 @@ title: 任务结构
   - `ask` — 向你要更多的发现工具。
 - **允许路径外候选 ≥5 个** — 提议扩展任务范围。
 
-## Q8. 自动压缩
+## Q8. 压缩策略(v1.3.0 修订)
 
-长任务跑久了会撞 prompt-too-long,所以定期把对话裁掉。`/compact` 会把旧记录清掉、保留最近状态。
+长任务会撞 prompt-too-long。**代理无法以编程方式调用 `/compact`** —— 在所有当前 harness(Claude Code / Codex / Cursor / Gemini)里它都是用户敲的斜杠命令。技能只能 *建议*,执行靠你(或 `/schedule` cron)。
 
-- **threshold** — 令牌使用率超过这个百分比就 pause-and-compact。
-  - 什么时候? 令牌重的活(大 diff、大文件)选 60-70;一般文档/代码循环选 80-90。默认 **80**。
-- **frequency**:
-  - `every-cycle` *(默认)* — 每轮做一次轻量压缩。成本可预测,长会话最安全。
-  - `threshold-only` — 只在超阈值时压缩。短会话省令牌。
-  - `off` — 不压缩。仅适合短的 bounded 任务,或你自己管上下文。
+- **threshold** —— token 使用率超过这个百分比就发提示。
+  - 什么时候? token 重活儿(大 diff、大文件)用低(60-70);普通 docs/代码周期用高(80-90)。默认 **80**。
+- **strategy**:
+  - `auto-suggest` *(默认)* —— 过阈值就输出 `📦 建议 /compact` 一行,你来敲 `/compact`。
+  - `cron-promote` —— 任务真的长就建议 `/schedule "<cron> /autopilot"`,cron 触发的每个周期都是新会话,不必压缩。
+  - `off` —— 静默。只适合短的 bounded 任务。
 
 ## Q9. 更新策略
 

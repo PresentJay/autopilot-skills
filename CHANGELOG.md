@@ -6,6 +6,20 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 
 ## [Unreleased]
 
+## [1.3.0] — 2026-05-05
+
+### Changed
+- **Q8 reframed as "compaction strategy" (truth-in-spec).** Earlier versions promised the skill would call built-in `/compact`, but the agent has no tool to invoke a slash command. Q8 now offers `auto-suggest` (default; surfaces a `📦 /compact suggested` advisory once threshold is crossed), `cron-promote` (recommend `/schedule` cron for genuinely long missions, where each scheduled run is a fresh session), and `off`. No silent failure when prompt-too-long is approaching — the user is told.
+- **Phase 8 NEXT no longer pretends to compact.** Step 2 now appends the advisory to cycle output and writes `kind: "advisory"` (not `"compaction"`) to `state.json.compaction_history`.
+- **Phase 0.5 boundary clarified.** Phase 0.5 (resume + update check) is meaningful only at invocation boundaries (fresh `/autopilot` call or `ScheduleWakeup` re-fire). Multiple cycles in a single conversation turn — without a wakeup boundary between them — is batch execution, not self-driving. Documented explicitly.
+
+### Added
+- **Quick boot (`--quick` / `/autopilot quick`).** All Q's default-pre-filled with safe values (continuous, defaults, L2, 15m, etc.); Q1 still required. Single summary, single confirm — total one-turn boot. Cuts the 10-question interview to one decision when the user already knows what they want.
+
+### Notes
+- Long-running self-drive in a single session is structurally bounded by harness limits (no programmatic compaction). Use Q6=`1h+` to promote to `/schedule` cron — each cron firing is a fresh session, no compaction needed.
+- `state.json.compaction_history` schema is non-breaking — old entries with `kind: "every-cycle"` are read as advisories.
+
 ## [1.2.0] — 2026-05-02
 
 ### Added
@@ -50,7 +64,8 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 - Cadence menu: immediate / 2m / 5m / 15m (default) / 30m / 1h+ → /schedule cron / manual.
 - Templates: `mission.md`, `state.json`, `journal-entry.md`, `proposal.md`, `milestone.md`.
 
-[Unreleased]: https://github.com/PresentJay/autopilot-skills/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/PresentJay/autopilot-skills/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/PresentJay/autopilot-skills/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/PresentJay/autopilot-skills/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/PresentJay/autopilot-skills/compare/v0.1.0...v1.1.0
 [0.1.0]: https://github.com/PresentJay/autopilot-skills/releases/tag/v0.1.0

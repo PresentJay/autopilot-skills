@@ -1,7 +1,7 @@
 ---
 name: autopilot
 description: Self-driving mission runner — once started, runs an endless discover→analyze→plan→execute→verify→learn cycle on a user-defined mission until told to stop. Boot interview captures mission, allow/forbidden paths, risk tier, cadence, auto-compact threshold, escalation, update policy, resume policy. Safety policy blocks forbidden zones at every phase, forces dry-run for risky ops, learns NOT-OK patterns from failures. Self-heals after interrupted cycles or missed wakeups. Universal across AI coding agents (Claude Code, Codex, Cursor, Gemini, ...). Triggers - "autopilot", "self-drive", "자율주행", "auto drive", "autonomous mode", "run cycle", "resume autopilot", "heal autopilot".
-version: 1.2.0
+version: 1.3.0
 ---
 
 # Autopilot — Self-driving mission runner
@@ -34,6 +34,7 @@ Decision:
 | `/autopilot status` | Print current state from `state.json` + last journal entry (includes installed version line); do **not** run a cycle |
 | `/autopilot version` (or `--version`, `-v`) | Print installed `version` from frontmatter, latest available from GitHub releases (cached), source URL; do **not** run a cycle |
 | `/autopilot stop` / "멈춰" / "pause" | Set `Mode: paused`, no `ScheduleWakeup` |
+| `/autopilot quick mission="X"` (or `/autopilot --quick`) | All Q's default-pre-filled, single confirm — **new in v1.3.0** |
 | `/autopilot mission="X" risk=L2 cadence=15m ...` | Args parsed into Q1–Q10 pre-fills |
 
 ---
@@ -86,6 +87,8 @@ Goal: capture mission, scope, risk, cadence, compaction, escalation, update poli
 3. Re-do from scratch
 
 Do **not** scan prior conversation, git history, or other artifacts. Args only. Cold start when no args given.
+
+**Quick boot (new in v1.3.0)**: if `quick` (positional) or `--quick` is in the args, **all Q's default to safe values** (Q2=continuous, Q3=default, Q4=default, Q5=L2, Q6=15m, Q7=defaults, Q8=auto-suggest@80, Q9=every-24h prompt, Q10=2x auto-resume). Q1 still required (from `mission="X"` arg or one prompt). Single summary, single confirm — total one turn boot. Use this when the user already knows what they want and asked you to "just go".
 
 ### Q1. Mission (one line)
 
@@ -157,15 +160,17 @@ Pre-checked defaults:
 - irreversible action (DB DDL, external API write, force push) → always escalate
 - ≥5 candidates discovered outside allow paths → propose mission expansion
 
-### Q8. Auto-compaction
+### Q8. Compaction strategy (revised in v1.3.0)
 
-Long-running loops bump into the prompt-too-long ceiling. Compaction trims the conversation while keeping recent context.
+Long-running loops bump into the prompt-too-long ceiling. **The agent cannot programmatically call `/compact`** in Claude Code, Codex, Cursor, or any current harness — `/compact` is a user-typed slash command. The skill therefore outputs a *suggestion* and relies on either the user typing `/compact` or, for genuinely long missions, `/schedule` cron promotion (each scheduled run is a fresh session — no compaction needed).
 
-- **threshold**: 60 / 70 / 80 / 90 — pause-and-compact when token usage crosses this percent. Default **80**.
-- **frequency**:
-  - `every-cycle` *(default)* — call `/compact` at the end of every cycle regardless of threshold (light compact; baseline for long sessions)
-  - `threshold-only` — compact only when threshold is crossed
-  - `off` — no compaction (user accepts the risk)
+- **threshold**: 60 / 70 / 80 / 90 — surface advisory when token usage crosses this percent. Default **80**.
+- **strategy**:
+  - `auto-suggest` *(default)* — output `📦 /compact suggested (estimated ~N% used)` at the end of every cycle once threshold is crossed; do not block
+  - `cron-promote` — explicitly recommend `/schedule "<cron> /autopilot"` so each cycle starts fresh; output the suggested cron line once
+  - `off` — silent; user accepts prompt-too-long risk
+
+If Q6 cadence is `1h+`, the skill auto-promotes to `/schedule` cron regardless of Q8 strategy (already in Phase 8 routing).
 
 ### Q9. Update policy (new in v1.1.0)
 
@@ -197,7 +202,7 @@ Render the proposed `mission.md` to the user. Wait for one explicit confirm befo
 
 ## Phase 0.5 — Resume + update check (new in v1.1.0)
 
-Runs **after** boot check, **before** Phase 1 DISCOVER. Two independent sub-checks:
+Runs **once per invocation**: after boot check, before Phase 1 DISCOVER. **Note (v1.3.0):** Phase 0.5 is meaningful only at *invocation boundaries* — i.e., each fresh `/autopilot` call (manual or via `ScheduleWakeup`). Multiple cycles within a single conversation turn (no wakeup boundary) is batch execution, not self-driving — Phase 0.5 fires once at the top, not between in-turn cycles. Two independent sub-checks:
 
 ### Resume check
 
@@ -367,11 +372,11 @@ If the cycle hits any of these, copy the journal entry into `.autopilot.mileston
 In this order:
 
 1. Update heartbeat (see "Heartbeat" above).
-2. Q8 frequency:
-   - `every-cycle` → call built-in `/compact` now
-   - `threshold-only` → call `/compact` if estimated token usage ≥ Q8 threshold
-   - `off` → skip
-3. Append a record to `state.json.compaction_history`.
+2. Q8 strategy (advisory only — agent cannot run `/compact`):
+   - `auto-suggest` → if estimated token usage ≥ Q8 threshold, append `📦 /compact suggested (~N% used)` to cycle output
+   - `cron-promote` → if cycle count ≥ 5 and Q6 cadence is sub-hour, append one-time `📅 Long mission detected — consider /schedule "@hourly /autopilot"`
+   - `off` → skip both
+3. Append the advisory event (not a real compaction) to `state.json.compaction_history` with `kind: "advisory"`.
 4. Q2 routing:
    - `continuous` / `monitor` → `ScheduleWakeup({ prompt: "/autopilot", delaySeconds: <Q6 mapping>, reason: "<why this delay>" })`
      - On 3+ consecutive idle cycles, bump cadence one tier (15m → 30m → 1h-cron → manual)
