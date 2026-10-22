@@ -8,7 +8,7 @@ host settings, start a daemon, or create test schedules as capability detection.
 | Need | Codex | Claude Code | Portable fallback |
 |---|---|---|---|
 | Explicit skill invocation | `$autopilot` | `/autopilot` | Host's skill selector |
-| Continue toward a goal | Native `/goal` or exposed goal controls, when available | Native `/goal`, when available | One checkpoint and manual resume |
+| Continue toward a goal | Native `/goal` or exposed goal controls, when available | Native `/goal`, when available | Work within the current turn; manual resume beyond host limits |
 | Periodic work | Host's actual scheduled tasks, if exposed/configured | `/loop` or configured cloud/Desktop task | Report scheduling unavailable |
 | Conversation compaction | Host automatic compaction; app-server has a separate integration API | Host context management | Save a handoff; do not fake compaction |
 | Unattended structured job | `codex exec --json --output-schema` / SDK | Host-supported noninteractive interface | Manual invocation |

@@ -16,7 +16,7 @@ On 2026-10-22, we ran three local tasks in three conditions: plain native goal, 
 - **Research:** compare local vendor inputs, one unavailable; cite evidence and identify unknowns.
 - **Documents:** write a short brief from supplied figures without inventing causal or revenue claims.
 
-The mission text already includes reasonable requirements in all conditions. The stronger control adds explicit verification, scope, and uncertainty instructions. Exact prompts, inputs, outputs, record samples, and candidate file hashes are public in the [evaluation directory](https://github.com/PresentJay/autopilot-skills/tree/improve/codex-missions-v2/evals).
+The mission text already includes reasonable requirements in all conditions. The stronger control adds explicit verification, scope, and uncertainty instructions. The measured skill is pinned to [f4a6d33](https://github.com/PresentJay/autopilot-skills/tree/f4a6d33c600674beded74c5b5571408944650e85/skills/autopilot). Exact prompts, inputs, outputs, record samples, and candidate file hashes are public in the [evaluation directory](https://github.com/PresentJay/autopilot-skills/tree/improve/codex-missions-v2/evals).
 
 ## Observed results
 
@@ -48,6 +48,8 @@ The semantic review was **unblinded and performed by the supervising agent**, no
 - Setup attempts with invalid process overrides or unsupported ephemeral goals were excluded before task execution. Two timing-calibration runs were excluded because the first harness stopped at goal completion before the final turn finished. The nine scored runs waited for both. These exclusions and the non-random ordering limit interpretation.
 - The portable runner includes output-path/privacy checks, automatic discovery isolation, and stricter timeout accounting added after the scored runs. The prompts and scored conditions are unchanged; see its usage and smoke-check notes in `evals/README.md`.
 - Tiny tasks, one attempt per condition, shared local resources, no cache control, no long execution, no human-intervention measurement, and no cross-host or cross-session trial. No claim about production ROI follows.
+
+After the pilot, the host reference’s fallback wording was aligned with the main instructions: continue within the current turn instead of stopping after one checkpoint. All scored runs used native goals; the revised fallback itself has not been evaluated with live tasks.
 
 ## What the package checks establish
 

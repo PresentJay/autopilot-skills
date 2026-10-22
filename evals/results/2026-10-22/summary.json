@@ -261,5 +261,6 @@
       }
     }
   ],
-  "grading": "Code: executed supplied tests and 45 numeric cases; research/documents: unblinded supervising-agent semantic review against original mission and inputs. No human or independent-model adjudication."
+  "grading": "Code: executed supplied tests and 45 numeric cases; research/documents: unblinded supervising-agent semantic review against original mission and inputs. No human or independent-model adjudication.",
+  "candidate_commit": "f4a6d33c600674beded74c5b5571408944650e85"
 }

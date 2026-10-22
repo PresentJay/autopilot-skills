@@ -4,6 +4,8 @@ This is an opt-in functional pilot, not a general performance benchmark. Read [t
 
 ## Inspect without model usage
 
+The measured skill is pinned to commit `f4a6d33c600674beded74c5b5571408944650e85`; the summary includes per-file hashes. The current preview subsequently clarifies the non-goal fallback wording, which was not exercised by this pilot.
+
 `fixtures/` contains the original missions and inputs. `results/2026-10-22/` contains exact prompts, generated outputs, Autopilot record samples, and a JSON summary with candidate/input hashes. Research/document grading was an unblinded supervising-agent review against the inputs; see the criteria in the summary. The supplied code tests can be rerun against each output by placing `discount.py` beside `fixtures/code/test_discount.py` in a temporary directory.
 
 Public records omit raw events, authentication, global instructions, thread IDs, and machine paths. `<WORKDIR>` replaces a working-directory path where needed. Output text is otherwise preserved. The model's journals are evidence of what it recorded, not independent proof.
