@@ -1,17 +1,13 @@
 ---
-title: Cadence menu
+layout: page
+title: "Goals and scheduling"
+lang: en
 ---
 
-# Cadence menu
+Goal execution continues toward an outcome. Monitoring repeats checks over time. They are separate capabilities.
 
-| Choice | Effective delay | When? |
-|---|---|---|
-| `immediate` | 60 s (ScheduleWakeup floor) | Stress-testing the loop, urgent backlog burndown, or a session you'll be watching |
-| `2m` | 120 s | Active dev session — fast feedback, stays inside Anthropic's prompt-cache window |
-| `5m` | 300 s | Mild iteration; cheaper than 2m, slightly past the cache window |
-| `15m` | 900 s | **Default.** Long-running missions where you check in every so often |
-| `30m` | 1800 s | Idle-heavy missions; space cycles out so empty ones cost less |
-| `1h+` | 3600 s+ | Survives session close. Auto-promotes to a `/schedule` cron (cloud) |
-| `manual` | — | Demos, debugging, or any case where you want to drive each cycle yourself |
+Use the host tools actually available in the current session. Record a schedule only after receiving its identifier and next run. Without scheduling, continue the current mission within host limits and explain how to resume manually if future work remains. `run-once` does not create or renew schedules.
 
-Idle auto-throttle: 3 consecutive empty cycles bump cadence one tier.
+Local scheduled tasks need the machine/app running. Cloud work needs its own access to the skill, targets, and durable state. Do not silently change cadence or move execution to the cloud.
+
+Claude `/loop` does not invoke skills marked `disable-model-invocation: true`. Installation support does not establish runtime compatibility; verify the chosen entrypoint.

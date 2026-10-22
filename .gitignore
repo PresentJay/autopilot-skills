@@ -14,3 +14,10 @@ yarn-error.log
 
 # OS
 Thumbs.db
+
+# Python checks
+__pycache__/
+*.pyc
+
+# Private live evaluation transcripts
+.autopilot-eval/

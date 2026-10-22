@@ -1,90 +1,16 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <title>autopilot-skills — 让 AI 编程代理自己跑起来</title>
-  <meta name="description" content="一行命令,AI 编程代理(Claude Code、Codex、Cursor、Gemini 等)就开始自己跑。每一步都把关安全,中断后自动接着跑。" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="../assets/style.css" />
-  <meta property="og:title" content="autopilot-skills" />
-  <meta property="og:description" content="让 AI 编程代理自己跑起来。" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="autopilot-skills" />
-  <meta property="og:locale" content="zh_CN" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="让 AI 编程代理自己跑起来。" />
-  <meta name="twitter:description" content="给一行任务,代理就一直跑下去 —— 直到你叫停,或者任务完成。每一步都把关安全,中断了也能自动接着跑。" />
-  <meta property="og:url" content="https://presentjay.github.io/autopilot-skills/zh/" />
-</head>
-<body>
-  <nav class="nav">
-    <a href="getting-started.html">入门</a>
-    <a href="mission-schema.html">任务</a>
-    <a href="safety.html">安全</a>
-    <a href="cadence.html">节奏</a>
-    <a href="milestones.html">里程碑</a>
-    <a href="comparison.html">对比</a>
-    <a href="https://github.com/PresentJay/autopilot-skills">GitHub</a>
-    <span class="lang-switch">
-      <a href="/autopilot-skills/">EN</a>
-      <a href="/autopilot-skills/ko/">한</a>
-      <a href="/autopilot-skills/zh/" class="active">中</a>
-      <a href="/autopilot-skills/ja/">日</a>
-    </span>
-  </nav>
-
-  <h1>让 AI 编程代理自己跑起来。</h1>
-  <p class="lead">给一行任务,代理就一直跑下去 —— 直到你叫停,或者任务完成。每一步都把关安全,中断了也能自动接着跑。Claude Code、Codex、Cursor、Gemini 等 40 多种 AI 编程工具上都能用。</p>
-
-  <div class="install" id="install">
-    <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
-    <button onclick="navigator.clipboard.writeText('npx skills add PresentJay/autopilot-skills'); this.textContent='已复制'; setTimeout(()=>this.textContent='复制', 1500);">复制</button>
-  </div>
-
-  <h2>它做什么</h2>
-  <p>你给一行任务描述,代理就跑 <code>discover → analyze → plan → execute → verify → learn</code> 这一整圈,然后睡到下一轮再接着跑。直到你叫停,或者任务完成。</p>
-
-  <h2>这些场景最合适</h2>
-  <ul>
-    <li><strong>代码自我改进</strong> — 清理 lint、死代码、覆盖率盲区、后续 PR。<code>mission="改进这个仓库"</code></li>
-    <li><strong>文档梳理</strong> — 语气一致、坏链、缺失翻译、结构文档。<code>mission="文档语气统一"</code></li>
-    <li><strong>合并后清扫</strong> — 大 PR 合并后那些容易忘记的小尾巴。<code>mission="PR #123 合并后清理"</code></li>
-    <li><strong>开源推广</strong> — README 打磨、对比页、社交卡片、SEO。(这个站点本身就是 autopilot 整理的。)<code>mission="推广 —— 可见度与信任"</code></li>
-  </ul>
-
-  <h2>它不做什么</h2>
-  <ul>
-    <li>不直接 push 到 <code>main</code> 或 <code>master</code>。</li>
-    <li>没你授权的 <code>.env</code>、密钥、基础设施、workflow,一律不碰。</li>
-    <li>允许路径以外,不跑 <code>--force</code>、<code>--no-verify</code>、<code>git reset --hard</code>、<code>rm -rf</code>。</li>
-    <li>已经学到失败的模式,不再重试 (NOT-OK 自动累积)。</li>
-  </ul>
-
-  <h2>节奏你说了算</h2>
-  <p>从 <code>immediate</code>、<code>2m</code>、<code>5m</code>、<code>15m</code>(默认)、<code>30m</code>、<code>1h+</code> 里选。<code>1h+</code> 自动升级成 cron,关掉会话也照样跑。空跑攒多了,节奏会自动放慢。</p>
-
-  <h2>关键时刻另存一份</h2>
-  <p>日志写在 <code>.autopilot.log/</code>(位置可以改);PR 合并、bounded 任务完成、首次 zero-defect 这种关键事件,自动晋升到 <code>.autopilot.milestones/</code>(这个路径是固定的、改不了)。</p>
-
-  <h2>断了能自己接上</h2>
-  <p>主机 sleep、会话崩溃、wakeup 丢了 —— 下次调用时它会自己诊断、清理工作分支,然后继续新一轮。只想看现在状态用 <code>/autopilot status</code>。</p>
-
-  <hr />
-
-  <h2>继续阅读</h2>
-  <ul>
-    <li><a href="getting-started.html">60 秒上手</a></li>
-    <li><a href="mission-schema.html">任务结构 (Q1–Q10)</a></li>
-    <li><a href="safety.html">安全策略</a></li>
-    <li><a href="cadence.html">节奏菜单</a></li>
-    <li><a href="milestones.html">里程碑触发条件</a></li>
-    <li><a href="comparison.html">对比 · ralph-loop · impeccable · gstack</a></li>
-    <li><a href="https://github.com/PresentJay/autopilot-skills/blob/main/CHANGELOG.md">Changelog</a></li>
-    <li><a href="https://github.com/PresentJay/autopilot-skills">GitHub 仓库</a></li>
-  </ul>
-
-  <footer>
-    <p>MIT 许可 · 由 <a href="https://github.com/PresentJay">PresentJay</a> 构建 · 灵感来自 <a href="https://impeccable.style">impeccable</a> 的极简主义。</p>
-  </footer>
-</body>
-</html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autopilot — 给出方向， 持续推进。</title><meta name="description" content="适用于代码、研究和文档的可复用任务。保持明确的范围，记录检查结果，留下可追溯的交接信息。">
+<meta property="og:title" content="Autopilot — portable missions"><meta property="og:description" content="适用于代码、研究和文档的可复用任务。保持明确的范围，记录检查结果，留下可追溯的交接信息。"><meta property="og:type" content="website"><meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://presentjay.github.io/autopilot-skills/zh/"><link rel="stylesheet" href="../assets/style.css"><script src="../assets/site.js" defer></script></head>
+<body class="landing"><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="./" aria-label="Autopilot home"><span class="brand-mark" aria-hidden="true">↗</span> autopilot</a><nav aria-label="Main"><a href="getting-started.html">文档</a><a href="../evidence.html">验证结果</a><a href="https://github.com/PresentJay/autopilot-skills">GitHub ↗</a></nav><nav class="languages" aria-label="Language"><a href="/autopilot-skills/" hreflang="en" >EN</a> <a href="/autopilot-skills/ko/" hreflang="ko" >한국어</a> <a href="/autopilot-skills/ja/" hreflang="ja" >日本語</a> <a href="/autopilot-skills/zh/" hreflang="zh" aria-current="page">中文</a></nav></header>
+<main id="main"><section class="hero"><div><p class="eyebrow">V2 预览版 · 审查中</p><h1>给出方向，<br>持续推进。</h1><p class="lead">适用于代码、研究和文档的可复用任务。保持明确的范围，记录检查结果，留下可追溯的交接信息。</p><div class="actions"><a class="button" href="#install">试用预览版 <span aria-hidden="true">↗</span></a><a href="../evidence.html">查看验证结果 →</a></div></div>
+<aside class="mission-example" aria-label="任务记录示例 · 非实测结果"><p class="example-caption">任务记录示例 · 非实测结果</p><div class="record"><span>范围</span><p>已授权的文件和操作</p></div><div class="record"><span>结果</span><p>已验证结果与未解决的问题</p></div><div class="record"><span>下一步</span><p>下个有用操作或停止原因</p></div><p class="record-path">.autopilot.log/mission.md</p></aside></section>
+<section class="split-section"><div><p class="eyebrow">01 / MISSION</p><h2>为什么使用 Autopilot？</h2><p>原生 goal 已能持续执行。Autopilot 将任务与工作记录放在一起，便于复用指令、检查进展和继续中断的工作。</p></div><div class="feature-rows"><article><span class="step">01</span><div><h3>可复用的任务说明</h3><p>将目标、授权范围和完成条件保存在一起。</p></div></article><article><span class="step">02</span><div><h3>每个检查点都有依据</h3><p>记录检查方法、对应版本和仍然未知的内容。</p></div></article><article><span class="step">03</span><div><h3>保留工作再继续</h3><p>恢复前先检查现有修改与未完成的成果。</p></div></article></div></section>
+<section class="task-section"><p class="eyebrow">02 / IN PRACTICE</p><h2>代码、研究、文档。</h2><p>使用现有的智能体和工具，在约定范围内推进工作。</p><div class="prompt-tabs" aria-label="Mission examples"><button type="button" data-prompt="0" aria-pressed="true">代码</button><button type="button" data-prompt="1" aria-pressed="false">研究</button><button type="button" data-prompt="2" aria-pressed="false">文档</button></div><pre class="task-prompt" id="prompt-0" ><code>$autopilot 修复 import 失败，不改变公共 API。复现问题并运行集成测试，保留我的修改。使用原生 goal 模式直到完成。</code></pre><pre class="task-prompt" id="prompt-1" hidden><code>$autopilot 比较这些规格文档的延迟和离线支持。引用提供的文件，将不可获取的信息标记为未知。</code></pre><pre class="task-prompt" id="prompt-2" hidden><code>$autopilot 将 source.txt 整理为面向非技术读者的简报。核对数字，保留限制条件和我的笔记。</code></pre></section>
+<section class="split-section evidence-section"><div><p class="eyebrow">03 / EVIDENCE</p><h2>先验证，再承诺。</h2><p>我们与原生 goal 比较实际产物和执行成本。短小示例无法证明长期可靠性或节省时间。</p></div><div><h3>尚未证实优于原生 goal</h3><p>请先阅读小规模比较的条件、结果和局限。</p><a href="../evidence.html">查看验证结果 →</a><hr><h3>用于需要工作记录的任务。</h3><p>明确的一次性任务可能只需原生 goal。技能不是调度器、沙箱或独立验证器；持续执行取决于宿主能力。</p></div></section>
+<section id="install" class="install-section"><p class="eyebrow">04 / START</p><h2>安装 v2 预览版</h2><p>v2 审查期间默认分支仍为 v1.3。请安装以下分支以试用本网站描述的行为。</p><div class="code-toolbar"><span>Terminal</span><button type="button" id="copy-install" data-copied="已复制" data-failed="请选择并复制下方命令">复制命令</button></div><pre class="install-code"><code id="install-command">git clone --branch improve/codex-missions-v2 https://github.com/PresentJay/autopilot-skills.git autopilot-skills-v2
+npx skills add ./autopilot-skills-v2 --skill autopilot</code></pre><p id="copy-status" role="status" aria-live="polite"></p><p class="host-note">Codex <code>$autopilot</code> · Claude Code <code>/autopilot</code></p></section>
+<section class="contribute-section"><p class="eyebrow">05 / BUILD IN PUBLIC</p><h2>一起验证它的价值。</h2><p>欢迎提交失败案例、更好的验证方法和经过测量的简化。代码、研究和文档贡献同等重要。</p><div class="actions"><a class="button" href="https://github.com/PresentJay/autopilot-skills/tree/improve/codex-missions-v2/ROADMAP.md">改进计划 ↗</a><a href="https://github.com/PresentJay/autopilot-skills/tree/improve/codex-missions-v2/CONTRIBUTING.md">贡献指南 · English →</a></div></section></main>
+<footer><a class="brand" href="./">autopilot</a><p>开放开发的开源项目 · MIT <a href="https://github.com/PresentJay">PresentJay</a></p><p>V2 preview · <a href="../evidence.html">Evidence & limitations</a></p></footer></body></html>

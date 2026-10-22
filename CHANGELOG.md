@@ -4,7 +4,26 @@ All notable changes to autopilot-skills are documented here.
 
 Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased] — v2.0.0 preview
+
+### Changed
+- Use host-native goals, scheduling, and context management when actually available; otherwise continue within the current execution limits and leave a manual handoff.
+- Support code, research, documents, and monitoring equally with outcome-specific acceptance checks.
+- Replace the monolithic procedure with a concise entrypoint and conditional start, cycle, recovery, profile, and host references.
+- Preserve user work during recovery; remove blanket restore/clean, automatic L3 merges, and self-updating during missions.
+- Distinguish no candidates, successful no-change, blocked access, and verified completion.
+- Move skill version to metadata.version and align package metadata, docs, templates, and CI.
+
+### Added
+- Publish an English-first preview site, multilingual entry pages, a matched native-goal pilot, and contribution guidance.
+- Read-only state diagnosis with legacy compatibility, completion record validation, and confirmed schedule fields.
+- Negative tests for false completion and non-destructive legacy inspection; package/reference validation.
+- Codex UI metadata with normal skill discovery retained.
+
+### Migration
+- V1 missions and journals remain readable. Status never migrates state; authorized resume requires an exact backup before adding v2 fields.
+- Legacy completion markers and next-wakeup times require actual evidence/host confirmation. No existing mission is migrated during installation.
+- New mission/state templates replace the old mandatory Q1–Q10 interview. No custom daemon, scheduler, or MCP server is included.
 
 ## [1.3.0] — 2026-05-05
 
@@ -64,7 +83,8 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 - Cadence menu: immediate / 2m / 5m / 15m (default) / 30m / 1h+ → /schedule cron / manual.
 - Templates: `mission.md`, `state.json`, `journal-entry.md`, `proposal.md`, `milestone.md`.
 
-[Unreleased]: https://github.com/PresentJay/autopilot-skills/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/PresentJay/autopilot-skills/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/PresentJay/autopilot-skills/compare/v1.3.0...v2.0.0
 [1.3.0]: https://github.com/PresentJay/autopilot-skills/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/PresentJay/autopilot-skills/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/PresentJay/autopilot-skills/compare/v0.1.0...v1.1.0

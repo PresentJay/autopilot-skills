@@ -1,0 +1,4 @@
+interface:
+  display_name: "Autopilot"
+  short_description: "Verified missions for code, research, and documents"
+  default_prompt: "Use $autopilot to carry my mission through verified checkpoints and leave a clear handoff."

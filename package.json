@@ -1,7 +1,7 @@
 {
   "name": "autopilot-skills",
-  "version": "0.1.0",
-  "description": "Universal self-driving mission runner for AI coding agents (Claude Code, Codex, Cursor, Gemini, ...).",
+  "version": "2.0.0",
+  "description": "Portable missions for code, research, and documents using the host agent runtime.",
   "keywords": [
     "ai-skill",
     "autopilot",
@@ -27,8 +27,16 @@
   },
   "private": false,
   "files": [
-    "skills/",
+    "skills/autopilot/SKILL.md",
+    "skills/autopilot/agents/",
+    "skills/autopilot/references/",
+    "skills/autopilot/templates/",
+    "skills/autopilot/scripts/*.py",
     "LICENSE",
     "README.md"
-  ]
+  ],
+  "scripts": {
+    "test": "python3 -m unittest discover -s tests -v",
+    "validate": "python3 scripts/validate_package.py"
+  }
 }

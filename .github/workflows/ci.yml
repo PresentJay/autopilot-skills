@@ -6,30 +6,16 @@ on:
   pull_request:
 
 jobs:
-  skill-lint:
+  skill-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
           node-version: 20
-
       - name: Verify skill discovery
         run: npx -y skills add . --list
-
-      - name: Frontmatter sanity
-        run: |
-          for f in $(find skills -name SKILL.md); do
-            echo "checking $f"
-            grep -q '^name:' "$f"           || (echo "$f missing name" && exit 1)
-            grep -q '^description:' "$f"    || (echo "$f missing description" && exit 1)
-            grep -q '^version:' "$f"        || (echo "$f missing version" && exit 1)
-          done
-
-      - name: Reject unresolved TODO / FIXME comments in SKILL.md
-        run: |
-          # Match comment-style TODO:/FIXME: (with colon) — actual unresolved markers,
-          # not literal mentions in example code blocks like `grep "TODO\|FIXME"`.
-          if grep -rnE "TODO:|FIXME:" skills/; then
-            echo "SKILL.md must not ship with unresolved TODO:/FIXME: comments"; exit 1
-          fi
+      - name: Validate package and references
+        run: python3 scripts/validate_package.py
+      - name: State and preservation tests
+        run: python3 -m unittest discover -s tests -v

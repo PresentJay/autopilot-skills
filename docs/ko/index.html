@@ -1,90 +1,16 @@
 <!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <title>autopilot-skills — AI 코딩 에이전트가 알아서 돌아가게</title>
-  <meta name="description" content="한 줄짜리 미션을 주면, AI 코딩 에이전트(Claude Code · Codex · Cursor · Gemini …)가 알아서 사이클을 돌립니다. 단계마다 안전 가드, 끊겨도 자동으로 이어 갑니다." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="../assets/style.css" />
-  <meta property="og:title" content="autopilot-skills" />
-  <meta property="og:description" content="AI 코딩 에이전트, 알아서 돌아가게." />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="autopilot-skills" />
-  <meta property="og:locale" content="ko_KR" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="AI 코딩 에이전트, 알아서 돌아가게." />
-  <meta name="twitter:description" content="한 줄짜리 미션만 주세요. 멈추라 할 때까지 사이클이 알아서 돕니다. 단계마다 안전 가드, 끊겨도 자동으로 이어 갑니다." />
-  <meta property="og:url" content="https://presentjay.github.io/autopilot-skills/ko/" />
-</head>
-<body>
-  <nav class="nav">
-    <a href="getting-started.html">시작하기</a>
-    <a href="mission-schema.html">미션</a>
-    <a href="safety.html">안전</a>
-    <a href="cadence.html">주기</a>
-    <a href="milestones.html">마일스톤</a>
-    <a href="comparison.html">비교</a>
-    <a href="https://github.com/PresentJay/autopilot-skills">GitHub</a>
-    <span class="lang-switch">
-      <a href="/autopilot-skills/">EN</a>
-      <a href="/autopilot-skills/ko/" class="active">한</a>
-      <a href="/autopilot-skills/zh/">中</a>
-      <a href="/autopilot-skills/ja/">日</a>
-    </span>
-  </nav>
-
-  <h1>AI 코딩 에이전트, 알아서 돌게.</h1>
-  <p class="lead">한 줄짜리 미션만 주세요. 멈추라 할 때까지 사이클이 알아서 돕니다. 단계마다 안전 가드, 끊겨도 자동으로 이어 갑니다. Claude Code · Codex · Cursor · Gemini 등 40여 종 AI 도구에서 동작.</p>
-
-  <div class="install" id="install">
-    <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
-    <button onclick="navigator.clipboard.writeText('npx skills add PresentJay/autopilot-skills'); this.textContent='복사됨'; setTimeout(()=>this.textContent='복사', 1500);">복사</button>
-  </div>
-
-  <h2>무엇을 하느냐</h2>
-  <p>미션을 받으면 <code>discover → analyze → plan → execute → verify → learn</code> 사이클을 자율로 돌립니다. 한 사이클 끝나면 다음 사이클까지 잠들고, 다시 깨어 작업을 이어 갑니다. 멈추라 할 때까지, 또는 미션이 끝날 때까지.</p>
-
-  <h2>이런 미션에 어울려요</h2>
-  <ul>
-    <li><strong>코드 자기개선</strong> — 린트 정리, 죽은 코드, 커버리지 구멍, 후속 PR. <code>mission="이 레포 자기개선"</code></li>
-    <li><strong>문서 정돈</strong> — 톤 일관성, 깨진 링크, 누락 번역, 스키마 문서. <code>mission="문서 톤 통일"</code></li>
-    <li><strong>머지 직후 청소</strong> — 큰 PR이 머지된 다음 까먹기 쉬운 작은 follow-up들. <code>mission="PR #123 머지 후 청소"</code></li>
-    <li><strong>OSS 확산</strong> — README 다듬기, 비교 페이지, 소셜 카드, SEO. (이 사이트도 autopilot으로 다듬었습니다.) <code>mission="확산 — 가시성과 신뢰 시그널"</code></li>
-  </ul>
-
-  <h2>건드리지 않는 것</h2>
-  <ul>
-    <li><code>main</code>, <code>master</code> 에는 직접 push 안 함.</li>
-    <li>허용 안 한 <code>.env</code>, 비밀, 인프라, 워크플로우는 절대 손대지 않음.</li>
-    <li>허용 경로 밖에서 <code>--force</code>, <code>--no-verify</code>, <code>git reset --hard</code>, <code>rm -rf</code> 안 씀.</li>
-    <li>한 번 실패한 패턴은 다시 시도 안 함 (NOT-OK 자동 누적).</li>
-  </ul>
-
-  <h2>주기는 직접 정해</h2>
-  <p><code>immediate</code> · <code>2m</code> · <code>5m</code> · <code>15m</code> (기본) · <code>30m</code> · <code>1h+</code> 중 골라 쓰세요. <code>1h+</code> 는 cron 으로 자동 승격되어 세션을 닫아도 계속 돕니다. 빈 사이클이 쌓이면 주기는 알아서 느려집니다.</p>
-
-  <h2>중요한 순간은 따로 보관</h2>
-  <p>저널은 <code>.autopilot.log/</code> 에 쌓이고 (위치 변경 가능), PR 머지 · 미션 완료 · 첫 zero-defect 같은 핵심 사건은 <code>.autopilot.milestones/</code> 에 자동 승격됩니다 (이쪽은 고정·불변).</p>
-
-  <h2>끊겨도 알아서 복구</h2>
-  <p>호스트 sleep, 세션 크래시, 누락된 wakeup 으로 사이클이 멈춰도 다음 호출 때 알아서 진단하고 작업 브랜치를 정리한 뒤 새 사이클을 시작합니다. 상태만 보고 싶을 땐 <code>/autopilot status</code>.</p>
-
-  <hr />
-
-  <h2>더 보기</h2>
-  <ul>
-    <li><a href="getting-started.html">60초 만에 시작</a></li>
-    <li><a href="mission-schema.html">미션 스키마 (Q1–Q10)</a></li>
-    <li><a href="safety.html">안전 정책</a></li>
-    <li><a href="cadence.html">주기 메뉴</a></li>
-    <li><a href="milestones.html">마일스톤 트리거</a></li>
-    <li><a href="comparison.html">ralph-loop · impeccable · gstack 비교</a></li>
-    <li><a href="https://github.com/PresentJay/autopilot-skills/blob/main/CHANGELOG.md">Changelog</a></li>
-    <li><a href="https://github.com/PresentJay/autopilot-skills">GitHub 레포</a></li>
-  </ul>
-
-  <footer>
-    <p>MIT 라이선스 · <a href="https://github.com/PresentJay">PresentJay</a> 제작 · <a href="https://impeccable.style">impeccable</a> 의 미니멀리즘에서 영감.</p>
-  </footer>
-</body>
-</html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autopilot — 방향을 맡기고, 작업을 이어가세요.</title><meta name="description" content="코드·리서치·문서 작업을 이어갈 수 있는 미션으로 정리합니다. 범위와 완료 조건을 유지하고, 확인한 근거와 다음 작업을 남깁니다.">
+<meta property="og:title" content="Autopilot — portable missions"><meta property="og:description" content="코드·리서치·문서 작업을 이어갈 수 있는 미션으로 정리합니다. 범위와 완료 조건을 유지하고, 확인한 근거와 다음 작업을 남깁니다."><meta property="og:type" content="website"><meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://presentjay.github.io/autopilot-skills/ko/"><link rel="stylesheet" href="../assets/style.css"><script src="../assets/site.js" defer></script></head>
+<body class="landing"><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="./" aria-label="Autopilot home"><span class="brand-mark" aria-hidden="true">↗</span> autopilot</a><nav aria-label="Main"><a href="getting-started.html">문서</a><a href="../evidence.html">검증 결과</a><a href="https://github.com/PresentJay/autopilot-skills">GitHub ↗</a></nav><nav class="languages" aria-label="Language"><a href="/autopilot-skills/" hreflang="en" >EN</a> <a href="/autopilot-skills/ko/" hreflang="ko" aria-current="page">한국어</a> <a href="/autopilot-skills/ja/" hreflang="ja" >日本語</a> <a href="/autopilot-skills/zh/" hreflang="zh" >中文</a></nav></header>
+<main id="main"><section class="hero"><div><p class="eyebrow">V2 미리보기 · 검토 중</p><h1>방향을 맡기고,<br>작업을 이어가세요.</h1><p class="lead">코드·리서치·문서 작업을 이어갈 수 있는 미션으로 정리합니다. 범위와 완료 조건을 유지하고, 확인한 근거와 다음 작업을 남깁니다.</p><div class="actions"><a class="button" href="#install">미리보기 사용 <span aria-hidden="true">↗</span></a><a href="../evidence.html">검증 결과 보기 →</a></div></div>
+<aside class="mission-example" aria-label="미션 기록 예시 · 실행 결과 아님"><p class="example-caption">미션 기록 예시 · 실행 결과 아님</p><div class="record"><span>범위</span><p>허용한 파일과 작업</p></div><div class="record"><span>결과</span><p>확인한 결과와 남은 질문</p></div><div class="record"><span>다음</span><p>다음 작업 또는 중단 이유</p></div><p class="record-path">.autopilot.log/mission.md</p></aside></section>
+<section class="split-section"><div><p class="eyebrow">01 / MISSION</p><h2>Autopilot을 더하는 이유</h2><p>기본 goal도 작업을 계속 수행합니다. Autopilot은 미션과 작업 기록을 함께 남겨 지시를 재사용하고, 진행을 살피고, 중단한 작업을 이어가기 쉽게 만듭니다.</p></div><div class="feature-rows"><article><span class="step">01</span><div><h3>다시 쓸 수 있는 작업 지시</h3><p>목표, 허용 범위, 완료 확인 방법을 한곳에 둡니다.</p></div></article><article><span class="step">02</span><div><h3>작업마다 남기는 근거</h3><p>어떤 버전을 어떻게 확인했는지, 무엇이 미확인인지 기록합니다.</p></div></article><article><span class="step">03</span><div><h3>기존 작업을 보존하는 재개</h3><p>사용자 수정과 미완성 결과를 살핀 뒤 작업을 이어갑니다.</p></div></article></div></section>
+<section class="task-section"><p class="eyebrow">02 / IN PRACTICE</p><h2>코드도, 조사도, 문서도.</h2><p>이미 쓰는 에이전트와 도구로 작업합니다. 원하는 결과를 정하면 합의한 범위 안에서 진행합니다.</p><div class="prompt-tabs" aria-label="Mission examples"><button type="button" data-prompt="0" aria-pressed="true">코드</button><button type="button" data-prompt="1" aria-pressed="false">리서치</button><button type="button" data-prompt="2" aria-pressed="false">문서</button></div><pre class="task-prompt" id="prompt-0" ><code>$autopilot 공개 API를 바꾸지 않고 import 실패를 고쳐줘. 실패를 재현하고 통합 테스트로 확인해. 내 수정은 보존하고 기본 goal 모드로 완료할 때까지 진행해.</code></pre><pre class="task-prompt" id="prompt-1" hidden><code>$autopilot 이 업체 사양서들을 지연 시간과 오프라인 지원 기준으로 비교해줘. 제공한 파일을 인용하고 확인할 수 없는 내용은 미확인으로 남겨줘.</code></pre><pre class="task-prompt" id="prompt-2" hidden><code>$autopilot source.txt를 비개발자를 위한 요약 문서로 만들어줘. 수치를 대조하고 원자료의 한계와 내 메모를 보존해줘.</code></pre></section>
+<section class="split-section evidence-section"><div><p class="eyebrow">03 / EVIDENCE</p><h2>효과를 확인하고 설명합니다.</h2><p>기본 goal과 실제 산출물·실행 비용을 비교합니다. 짧은 예제의 성공만으로 장시간 안정성이나 시간 절약을 주장하지 않습니다.</p></div><div><h3>기본 goal 대비 우위는 아직 미확인</h3><p>조건과 한계를 포함한 소규모 비교 결과를 보고 선택하세요.</p><a href="../evidence.html">검증 결과 보기 →</a><hr><h3>기록이 필요한 작업에 사용하세요.</h3><p>명확한 일회성 작업은 기본 goal로 충분할 수 있습니다. 스킬은 예약 실행기·샌드박스·독립 검증기가 아닙니다. 지속 실행은 현재 환경의 기능에 따릅니다.</p></div></section>
+<section id="install" class="install-section"><p class="eyebrow">04 / START</p><h2>v2 미리보기 설치</h2><p>v2 검토 중에는 기본 브랜치가 v1.3입니다. 아래 브랜치를 설치해야 이 사이트에서 설명하는 동작을 사용할 수 있습니다.</p><div class="code-toolbar"><span>Terminal</span><button type="button" id="copy-install" data-copied="복사됨" data-failed="아래 명령을 선택해 복사해주세요">명령 복사</button></div><pre class="install-code"><code id="install-command">git clone --branch improve/codex-missions-v2 https://github.com/PresentJay/autopilot-skills.git autopilot-skills-v2
+npx skills add ./autopilot-skills-v2 --skill autopilot</code></pre><p id="copy-status" role="status" aria-live="polite"></p><p class="host-note">Codex <code>$autopilot</code> · Claude Code <code>/autopilot</code></p></section>
+<section class="contribute-section"><p class="eyebrow">05 / BUILD IN PUBLIC</p><h2>쓸 이유를 함께 만들어갑니다.</h2><p>실패한 미션, 더 나은 검증 방법, 효과를 확인한 단순화를 제안해주세요. 코드·리서치·문서 기여를 모두 환영합니다.</p><div class="actions"><a class="button" href="https://github.com/PresentJay/autopilot-skills/tree/improve/codex-missions-v2/ROADMAP.md">개선 계획 ↗</a><a href="https://github.com/PresentJay/autopilot-skills/tree/improve/codex-missions-v2/CONTRIBUTING.md">기여 안내 · English →</a></div></section></main>
+<footer><a class="brand" href="./">autopilot</a><p>공개적으로 개선하는 오픈소스 · MIT <a href="https://github.com/PresentJay">PresentJay</a></p><p>V2 preview · <a href="../evidence.html">Evidence & limitations</a></p></footer></body></html>

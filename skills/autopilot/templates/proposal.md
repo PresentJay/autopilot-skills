@@ -1,36 +1,17 @@
-<!-- Write to proposals/<id>.md after Phase 3 ANALYZE -->
+# Proposal: <title>
 
-# Proposal: <id> — <title>
+## Intended outcome
+<Requested result, affected targets, and authorization boundary.>
 
-**Discovered by**: <Phase 1 tool>
-**Priority**: <P1 | P2>
-**Created**: <ISO>
+## Evidence and hypothesis
+<Observed behavior or source findings; separate inference and unknowns.>
 
-## What
-<2-3 lines — what to change>
+## Planned work
+<Smallest coherent change/investigation and expected effect.>
 
-## Evidence (auto-discovery output, ≤20 lines)
+## Acceptance and verification
+<Criterion IDs, decisive checks, and target versions.>
 
-```
-<excerpt of tool output that triggered this proposal>
-```
-
-## Impact analysis
-
-- **Files affected**: <list>
-- **Modules / users affected**: <list or "none">
-- **Reversibility**: reversible | partially reversible (config) | irreversible
-- **Conflicts with other proposals**: <list or "none">
-
-## Plan
-
-- **Change scope**: <files, expected lines>
-- **Verify**: <build / test / lint / smoke commands>
-- **Rollback**: <git restore | feature flag | config revert>
-- **Dry-run available?**: yes | no
-
-## Risk
-- <known risks, one per line>
-
-## Acceptance
-- <explicit pass/fail criteria — Phase 6 VERIFY decides on this>
+## Recovery and handoff
+<Preserve existing work; name an authorized scoped rollback only if needed.>
+<Unresolved decisions or conflicts.>

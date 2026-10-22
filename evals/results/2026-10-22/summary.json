@@ -1,0 +1,265 @@
+{
+  "date": "2026-10-22",
+  "model": "gpt-6-astra",
+  "effort": "medium",
+  "codex_version": "0.154.0",
+  "native_goal_token_budget": 60000,
+  "wall_limit_seconds": 180,
+  "repetitions": 1,
+  "max_concurrent_runs": 3,
+  "skill_files_sha256": {
+    "SKILL.md": "c418c3377ca26ac2f9bbe59f203f46eee1082a23192cdbff8acd56df34d72647",
+    "agents/openai.yaml": "00c45e3268b95ce48cc52ecae22df047d9090a1bafc232cac65ae8ec80cc12b0",
+    "references/cycle.md": "d62a59900106587889672cdcd1ff61e5aebbfe9e31e030dad521ecb1dab43449",
+    "references/hosts.md": "d7e3508e4ccc02b6ec7b459802ad972336d29c8f03c43938ca1ae15d22176819",
+    "references/profiles.md": "966c7814455096a705e39ff2817881ebbe95742b5f4ba7ab47bee8c4fe0ffe22",
+    "references/recovery.md": "6c07e33573f020041e7b4fd37604f0e4b19a7e6f9d62c359d25ddd1aa4fad9e4",
+    "references/start.md": "61d024de9a0dc16f10708b6be7178e069c60438834ce45f8f83faa4325401687",
+    "scripts/check_state.py": "aab28b0317e05a732f50993551462c2c040bb6e49cf15a5ccd68fc1fedc74efb",
+    "templates/journal-entry.md": "513d7bb029a2a5f7969c583357a28316d727b7a2743b1a1f294e6c82581c319b",
+    "templates/milestone.md": "05e32d1d67ce6b23f581695315572974b7b343477fab751a03fe3a8d3e25000d",
+    "templates/mission.md": "ddd4d3452f9af8c509257086ba96e0574fe37fabfc8c1fc827cdd2e2bf511963",
+    "templates/proposal.md": "8583d434ab9d7831eafb427bdbb63d6c2de9653b1e9908c95162068f179a84cf",
+    "templates/state.json": "988dd78d77f43d05abed068f1fd990d00d63d82b2b1c1d36fdbb696bd3a3507e"
+  },
+  "fixture_files_sha256": {
+    "code/discount.py": "5c2ba7c9e9abf3267312f78f25c6b30e23b671055ddd60f3877cab27448d93fe",
+    "code/mission.md": "4dac71778de1ad99f7400dfc8eaed40a11187bc26b6467c08a2a2827640220ad",
+    "code/test_discount.py": "d8720fe26a533f03ce4735132c1b6df40610b9dbb73e2b7046933936cb797e08",
+    "code/user-notes.txt": "006f471c26ceb39ef7f662a9fb111605729f280308e5c9e6959d0e4b8572201d",
+    "documents/mission.md": "cbc2356a15852815951aafbbbb7b525f1489db6e1bc10169d895c288984b942f",
+    "documents/source.txt": "03b9b9560a58bbb3fe2517ef73e046487e97b0a85cd263ebd5e2bf73c7f938a7",
+    "documents/user-notes.txt": "f680b5fa04e6d6942b535db238133e6491bb35881029a7f7f8bdadf291a9a45d",
+    "research/mission.md": "7f6e047fc7cc651ae5140b00647208b0879db31c710c93070b5d8cb1d6b13e23",
+    "research/vendor-a.txt": "b4319760ea4083b2b39c46a59ae2a89742484447915261d4f0f0e3a78445e412",
+    "research/vendor-b-error.txt": "418e3ed19ff285a30e3e6ddbd8e2a157a46239cebc77e20680a12d28df5db2bd"
+  },
+  "results": [
+    {
+      "task": "code",
+      "arm": "plain",
+      "quality": "pass",
+      "checks": {
+        "original_inputs_preserved": true,
+        "supplied_tests": "2/2",
+        "independent_numeric_cases": "45/45"
+      },
+      "goal_status": "complete",
+      "native_goal_tokens": 5725,
+      "elapsed_seconds": 27.168,
+      "output_sha256": "867ba624317debd5e6be217d195a374c1653b6ea096e4c912114e535e5e5b9c5",
+      "thread_token_usage": {
+        "totalTokens": 82958,
+        "inputTokens": 82439,
+        "cachedInputTokens": 76288,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 519,
+        "reasoningOutputTokens": 42
+      }
+    },
+    {
+      "task": "code",
+      "arm": "strong",
+      "quality": "pass",
+      "checks": {
+        "original_inputs_preserved": true,
+        "supplied_tests": "2/2",
+        "independent_numeric_cases": "45/45"
+      },
+      "goal_status": "complete",
+      "native_goal_tokens": 6333,
+      "elapsed_seconds": 38.486,
+      "output_sha256": "5af766025f15036d7b060d2ce792612598a34f9ec6d3250137ca576189a77c46",
+      "thread_token_usage": {
+        "totalTokens": 100491,
+        "inputTokens": 99570,
+        "cachedInputTokens": 93184,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 921,
+        "reasoningOutputTokens": 52
+      }
+    },
+    {
+      "task": "code",
+      "arm": "autopilot",
+      "quality": "pass",
+      "checks": {
+        "original_inputs_preserved": true,
+        "supplied_tests": "2/2",
+        "independent_numeric_cases": "45/45"
+      },
+      "goal_status": "complete",
+      "native_goal_tokens": 11871,
+      "elapsed_seconds": 58.975,
+      "output_sha256": "5af766025f15036d7b060d2ce792612598a34f9ec6d3250137ca576189a77c46",
+      "thread_token_usage": {
+        "totalTokens": 144127,
+        "inputTokens": 142565,
+        "cachedInputTokens": 130432,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1562,
+        "reasoningOutputTokens": 51
+      }
+    },
+    {
+      "task": "research",
+      "arm": "plain",
+      "quality": "pass",
+      "checks": {
+        "original_inputs_preserved": true,
+        "semantic_review": "pass",
+        "criteria": [
+          "A: 200 ms median + one request at a time + local network",
+          "A offline unknown; B unavailable/403 and both capabilities unknown",
+          "source references and date scope; no unsupported ranking"
+        ]
+      },
+      "goal_status": "complete",
+      "native_goal_tokens": 5086,
+      "elapsed_seconds": 28.415,
+      "output_sha256": "9976f119c944c84c52d96703921de08b6d39bf09e884ce5225157f4b39991cfb",
+      "thread_token_usage": {
+        "totalTokens": 82754,
+        "inputTokens": 82195,
+        "cachedInputTokens": 76416,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 559,
+        "reasoningOutputTokens": 13
+      }
+    },
+    {
+      "task": "research",
+      "arm": "strong",
+      "quality": "pass",
+      "checks": {
+        "original_inputs_preserved": true,
+        "semantic_review": "pass",
+        "criteria": [
+          "A: 200 ms median + one request at a time + local network",
+          "A offline unknown; B unavailable/403 and both capabilities unknown",
+          "source references and date scope; no unsupported ranking"
+        ]
+      },
+      "goal_status": "complete",
+      "native_goal_tokens": 9566,
+      "elapsed_seconds": 37.346,
+      "output_sha256": "ab74cbeb3c59c2c2a0bb42f6bccdffce3519af7f33603965f35d45473ce31f12",
+      "thread_token_usage": {
+        "totalTokens": 85132,
+        "inputTokens": 84334,
+        "cachedInputTokens": 73600,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 798,
+        "reasoningOutputTokens": 12
+      }
+    },
+    {
+      "task": "research",
+      "arm": "autopilot",
+      "quality": "pass",
+      "checks": {
+        "original_inputs_preserved": true,
+        "semantic_review": "pass",
+        "criteria": [
+          "A: 200 ms median + one request at a time + local network",
+          "A offline unknown; B unavailable/403 and both capabilities unknown",
+          "source references and date scope; no unsupported ranking"
+        ]
+      },
+      "goal_status": "complete",
+      "native_goal_tokens": 24894,
+      "elapsed_seconds": 59.476,
+      "output_sha256": "d0c110cadb5be3ad226faa048731328bab4f051a60551adadf4f42b6527e19e0",
+      "thread_token_usage": {
+        "totalTokens": 169749,
+        "inputTokens": 167887,
+        "cachedInputTokens": 142720,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1862,
+        "reasoningOutputTokens": 41
+      }
+    },
+    {
+      "task": "documents",
+      "arm": "plain",
+      "quality": "pass",
+      "checks": {
+        "original_inputs_preserved": true,
+        "semantic_review": "pass",
+        "criteria": [
+          "120 requests, 18 retries, previous 30",
+          "different workloads, no causal claim",
+          "no revenue measurement; no invented impact",
+          "short plain-English brief"
+        ]
+      },
+      "goal_status": "complete",
+      "native_goal_tokens": 6084,
+      "elapsed_seconds": 37.374,
+      "output_sha256": "4789265ac16e74309021330b915774bd882355bdde122b0f260b276c724d8099",
+      "thread_token_usage": {
+        "totalTokens": 85273,
+        "inputTokens": 84154,
+        "cachedInputTokens": 77696,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1119,
+        "reasoningOutputTokens": 33
+      }
+    },
+    {
+      "task": "documents",
+      "arm": "strong",
+      "quality": "pass",
+      "checks": {
+        "original_inputs_preserved": true,
+        "semantic_review": "pass",
+        "criteria": [
+          "120 requests, 18 retries, previous 30",
+          "different workloads, no causal claim",
+          "no revenue measurement; no invented impact",
+          "short plain-English brief"
+        ]
+      },
+      "goal_status": "complete",
+      "native_goal_tokens": 9352,
+      "elapsed_seconds": 33.377,
+      "output_sha256": "226a381f2140d339b1bfa43792f2824fa429f2a33b38916211dc971819abe1ec",
+      "thread_token_usage": {
+        "totalTokens": 84101,
+        "inputTokens": 83229,
+        "cachedInputTokens": 72832,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 872,
+        "reasoningOutputTokens": 55
+      }
+    },
+    {
+      "task": "documents",
+      "arm": "autopilot",
+      "quality": "pass",
+      "checks": {
+        "original_inputs_preserved": true,
+        "semantic_review": "pass",
+        "criteria": [
+          "120 requests, 18 retries, previous 30",
+          "different workloads, no causal claim",
+          "no revenue measurement; no invented impact",
+          "short plain-English brief"
+        ]
+      },
+      "goal_status": "complete",
+      "native_goal_tokens": 19381,
+      "elapsed_seconds": 59.233,
+      "output_sha256": "074bfef0aa72c0a3c14aa6a1176f2c3928564ddf3b415ac371ca7212b4bed33a",
+      "thread_token_usage": {
+        "totalTokens": 166467,
+        "inputTokens": 164556,
+        "cachedInputTokens": 145280,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1911,
+        "reasoningOutputTokens": 44
+      }
+    }
+  ],
+  "grading": "Code: executed supplied tests and 45 numeric cases; research/documents: unblinded supervising-agent semantic review against original mission and inputs. No human or independent-model adjudication."
+}
