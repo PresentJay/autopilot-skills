@@ -1,0 +1,18 @@
+---
+layout: page
+title: "시작하기"
+lang: ko
+---
+
+V2는 검토 중인 프리뷰입니다. 기본 브랜치는 아직 v1.3이므로 아래 명령으로 프리뷰를 설치하세요:
+
+```sh
+git clone --branch improve/codex-missions-v2 https://github.com/PresentJay/autopilot-skills.git autopilot-skills-v2
+npx skills add ./autopilot-skills-v2 --skill autopilot
+```
+
+Codex에서는 `$autopilot`, Claude Code에서는 `/autopilot`으로 호출합니다. 원하는 결과, 허용 범위, 완료 확인 방법, 중단 조건을 설명하세요. 코드·조사·문서 작업을 모두 지원하며 Git은 필수가 아닙니다.
+
+일반 미션은 완료 확인, 장애, 일시정지, 사용자·호스트의 실행 한도에 도달할 때까지 이어갑니다. 체크포인트에 도달했다는 이유만으로 멈추지 않습니다. `run-once`는 한 체크포인트로 제한합니다. 턴을 넘어 계속 실행하려면 호스트가 제공하는 native goal 사용을 명시적으로 요청하세요. 예약 실행은 별도 기능입니다.
+
+명확한 일회성 작업에는 기본 goal만으로 충분할 수 있습니다. Autopilot은 재사용할 미션 정의와 작업 기록을 더합니다. 속도나 결과의 우위는 입증되지 않았습니다. [비교 결과와 한계](../evidence.html)를 확인하세요.

@@ -1,0 +1,29 @@
+title: autopilot-skills
+description: Portable missions for code, research, and documents.
+theme: minima
+baseurl: "/autopilot-skills"
+url: "https://presentjay.github.io"
+markdown: kramdown
+defaults:
+  - scope:
+      path: "ko"
+    values:
+      layout: page
+      lang: ko
+  - scope:
+      path: "zh"
+    values:
+      layout: page
+      lang: zh
+  - scope:
+      path: "ja"
+    values:
+      layout: page
+      lang: ja
+  - scope:
+      path: ""
+    values:
+      layout: page
+      lang: en
+exclude:
+  - PUBLISH.md
