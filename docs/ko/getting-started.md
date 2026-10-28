@@ -6,11 +6,10 @@ lang: ko
 
 이번 실행에서 끝낼 수 있는 작업은 스킬 본문만 읽고 결과를 확인합니다. 상태·일지 파일이나 전체 작업 폴더의 해시 목록은 만들지 않습니다. 다음 세션으로 넘길 작업, 반복 모니터링, 명시적으로 기록을 요청한 작업, 기존 미션에만 지속 기록을 사용합니다. 기존 일시정지 상태와 사용자 수정은 항상 보존합니다.
 
-V2는 검토 중인 프리뷰입니다. 기본 브랜치는 아직 v1.3이므로 아래 명령으로 프리뷰를 설치하세요:
+기본 브랜치에 v2를 반영했습니다. 아직 정식 릴리스 태그는 없으며, 아래 명령으로 현재 버전을 설치합니다:
 
 ```sh
-git clone --branch improve/codex-missions-v2 https://github.com/PresentJay/autopilot-skills.git autopilot-skills-v2
-npx skills add ./autopilot-skills-v2 --skill autopilot
+npx skills add PresentJay/autopilot-skills --skill autopilot
 ```
 
 Codex에서는 `$autopilot`, Claude Code에서는 `/autopilot`으로 호출합니다. 원하는 결과, 허용 범위, 완료 확인 방법, 중단 조건을 설명하세요. 코드·조사·문서 작업을 모두 지원하며 Git은 필수가 아닙니다.

@@ -11,9 +11,8 @@ native goal mode when available.
 [Evidence](docs/evidence.md) · [Roadmap](ROADMAP.md) ·
 [Contribute](CONTRIBUTING.md) · [한국어](https://presentjay.github.io/autopilot-skills/ko/)
 
-> **V2 preview.** This branch is under review. The default branch still contains
-> v1.3. The preview is not a released upgrade, and no speed or quality advantage
-> over native goals has been established.
+> **V2 preview on main.** No stable v2 release tag has been published.
+> No speed or quality advantage over native goals has been established.
 
 ## Why use it?
 
@@ -30,8 +29,7 @@ See the [comparison and limits](docs/comparison.md).
 ## Try the preview
 
 ```sh
-git clone --branch improve/codex-missions-v2 https://github.com/PresentJay/autopilot-skills.git autopilot-skills-v2
-npx skills add ./autopilot-skills-v2 --skill autopilot
+npx skills add PresentJay/autopilot-skills --skill autopilot
 ```
 
 In Codex, invoke `$autopilot`. In Claude Code, invoke `/autopilot`.

@@ -1,9 +1,9 @@
 # Publishing Autopilot
 
 The skill is installed from this GitHub repository. No npm publish is required.
-V2 is an unreleased preview on `improve/codex-missions-v2`; `main` still contains
-v1.3 until the maintainer reviews and merges the PR. Do not tag a preview as a
-stable release or imply that the default install already has preview behavior.
+V2 is on `main` as an untagged preview. The default repository install includes
+v2 behavior. Merging the source does not create a stable release tag; publish a
+release only when that separate action is authorized.
 
 ## Validate a candidate
 
