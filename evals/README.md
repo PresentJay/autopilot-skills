@@ -2,6 +2,16 @@
 
 This is an opt-in functional pilot, not a general performance benchmark. Read [the evidence and exclusions](../docs/evidence.md) before interpreting the numbers. All nine scored outputs met the small tasks; Autopilot used more tokens and time. Long-running usefulness remains untested.
 
+## Bounded-task follow-up (2026-10-29)
+
+`results/2026-10-29/` compares the previous preview at `7288f62`, the revised skill at `b4b1f3b`, and a strong goal under CLI 0.164.0. It retains all 13 matched-task attempts (nine completed, four timed out before agent output), separate routing probes, and the grading criteria fixed before execution. The revised tasks create no runtime records or explicit reference/template/checker reads. Aggregate goal tokens fell 21.8% against the previous skill in this sample; the document case increased 18.0%, and the strong goal still used less in total. No general saving or speedup is established.
+
+The same runner was used for both revisions; a private wrapper selected an extracted skill tree for the previous arm. To reproduce, use separate checkouts of the two pinned revisions and run the same fixtures with the documented command/model/limits. The routing inputs are included under `routing-inputs/`; invoke the skill on those briefs to inspect pause protection and explicit durable records. The paused probe requires no changes, including to its supplied code; it is an inspection goal, not authorization to resume. The ordinary code rubric must not be applied to it.
+
+The paused routing probe passed. Both explicit durable-record probes reached the wall limit before agent output, so the revised durable routing remains unverified; do not infer runtime compatibility from its structural tests. These probes are recorded separately from the 13 matched-task attempts.
+
+The revised research arm had one failed start and a successful retry; its control also had a failed start and a successful retry. Retry metadata, shared global instructions/hooks, observed builtin app startup, non-random order, cache differences, and a temporary concurrency deviation are disclosed in the evidence page and JSON summary. Raw host events remain private.
+
 ## Inspect without model usage
 
 The measured skill is pinned to commit `f4a6d33c600674beded74c5b5571408944650e85`; the summary includes per-file hashes. The current preview subsequently clarifies the non-goal fallback wording, which was not exercised by this pilot.
