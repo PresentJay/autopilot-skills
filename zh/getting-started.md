@@ -6,11 +6,10 @@ lang: zh
 
 能在本次执行中完成的工作只读取技能入口并检查结果，不创建状态或日志文件，也不对整个工作目录计算哈希。持久记录用于跨会话交接、定期监控、用户明确要求记录或已有任务。始终保留已有暂停状态和用户修改。
 
-V2是正在审核的预览版，默认分支仍为v1.3。请明确安装预览分支:
+V2预览版已合入默认分支，尚无正式发布标签。请安装当前版本:
 
 ```sh
-git clone --branch improve/codex-missions-v2 https://github.com/PresentJay/autopilot-skills.git autopilot-skills-v2
-npx skills add ./autopilot-skills-v2 --skill autopilot
+npx skills add PresentJay/autopilot-skills --skill autopilot
 ```
 
 在Codex中使用`$autopilot`，在Claude Code中使用`/autopilot`。说明目标、允许范围、完成检查和停止条件。代码、研究和文档均可使用，不要求Git。

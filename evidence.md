@@ -31,7 +31,7 @@ After these runs, the Codex UI default prompt was aligned with the conditional-r
 
 A separate paused-mission probe preserved all original code and records byte for byte. The explicit durable-record probe was attempted twice but reached the wall limit before any agent output; its revised routing is therefore **not live-verified**. Both failed probes are retained separately and are excluded from the task-token comparison.
 
-The exact candidate/input hashes, prompts, artifacts, full thread counters, all attempts, and the prewritten grading/routing criteria are in [the follow-up results](https://github.com/PresentJay/autopilot-skills/tree/improve/codex-missions-v2/evals/results/2026-10-29). Long-session handoff effectiveness and broader quality advantages remain unproven.
+The exact candidate/input hashes, prompts, artifacts, full thread counters, all attempts, and the prewritten grading/routing criteria are in [the follow-up results](https://github.com/PresentJay/autopilot-skills/tree/main/evals/results/2026-10-29). Long-session handoff effectiveness and broader quality advantages remain unproven.
 
 ## What was compared
 
@@ -41,7 +41,7 @@ On 2026-10-22, we ran three local tasks in three conditions: plain native goal, 
 - **Research:** compare local vendor inputs, one unavailable; cite evidence and identify unknowns.
 - **Documents:** write a short brief from supplied figures without inventing causal or revenue claims.
 
-The mission text already includes reasonable requirements in all conditions. The stronger control adds explicit verification, scope, and uncertainty instructions. The measured skill is pinned to [f4a6d33](https://github.com/PresentJay/autopilot-skills/tree/f4a6d33c600674beded74c5b5571408944650e85/skills/autopilot). Exact prompts, inputs, outputs, record samples, and candidate file hashes are public in the [evaluation directory](https://github.com/PresentJay/autopilot-skills/tree/improve/codex-missions-v2/evals).
+The mission text already includes reasonable requirements in all conditions. The stronger control adds explicit verification, scope, and uncertainty instructions. The measured skill is pinned to [f4a6d33](https://github.com/PresentJay/autopilot-skills/tree/f4a6d33c600674beded74c5b5571408944650e85/skills/autopilot). Exact prompts, inputs, outputs, record samples, and candidate file hashes are public in the [evaluation directory](https://github.com/PresentJay/autopilot-skills/tree/main/evals).
 
 ## Observed results
 
