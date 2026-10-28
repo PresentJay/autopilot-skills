@@ -7,6 +7,7 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 ## [Unreleased] — v2.0.0 preview
 
 ### Changed
+- Execute bounded tasks directly without mandatory state/journal files, workspace hash inventories, or extra references. Load durable-mission instructions only for existing/persistent work; retain verification and pause/ownership checks.
 - Use host-native goals, scheduling, and context management when actually available; otherwise continue within the current execution limits and leave a manual handoff.
 - Support code, research, documents, and monitoring equally with outcome-specific acceptance checks.
 - Replace the monolithic procedure with a concise entrypoint and conditional start, cycle, recovery, profile, and host references.

@@ -4,6 +4,8 @@ title: "Mission and evidence"
 lang: en
 ---
 
+A task that can finish in the current invocation reads only the skill entrypoint and verifies the requested output, without creating state/journal files or hashing the whole workspace. Persistent records are for cross-session handoffs, recurring monitoring, explicit record requests, or an existing mission. Existing pauses and user edits are always preserved.
+
 V2 records outcome, scope and authorization, acceptance criterion IDs, execution/stopping conditions, and storage in `mission.md`. Use the packaged template rather than a fixed ten-question interview.
 
 `state.json` uses `schema_version: 1` and records mission/run IDs, target, criterion IDs, verification records, status, and the last result. Evidence identifies the method and target version. The checker validates record structure, not truth or freshness.

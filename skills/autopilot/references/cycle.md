@@ -13,7 +13,8 @@ question, affected targets, expected result, and decisive check when the work
 requires design or diagnosis. A tiny edit needs no separate proposal file.
 Use the proposal template only when a proposal materially helps review.
 
-Apply authorized work, then verify according to profiles.md. Distinguish:
+Apply authorized work, then verify the requested outcome. Read profiles.md only
+when the task lacks necessary verification guidance. Distinguish:
 
 - `progress`: a useful checkpoint passed, but some criteria remain.
 - `no_candidate`: discovery found nothing actionable; it is not completion.
@@ -44,7 +45,8 @@ failure. Preserve changes for inspection; fix within scope or hand off.
 Add a NOT-OK lesson only after establishing its conditions and cause. Do not
 turn transient network errors into a permanent prohibition.
 
-Update the journal and state with criterion IDs, target versions, methods,
+Keep records concise: link to the output and actual check instead of copying
+the output or host goal counters. Update the journal and state with criterion IDs, target versions, methods,
 results, evidence locations, and unresolved work. Do not record a check as
 passed if it was skipped. Checks describe the actual command/reading/inspection,
 not a command the model merely proposes. The state checker validates records;

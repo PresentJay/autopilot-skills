@@ -1,4 +1,6 @@
-# Start or run one checkpoint
+# Start a durable mission
+
+Read this only for persistent or existing mission records, not a bounded task.
 
 Read applicable project instructions and any existing mission before writing.
 `quick`, `--quick`, and `mission="..."` are input hints, not authorization to
@@ -28,8 +30,8 @@ Budget/time limits are optional user choices; do not
 invent a token budget. `run-once` performs at most one checkpoint and does not
 create or renew schedules. An authorized native goal may continue checkpoints.
 
-Inspect actual host capabilities as described in hosts.md before promising
-continuation. Do not create a goal merely because the skill was loaded.
+Reuse host capabilities already exposed. Read hosts.md only to resolve a missing
+capability before promising continuation. Do not create a goal merely because the skill was loaded.
 A request to explicitly start goal mode may use an exposed goal tool; otherwise
 work within the current turn or show the host's goal invocation to the user.
 
@@ -39,7 +41,9 @@ for research, identify questions, sources, and date scope. Git, npm, and PRs are
 not universal prerequisites. Discover the project's real commands rather than
 installing arbitrary linters with npx.
 
-Before modifying a target, record its baseline and existing edits/revision.
+Before modifying a target, record its relevant baseline and existing edits/revision.
+Do not hash the whole workspace or the installed skill. Record only what is
+needed to protect existing work and invalidate checks when a target changes.
 Store runtime records inside the authorized journal directory, even for a
 read-only target mission. If no writable journal destination is authorized,
 keep a conversational handoff and report that durable recovery is unavailable.

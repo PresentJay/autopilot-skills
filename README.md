@@ -55,7 +55,18 @@ $autopilot Turn source.txt into a brief for a nontechnical reader. Check every
 figure and preserve the source's limitations. Keep my existing notes.
 ```
 
-## What stays with the mission
+## Keep short tasks short
+
+A task that can finish in the current invocation uses only the skill entrypoint.
+It still verifies the output and preserves existing edits, but does not create
+state/journal files, hash the whole workspace, or read the durable-mission guides.
+An active native goal already owns its execution bookkeeping.
+
+Use persistent records when work must continue in another session, monitoring
+needs previous results, or you explicitly ask for an auditable mission record.
+Existing mission records are always honored, including a stored pause.
+
+## What stays with a durable mission
 
 - `mission.md`: outcome, scope, acceptance criteria, stopping conditions.
 - `state.json`: current checkpoint, observed results, and target version.
