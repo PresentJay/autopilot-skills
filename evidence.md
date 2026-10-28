@@ -6,7 +6,32 @@ lang: en
 
 # Does Autopilot earn its overhead?
 
-**Not demonstrated yet.** In this small pilot, all three approaches met the supplied task requirements. Autopilot added a structured journal and state, but used more native-goal tokens and elapsed time. There is no measured quality, speed, or long-running reliability advantage here.
+**A general advantage over native goals is not demonstrated.** In the original small pilot, all three approaches met the supplied task requirements. Autopilot added a structured journal and state, but used more native-goal tokens and elapsed time. There is no measured quality, speed, or long-running reliability advantage here.
+
+## Bounded-task follow-up — 2026-10-29
+
+The preview now performs a bounded task directly from the entrypoint. It retains output verification and user-edit protection, but does not require durable state, journals, whole-workspace hash inventories, or the detailed mission guides. Existing paused missions are still honored. Persistent records remain available for handoffs, monitoring, and explicit record requests.
+
+We reran the same three fixtures with a strong native goal, the previous preview ([7288f62](https://github.com/PresentJay/autopilot-skills/tree/7288f6223b0be0c4c1541d7fed09da8c9bdfda54/skills/autopilot)), and the revised skill ([b4b1f3b](https://github.com/PresentJay/autopilot-skills/tree/b4b1f3bd7fc69a256b11e82c2fdc76b152435b4b/skills/autopilot)). All used Codex **0.164.0**, **gpt-6-astra**, medium effort, the same prompts and 60,000-token/180-second limits. The CLI changed since the original pilot; do not present these as a controlled change from its 2.22× figure.
+
+| Task | Strong goal tokens | Previous skill tokens | Revised skill tokens |
+| --- | ---: | ---: | ---: |
+| Code | 10,883 | 15,877 | 12,478 |
+| Research | 4,578 | 17,715 | 7,321 |
+| Documents | 5,734 | 16,215 | 19,132 |
+| Total | **21,195** | **49,807** | **38,931** |
+
+The revised skill used **21.8% fewer native-goal tokens than the previous skill in these completed runs**, and **1.84× the strong-goal total**. This is a descriptive sample, not an expected saving. **The document task increased by 18.0%**, even though it also avoided the extra records and reference reads. Cache counters differed between runs, and there is only one completed run per task/condition. Removing procedures does not guarantee lower measured token usage on every task. These counters are not an invoice.
+
+All nine completed outputs met the original task requirements. Code outputs passed the two supplied tests and the 45-case numeric grid; original input files and user notes were preserved. The three revised tasks created **zero new runtime record files**, and their command traces showed **zero explicit reads of references/templates/checker source**. The research control delivered its report in the final answer, which the mission allows; we did not require an extra file just for grading. Semantic review remains unblinded and performed by the supervising agent.
+
+Four initial attempts reached the wall limit with no agent output, no completed turn, and zero native-goal tokens reported. They are retained in the public summary. Those task/condition pairs were retried after concurrency reduced; the failed starts are not artifact-quality results. Runner processes briefly overlapped up to five despite a planned maximum of three. Shared load, non-random order, no cache control, and retries confound timing, so no speedup is claimed. The builtin apps server and the account's session-start hook were observed in the newer host despite disabling configured plugins/servers; no external app actions were used by the scored tasks. This is not a clean-system benchmark.
+
+After these runs, the Codex UI default prompt was aligned with the conditional-record policy; that UI entrypoint itself was not live-tested. The measured entrypoint and references remain unchanged.
+
+A separate paused-mission probe preserved all original code and records byte for byte. The explicit durable-record probe was attempted twice but reached the wall limit before any agent output; its revised routing is therefore **not live-verified**. Both failed probes are retained separately and are excluded from the task-token comparison.
+
+The exact candidate/input hashes, prompts, artifacts, full thread counters, all attempts, and the prewritten grading/routing criteria are in [the follow-up results](https://github.com/PresentJay/autopilot-skills/tree/improve/codex-missions-v2/evals/results/2026-10-29). Long-session handoff effectiveness and broader quality advantages remain unproven.
 
 ## What was compared
 

@@ -4,6 +4,8 @@ title: "Get started"
 lang: en
 ---
 
+A task that can finish in the current invocation reads only the skill entrypoint and verifies the requested output, without creating state/journal files or hashing the whole workspace. Persistent records are for cross-session handoffs, recurring monitoring, explicit record requests, or an existing mission. Existing pauses and user edits are always preserved.
+
 V2 is a preview under review. The default branch still contains v1.3. Install the preview explicitly:
 
 ```sh
