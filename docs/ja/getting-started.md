@@ -1,32 +1,19 @@
 ---
-title: はじめに
+layout: page
+title: "はじめに"
+lang: ja
 ---
 
-# はじめに
+今回の実行で完了できる作業はスキル本体だけを読み、成果を確認します。状態・ログファイルや作業フォルダー全体のハッシュ一覧は作りません。永続記録は次のセッションへの引き継ぎ、定期監視、明示的な記録依頼、既存ミッションに使います。既存の一時停止状態とユーザーの編集は常に保護します。
 
-## インストール
+V2はデフォルトブランチに反映済みのプレビューです。正式なリリースタグはまだありません。現在の版をインストールしてください:
 
-```bash
-npx skills add PresentJay/autopilot-skills
+```sh
+npx skills add PresentJay/autopilot-skills --skill autopilot
 ```
 
-プロンプトでハーネスを選ぶか、`--all -g` で一気に全部入れます。
+Codexでは`$autopilot`、Claude Codeでは`/autopilot`を使います。成果、許可する範囲、完了の確認方法、停止条件を伝えてください。コード・調査・文書を対象とし、Gitは必須ではありません。
 
-## ミッションを開始
+通常のミッションは、完了の確認、障害、一時停止、ユーザーまたはホストの実行上限まで続けます。チェックポイントだけを理由に停止しません。`run-once`は1回に限定します。ターンをまたぐ実行には、対応するホストのnative goalを明示的に依頼してください。予約実行は別の機能です。
 
-使っている AI(Claude Code・Codex・Cursor など)で:
-
-```
-/autopilot
-```
-
-初回は 10 問のセットアップが立ち上がります。すでに決めている回答は引数で渡せば、その質問だけスキップできます。
-
-```
-/autopilot mission="lint cleanup" risk=L2 cadence=15m
-```
-
-## 止める
-
-- "stop autopilot" / "멈춰" / "pause" — `mission.md` の Mode が `paused` に変わります。
-- `.autopilot.log/mission.md` を消す — 次回呼び出しで最初から。
+明確な単発タスクでは標準のgoalで十分な場合があります。Autopilotは再利用できるミッション定義と作業記録を追加します。速度や成果の優位性は未確認です。[比較結果と制約](../evidence.html)を確認してください。

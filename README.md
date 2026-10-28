@@ -1,132 +1,106 @@
-# autopilot-skills
+# Autopilot
 
-[![Latest release](https://img.shields.io/github/v/release/PresentJay/autopilot-skills?label=release&color=4c1)](https://github.com/PresentJay/autopilot-skills/releases/latest)
-[![License: MIT](https://img.shields.io/badge/license-MIT-4c1)](LICENSE)
-[![AI harnesses: 50+](https://img.shields.io/badge/harnesses-50%2B-4c1)](https://github.com/vercel-labs/skills#supported-harnesses)
-[![Docs](https://img.shields.io/badge/docs-presentjay.github.io-4c1)](https://presentjay.github.io/autopilot-skills)
-[![Languages: en · ko · zh · ja](https://img.shields.io/badge/docs-en%20·%20ko%20·%20zh%20·%20ja-4c1)](https://presentjay.github.io/autopilot-skills)
+**Give your agent a mission it can carry forward.**
 
-Universal self-driving mission runner for AI coding agents.
+Autopilot is a portable mission workflow for code, research, and documents.
+It keeps the outcome, scope, checks, and next action together so work can continue
+without rebuilding the brief at every checkpoint. It uses your agent's tools and
+native goal mode when available.
 
-> 📘 Docs and quickstart: [presentjay.github.io/autopilot-skills](https://presentjay.github.io/autopilot-skills)
+[Website](https://presentjay.github.io/autopilot-skills/) ·
+[Evidence](docs/evidence.md) · [Roadmap](ROADMAP.md) ·
+[Contribute](CONTRIBUTING.md) · [한국어](https://presentjay.github.io/autopilot-skills/ko/)
 
-Once you start `/autopilot`, it runs an endless **discover → analyze → plan → execute → verify → learn** cycle on your mission until you tell it to stop. Domain-agnostic — code self-improvement, doc grooming, ops sweeps, anything you can describe in one line.
+> **V2 preview on main.** No stable v2 release tag has been published.
+> No speed or quality advantage over native goals has been established.
 
-Works on Claude Code, Codex CLI, Cursor, Gemini CLI, and 50+ other AI coding agents (via the [`skills`](https://github.com/vercel-labs/skills) ecosystem).
+## Why use it?
 
-## Install
+Use Autopilot when a reusable mission and an inspectable handoff matter: improving
+a repository over several checkpoints, investigating a question with incomplete
+sources, or preparing a document from evidence. You get the same mission format
+and recovery conventions across those tasks.
 
-```bash
-npx skills add PresentJay/autopilot-skills
+A well-specified one-off task may need only a native goal. Goals already support
+continuation and completion checks. Autopilot earns its place only if its added
+structure reduces repeated briefing, missed work, or supervision for your task.
+See the [comparison and limits](docs/comparison.md).
+
+## Try the preview
+
+```sh
+npx skills add PresentJay/autopilot-skills --skill autopilot
 ```
 
-That's it. The CLI auto-detects your AI harness and drops `SKILL.md` into the correct skills directory (`~/.claude/skills/autopilot/`, `~/.codex/skills/autopilot/`, etc.). No global install needed.
+In Codex, invoke `$autopilot`. In Claude Code, invoke `/autopilot`.
+For execution across turns, explicitly request native goal mode in a host that
+provides it. The skill itself cannot keep a closed app running.
 
-> Don't have `skills`? `npx` fetches it from npm on demand — just need Node 18+.
-
-### Manual install (no npx)
-
-If you prefer not to use the `skills` CLI:
-
-```bash
-git clone https://github.com/PresentJay/autopilot-skills
-mkdir -p ~/.claude/skills/autopilot
-cp -r autopilot-skills/skills/autopilot/* ~/.claude/skills/autopilot/
+```text
+$autopilot Improve this repository's import reliability. Reproduce the failure,
+fix it without changing the public API, and verify the existing integration tests.
+Use native goal mode to continue until complete. Leave unrelated edits intact.
 ```
 
-Replace `~/.claude/skills/` with your harness's skills directory.
-
-## Compare with peers
-
-Already use `ralph-loop`, `impeccable`, or `gstack`? Read [the comparison page](https://presentjay.github.io/autopilot-skills/comparison.html) — what autopilot adds, what overlaps, **when not to use it**.
-
-## Use
-
-```
-/autopilot
+```text
+$autopilot Compare these vendor specifications for latency and offline support.
+Write a source-backed report. If a specification is inaccessible, report that
+gap rather than inventing its contents. Use only the supplied files.
 ```
 
-First call: 8-question boot interview captures your mission, allow/forbidden paths, risk tier, cadence, auto-compact threshold, escalation rules.
-
-Subsequent calls: one cycle per invocation. Idle/`continuous` mode auto-schedules the next cycle via `ScheduleWakeup`.
-
-### One-line mission via args
-
-Skip the interview for known answers:
-
-```
-/autopilot mission="lint cleanup" risk=L2 cadence=15m
+```text
+$autopilot Turn source.txt into a brief for a nontechnical reader. Check every
+figure and preserve the source's limitations. Keep my existing notes.
 ```
 
-Recognized keys: `mission`, `mode`, `allow`, `forbidden`, `risk`, `cadence`, `escalate_idle`, `compact`. Anything not provided falls back to defaults.
+## Keep short tasks short
 
-## Safety
+A task that can finish in the current invocation uses only the skill entrypoint.
+It still verifies the output and preserves existing edits, but does not create
+state/journal files, hash the whole workspace, or read the durable-mission guides.
+An active native goal already owns its execution bookkeeping.
 
-The skill enforces these at **every** phase, not just at execute time:
+Use persistent records when work must continue in another session, monitoring
+needs previous results, or you explicitly ask for an auditable mission record.
+Existing mission records are always honored, including a stored pause.
 
-- **Forbidden zones (Q4)** — `main`/`master`, secrets, infra, destructive flags. Non-negotiable.
-- **Pre-execute deny-list** — `git push --force`, `git reset --hard`, `rm -rf <outside allow paths>`, DB DDL, external API writes. Blocked unless mission opts in.
-- **Diff cap by risk tier** — L1 read-only, L2 ≤300 lines, L3 ≤500 lines, L4 user-approved.
-- **NOT-OK pattern auto-grow** — failed proposals add anti-patterns; future cycles avoid the same trap.
+## What stays with a durable mission
 
-## Storage
+- `mission.md`: outcome, scope, acceptance criteria, stopping conditions.
+- `state.json`: current checkpoint, observed results, and target version.
+- A journal: evidence, unresolved work, and the next useful action.
 
+The default directory is `.autopilot.log/`; existing custom paths are preserved.
+`status` and `version` are read-only. `resume` inspects interrupted work before
+continuing. `pause` records a pause. `run-once` limits work to one checkpoint.
+An ordinary mission continues within the available execution until its agreed
+boundary; it does not stop just because a checkpoint was recorded.
+
+## Evidence and limitations
+
+The [evidence page](docs/evidence.md) separates functional checks from comparative
+performance. The state checker validates record structure, not the truth or
+freshness of a check. Markdown scope rules are not a sandbox or a distributed lock.
+Scheduling, permissions, compaction, and background execution belong to the host.
+Installation compatibility does not establish tested runtime support.
+
+Code, research, and document fixtures are included for repeatable evaluation.
+Short fixtures cannot establish long-running reliability or user time saved.
+Help us test those claims through the [roadmap](ROADMAP.md).
+
+## Develop and contribute
+
+```sh
+python3 scripts/validate_package.py
+python3 -m unittest discover -s tests -v
 ```
-<repo>/
-├── .autopilot.log/                 # mission, journal, proposals, state — mutable path
-└── .autopilot.milestones/          # PR-merged / bounded-complete / first-zero-defect / novel-NOT-OK — fixed path
-```
 
-Add to `.gitignore` if you don't want runtime artifacts in git, or commit them for review-friendly history.
+No third-party Python runtime dependency is required. Use Python 3.11+ for the
+optional native-goal pilot runner. Run live evaluations only when you intend to
+spend model usage; CI runs deterministic checks only.
 
-## Cadence
+Start with a reproducible mission failure, make one focused change, and show its
+effect on the actual artifact. [Contribution guide](CONTRIBUTING.md) ·
+[Open issues](https://github.com/PresentJay/autopilot-skills/issues)
 
-| Choice | Effective delay | Notes |
-|---|---|---|
-| `immediate` | 60 s | Most aggressive; high token cost |
-| `2m` | 120 s | Inside Anthropic prompt-cache window |
-| `5m` | 300 s | Just past cache window |
-| `15m` | 900 s | **default** |
-| `30m` | 1800 s | Relaxed |
-| `1h+` | 3600 s+ | Auto-promotes to a `/schedule` cron (cloud) |
-| `manual` | — | No auto wake; re-invoke yourself |
-
-3 consecutive idle cycles bump the tier up automatically.
-
-## Stop
-
-- Type any new message — interrupts the next scheduled wake.
-- "stop autopilot" / "멈춰" / "pause" — sets mission `Mode: paused`.
-- Delete `.autopilot.log/mission.md` — cold start on next call.
-
-## What's inside
-
-- `skills/autopilot/SKILL.md` — the skill itself (orchestrator, safety policy, output protocol).
-- `skills/autopilot/templates/` — `mission.md`, `state.json`, `journal-entry.md`, `proposal.md`, `milestone.md`.
-
-## License
-
-MIT — see [LICENSE](LICENSE).
-
-## Origin
-
-Built after observing that ad-hoc loops (e.g. ralph-loop) had two problems: bootstrap parsing bugs that locked them into infinite mode, and single-domain hard-coding. Autopilot is the meta-loop with proper interrupt/resume, mission-bound governance, and self-pacing via the `ScheduleWakeup` primitive — no plugin dependency required.
-
-## Share your mission
-
-Ran autopilot on something interesting? [Open a Showcase issue](https://github.com/PresentJay/autopilot-skills/issues/new?template=showcase.yml) — mission, cycles, outcome. Public learning is how the loop tunes itself across repos and domains.
-
-## Built with itself
-
-This repo's own grooming runs through autopilot. Concrete trail:
-
-- The 4-language Pages site (en / ko / zh / ja) was translated, polished, and laid out across multiple autopilot cycles — landing, mission schema, safety, cadence, milestones, comparison.
-- The mission-schema option pickers in 4 langs (Q2 + Q5–Q10) were generated by 7 autopilot cycles in PR [#11](https://github.com/PresentJay/autopilot-skills/pull/11).
-- README badges, use-cases section, comparison page, and OG/Twitter card polish were each one autopilot cycle commit on the adoption mission.
-- The `/autopilot version` signal in v1.2.0 is the kind of small surface autopilot is designed to ship: tight scope, single PR, full verification.
-
-If you want to verify, the mission-bound journals live under `.autopilot.log/journal/` and the immutable milestone trail in `.autopilot.milestones/`.
-
-## Star history
-
-[![Star History Chart](https://api.star-history.com/svg?repos=PresentJay/autopilot-skills&type=Date)](https://star-history.com/#PresentJay/autopilot-skills&Date)
+MIT · Built and maintained by [PresentJay](https://github.com/PresentJay).

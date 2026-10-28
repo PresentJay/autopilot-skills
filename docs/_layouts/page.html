@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <title>{{ page.title }} — autopilot-skills</title>
-  <meta name="description" content="Universal self-driving mission runner for AI coding agents." />
+  <meta name="description" content="Portable missions for code, research, and documents." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml" />
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}" />
 </head>
 <body>
   {%- assign lang = page.lang | default: 'en' -%}
-  <nav class="nav">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <p class="preview-note">V2 preview · <a href="{{ '/' | relative_url }}">Autopilot</a> · <a href="{{ '/evidence.html' | relative_url }}">Evidence &amp; limitations</a></p>
+  <nav class="nav" aria-label="Documentation">
     {%- if lang == 'ko' -%}
       <a href="{{ '/ko/getting-started.html' | relative_url }}">시작하기</a>
       <a href="{{ '/ko/mission-schema.html' | relative_url }}">미션</a>
@@ -48,10 +51,10 @@
     </span>
   </nav>
 
-  {{ content }}
+  <main id="main">{{ content }}</main>
 
   <footer>
-    <p>MIT-licensed. Built by <a href="https://github.com/PresentJay">PresentJay</a>. Inspired by <a href="https://impeccable.style">impeccable</a>'s minimalism.</p>
+    <p>MIT-licensed. Built by <a href="https://github.com/PresentJay">PresentJay</a>.</p>
   </footer>
 </body>
 </html>

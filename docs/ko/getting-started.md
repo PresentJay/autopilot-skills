@@ -1,32 +1,19 @@
 ---
-title: 시작하기
+layout: page
+title: "시작하기"
+lang: ko
 ---
 
-# 시작하기
+이번 실행에서 끝낼 수 있는 작업은 스킬 본문만 읽고 결과를 확인합니다. 상태·일지 파일이나 전체 작업 폴더의 해시 목록은 만들지 않습니다. 다음 세션으로 넘길 작업, 반복 모니터링, 명시적으로 기록을 요청한 작업, 기존 미션에만 지속 기록을 사용합니다. 기존 일시정지 상태와 사용자 수정은 항상 보존합니다.
 
-## 설치
+기본 브랜치에 v2를 반영했습니다. 아직 정식 릴리스 태그는 없으며, 아래 명령으로 현재 버전을 설치합니다:
 
-```bash
-npx skills add PresentJay/autopilot-skills
+```sh
+npx skills add PresentJay/autopilot-skills --skill autopilot
 ```
 
-쓰는 도구를 프롬프트에서 고르거나, `--all -g` 로 한 번에 다 깔 수 있어요.
+Codex에서는 `$autopilot`, Claude Code에서는 `/autopilot`으로 호출합니다. 원하는 결과, 허용 범위, 완료 확인 방법, 중단 조건을 설명하세요. 코드·조사·문서 작업을 모두 지원하며 Git은 필수가 아닙니다.
 
-## 미션 시작
+일반 미션은 완료 확인, 장애, 일시정지, 사용자·호스트의 실행 한도에 도달할 때까지 이어갑니다. 체크포인트에 도달했다는 이유만으로 멈추지 않습니다. `run-once`는 한 체크포인트로 제한합니다. 턴을 넘어 계속 실행하려면 호스트가 제공하는 native goal 사용을 명시적으로 요청하세요. 예약 실행은 별도 기능입니다.
 
-도구(Claude Code · Codex · Cursor 등)에서:
-
-```
-/autopilot
-```
-
-처음 호출하면 10 문항 셋업이 뜹니다. 이미 정해 둔 답이 있으면 인자로 같이 넘겨 인터뷰를 건너뛸 수 있어요.
-
-```
-/autopilot mission="lint cleanup" risk=L2 cadence=15m
-```
-
-## 멈추기
-
-- "stop autopilot" / "멈춰" / "pause" — `mission.md` Mode 가 `paused` 로 바뀝니다.
-- `.autopilot.log/mission.md` 삭제 — 다음 호출 때 처음부터 다시.
+명확한 일회성 작업에는 기본 goal만으로 충분할 수 있습니다. Autopilot은 재사용할 미션 정의와 작업 기록을 더합니다. 속도나 결과의 우위는 입증되지 않았습니다. [비교 결과와 한계](../evidence.html)를 확인하세요.

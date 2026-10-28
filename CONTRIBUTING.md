@@ -1,49 +1,69 @@
-# Contributing to autopilot-skills
+# Contributing
 
-Thank you for considering a contribution. autopilot is a self-driving mission runner for AI coding agents — small, sharp changes are welcome; large new features should be discussed in an issue first.
+Autopilot aims to make a mission easy to carry forward across code, research,
+and documents. Help us reduce repeated briefing, missed requirements, and needless
+supervision. More process is useful only when it fixes an observed problem.
 
-## Getting started
+English is the shared documentation language. Issues and discussion in Korean,
+Japanese, or Chinese are also welcome; include an English summary when possible.
+You do not need to be a native English speaker to contribute.
 
-```bash
-git clone https://github.com/PresentJay/autopilot-skills
-cd autopilot-skills
-npx -y skills add . --copy --all -g   # install the local copy globally for dev
-```
+## Find a useful change
 
-Edit `skills/autopilot/SKILL.md`, then re-sync:
+Start with [ROADMAP.md](ROADMAP.md) and linked issues. Bug reports, realistic
+fixtures, translations, and measured simplifications are welcome. For a large
+change, discuss the concrete failure and proposed scope in an issue first so
+maintainers can help avoid duplicate work. Small fixes can go straight to a PR.
 
-```bash
-npx -y skills experimental_sync -y
-```
+Report your agent, model, skill revision, invocation, expected outcome, and actual
+artifact. Redact private data. Do not publish credentials or raw private transcripts.
 
-## Propose a change
+## Make and verify a change
 
-1. Open an issue describing the change (use the bug / feature / question template).
-2. Fork + branch (`feat/your-change`, `fix/your-issue-number`).
-3. Open a PR. Reference the issue.
+1. Fork the repository and branch from `main` (or the explicitly named preview
+   branch when contributing to a preview).
+2. Read the relevant skill references, templates, and callers. Keep the change
+   focused on the reported failure.
+3. Run the existing checks:
 
-## SKILL.md frontmatter rules
+   ```sh
+   python3 scripts/validate_package.py
+   python3 -m unittest discover -s tests -v
+   ```
 
-- `name` — lowercase, hyphens only.
-- `description` — under 500 chars, must include trigger keywords (e.g. `자율주행`, `autopilot`, `self-drive`).
-- `version` — semver. Bump on every change.
+4. For behavior changes, include a small realistic fixture and inspect its actual
+   output. For performance claims, compare against a strong native-goal baseline
+   with the same model, inputs, tools, and limits. Record failures as well as wins.
+5. Update affected documentation. English, Korean, Chinese, and Japanese pages
+   must agree on release status, supported behavior, and evidence limitations.
+6. Open a focused PR using the template. Maintainers review and merge changes.
 
-## Commit format
+Use a Conventional Commit title of at most 70 characters. Add a changelog note
+for user-visible behavior changes. Maintainers coordinate version bumps; a typo
+fix does not require a release number change.
 
-Conventional Commits: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`. Subject ≤ 70 chars; body explains *why*.
+## Preserve the contract
 
-## PR checklist
+- Keep `metadata.version`, package.json, and release notes aligned.
+- Preserve pre-existing edits and interrupted work; never recover with blanket
+  restore/clean/reset.
+- Distinguish no changes, blocked access, and verified completion.
+- Keep the skill entrypoint short and load details only when needed.
+- Keep the user's scope and authorization. A mission is not permission to merge,
+  publish, send, or expand access.
+- Use native execution facilities. Propose a new runtime or MCP dependency only
+  with a demonstrated gap and a comparison against the simpler option.
 
-- [ ] frontmatter valid (`name`, `description`, `version`)
-- [ ] `version` bumped (semver)
-- [ ] `CHANGELOG.md` entry under "Unreleased"
-- [ ] README updated if user-facing
-- [ ] No project-specific paths or PII
+## Evaluation and publication
 
-## License
+See [evals/README.md](evals/README.md) for the bounded pilot, raw-input fixtures,
+and limits. Live evaluations are opt-in and never run in public PR CI. Do not
+claim a speedup from one run or treat a passing state record as proof of quality.
 
-By contributing you agree your work is MIT-licensed (see `LICENSE`).
+The source of the website is `docs/`. Preview it with Jekyll or review the static
+landing pages, then follow [PUBLISH.md](PUBLISH.md) for the publication branch.
+Check desktop, mobile, keyboard focus, language links, and copy controls after a
+site change.
 
-## Code of Conduct
-
-This project follows the Contributor Covenant 2.1 — see `CODE_OF_CONDUCT.md`.
+Contributions are MIT-licensed. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) and
+[SECURITY.md](SECURITY.md).

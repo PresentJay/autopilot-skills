@@ -1,32 +1,19 @@
 ---
-title: Getting started
+layout: page
+title: "Get started"
+lang: en
 ---
 
-# Getting started
+A task that can finish in the current invocation reads only the skill entrypoint and verifies the requested output, without creating state/journal files or hashing the whole workspace. Persistent records are for cross-session handoffs, recurring monitoring, explicit record requests, or an existing mission. Existing pauses and user edits are always preserved.
 
-## Install
+V2 is on the default branch as an untagged preview. Install the current version:
 
-```bash
-npx skills add PresentJay/autopilot-skills
+```sh
+npx skills add PresentJay/autopilot-skills --skill autopilot
 ```
 
-Pick the harness when prompted, or install everywhere with `--all -g`.
+In Codex invoke `$autopilot`; in Claude Code invoke `/autopilot`. Describe the outcome, allowed scope, completion checks, and stopping conditions. Code, research, and documents are equally supported; Git is not required.
 
-## Start a mission
+An ordinary mission continues through useful checkpoints until verified completion, a blocker, a pause, or a user/host limit. A checkpoint alone is not a reason to stop. `run-once` is explicitly limited to one checkpoint. To continue across turns, explicitly request native goal mode when the host exposes it. Scheduling is a separate host capability.
 
-In your harness (Claude Code, Codex, Cursor, etc.):
-
-```
-/autopilot
-```
-
-First call: an 8-question interview. Skip questions you've already decided by passing args:
-
-```
-/autopilot mission="lint cleanup" risk=L2 cadence=15m
-```
-
-## Stop
-
-- "stop autopilot" / "멈춰" / "pause" — sets `mission.md` Mode to `paused`.
-- Delete `.autopilot.log/mission.md` — cold start on next call.
+For a clear one-off task, native goals may be enough. Autopilot adds a reusable mission brief and working record. Faster execution and better outcomes are not established; read the [pilot evidence](evidence.html).

@@ -1,90 +1,15 @@
 <!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8" />
-  <title>autopilot-skills — AI エージェントを、走らせ続ける</title>
-  <meta name="description" content="一行のミッションを渡せば、AI エージェント(Claude Code・Codex・Cursor・Gemini …)が自走し続けます。各フェーズで安全をガード、止まっても自動で再起動。" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="../assets/style.css" />
-  <meta property="og:title" content="autopilot-skills" />
-  <meta property="og:description" content="AI エージェントを、走らせ続ける。" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="autopilot-skills" />
-  <meta property="og:locale" content="ja_JP" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="AI エージェントを、走らせ続ける。" />
-  <meta name="twitter:description" content="一行のミッションを渡すだけ。あなたが止めるまで、サイクルが回り続けます。各フェーズで安全をガード、止まっても自動で再起動。" />
-  <meta property="og:url" content="https://presentjay.github.io/autopilot-skills/ja/" />
-</head>
-<body>
-  <nav class="nav">
-    <a href="getting-started.html">はじめに</a>
-    <a href="mission-schema.html">ミッション</a>
-    <a href="safety.html">セーフティ</a>
-    <a href="cadence.html">サイクル</a>
-    <a href="milestones.html">マイルストーン</a>
-    <a href="comparison.html">比較</a>
-    <a href="https://github.com/PresentJay/autopilot-skills">GitHub</a>
-    <span class="lang-switch">
-      <a href="/autopilot-skills/">EN</a>
-      <a href="/autopilot-skills/ko/">한</a>
-      <a href="/autopilot-skills/zh/">中</a>
-      <a href="/autopilot-skills/ja/" class="active">日</a>
-    </span>
-  </nav>
-
-  <h1>AI エージェントを、走らせ続ける。</h1>
-  <p class="lead">一行のミッションを渡すだけ。あなたが止めるまで、サイクルが回り続けます。各フェーズで安全をガード、止まっても自動で再起動。Claude Code・Codex・Cursor・Gemini ほか 40 種類以上のコーディング AI で動きます。</p>
-
-  <div class="install" id="install">
-    <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
-    <button onclick="navigator.clipboard.writeText('npx skills add PresentJay/autopilot-skills'); this.textContent='コピー済み'; setTimeout(()=>this.textContent='コピー', 1500);">コピー</button>
-  </div>
-
-  <h2>何をするか</h2>
-  <p>一行のミッションを渡すと、<code>discover → analyze → plan → execute → verify → learn</code> という自律サイクルを回します。1 周終わったら次のサイクルまでスリープして、起きてからまた続きをやる。あなたが止めるまで、もしくはミッションが終わるまで。</p>
-
-  <h2>こんなミッションに向いています</h2>
-  <ul>
-    <li><strong>コード自己改善</strong> — lint 整理、デッドコード、カバレッジ穴、フォローアップ PR。<code>mission="このリポを自己改善"</code></li>
-    <li><strong>ドキュメント整備</strong> — トーン統一、リンク切れ、翻訳欠落、スキーマ文書。<code>mission="ドキュメントのトーン統一"</code></li>
-    <li><strong>マージ直後の掃除</strong> — 大きな PR がマージされた後の、忘れがちな細かい後始末。<code>mission="PR #123 マージ後の掃除"</code></li>
-    <li><strong>OSS 普及</strong> — README 磨き、比較ページ、ソーシャルカード、SEO。(このサイト自体、autopilot で整えました。) <code>mission="普及 — 認知と信頼"</code></li>
-  </ul>
-
-  <h2>やらないこと</h2>
-  <ul>
-    <li><code>main</code>・<code>master</code> に直接 push しません。</li>
-    <li>許可していない <code>.env</code>・シークレット・インフラ・ワークフローには触りません。</li>
-    <li>許可パス外で <code>--force</code>・<code>--no-verify</code>・<code>git reset --hard</code>・<code>rm -rf</code> を実行しません。</li>
-    <li>すでに失敗を学習したパターンは、もう試しません(NOT-OK 自動蓄積)。</li>
-  </ul>
-
-  <h2>サイクルはあなた次第</h2>
-  <p><code>immediate</code>・<code>2m</code>・<code>5m</code>・<code>15m</code>(デフォルト)・<code>30m</code>・<code>1h+</code> から選びます。<code>1h+</code> は cron に自動昇格するので、セッションを閉じても動き続けます。空サイクルが続けば、テンポは自動で落ちます。</p>
-
-  <h2>大事な瞬間は別建て</h2>
-  <p>ジャーナルは <code>.autopilot.log/</code> に貯まります(場所は変えられます)。PR マージ・bounded ミッション完了・初回 zero-defect のような重要な瞬間は、自動で <code>.autopilot.milestones/</code> へ昇格します(こちらは固定で動かせません)。</p>
-
-  <h2>止まっても自分で立ち上がる</h2>
-  <p>ホスト sleep・セッションクラッシュ・wakeup の取りこぼしでサイクルが止まっても、次の呼び出しで自動で診断し、作業ブランチを片付けてから新しいサイクルを始めます。状態だけ確認したいときは <code>/autopilot status</code>。</p>
-
-  <hr />
-
-  <h2>続きを読む</h2>
-  <ul>
-    <li><a href="getting-started.html">60 秒ではじめる</a></li>
-    <li><a href="mission-schema.html">ミッションスキーマ (Q1–Q10)</a></li>
-    <li><a href="safety.html">セーフティポリシー</a></li>
-    <li><a href="cadence.html">サイクルメニュー</a></li>
-    <li><a href="milestones.html">マイルストーン トリガー</a></li>
-    <li><a href="comparison.html">比較 · ralph-loop · impeccable · gstack</a></li>
-    <li><a href="https://github.com/PresentJay/autopilot-skills/blob/main/CHANGELOG.md">Changelog</a></li>
-    <li><a href="https://github.com/PresentJay/autopilot-skills">GitHub リポジトリ</a></li>
-  </ul>
-
-  <footer>
-    <p>MIT ライセンス · <a href="https://github.com/PresentJay">PresentJay</a> 制作 · <a href="https://impeccable.style">impeccable</a> のミニマリズムから着想。</p>
-  </footer>
-</body>
-</html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autopilot — 方向を決めて、 作業を進める。</title><meta name="description" content="コード・調査・文書のための再利用できるミッション。範囲、確認した結果、引き継ぎを残しながら作業を進めます。">
+<meta property="og:title" content="Autopilot — portable missions"><meta property="og:description" content="コード・調査・文書のための再利用できるミッション。範囲、確認した結果、引き継ぎを残しながら作業を進めます。"><meta property="og:type" content="website"><meta name="twitter:card" content="summary">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="canonical" href="https://presentjay.github.io/autopilot-skills/ja/"><link rel="stylesheet" href="../assets/style.css"><script src="../assets/site.js" defer></script></head>
+<body class="landing"><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="./" aria-label="Autopilot home"><span class="brand-mark" aria-hidden="true">↗</span> autopilot</a><nav aria-label="Main"><a href="getting-started.html">ドキュメント</a><a href="../evidence.html">検証結果</a><a href="https://github.com/PresentJay/autopilot-skills">GitHub ↗</a></nav><nav class="languages" aria-label="Language"><a href="/autopilot-skills/" hreflang="en" >EN</a> <a href="/autopilot-skills/ko/" hreflang="ko" >한국어</a> <a href="/autopilot-skills/ja/" hreflang="ja" aria-current="page">日本語</a> <a href="/autopilot-skills/zh/" hreflang="zh" >中文</a></nav></header>
+<main id="main"><section class="hero"><div><p class="eyebrow">V2 プレビュー · main に反映済み</p><h1>方向を決めて、<br>作業を進める。</h1><p class="lead">コード・調査・文書のための再利用できるミッション。範囲、確認した結果、引き継ぎを残しながら作業を進めます。</p><div class="actions"><a class="button" href="#install">プレビューを試す <span aria-hidden="true">↗</span></a><a href="../evidence.html">検証結果を読む →</a></div></div>
+<aside class="mission-example" aria-label="ミッション記録の例 · 実測値ではありません"><p class="example-caption">ミッション記録の例 · 実測値ではありません</p><div class="record"><span>範囲</span><p>許可されたファイルと操作</p></div><div class="record"><span>結果</span><p>確認した結果と未解決の質問</p></div><div class="record"><span>次へ</span><p>次の行動、または停止理由</p></div><p class="record-path">.autopilot.log/mission.md</p></aside></section>
+<section class="split-section"><div><p class="eyebrow">01 / MISSION</p><h2>Autopilot を使う理由</h2><p>標準の goal でも作業を継続できます。Autopilot はミッションと作業記録をまとめ、指示の再利用、進捗の確認、中断した作業の再開を助けます。</p></div><div class="feature-rows"><article><span class="step">01</span><div><h3>再利用できる指示</h3><p>目標、許可された範囲、完了条件をまとめます。</p></div></article><article><span class="step">02</span><div><h3>チェックポイントごとの根拠</h3><p>何をどの版で確認したか、何が不明かを記録します。</p></div></article><article><span class="step">03</span><div><h3>作業を残して再開</h3><p>既存の編集と途中の成果物を確認してから続行します。</p></div></article></div></section>
+<section class="task-section"><p class="eyebrow">02 / IN PRACTICE</p><h2>コードにも、調査にも、文書にも。</h2><p>普段のエージェントとツールを使い、合意した範囲内で進めます。</p><div class="prompt-tabs" aria-label="Mission examples"><button type="button" data-prompt="0" aria-pressed="true">コード</button><button type="button" data-prompt="1" aria-pressed="false">調査</button><button type="button" data-prompt="2" aria-pressed="false">文書</button></div><pre class="task-prompt" id="prompt-0" ><code>$autopilot 公開 API を変えずに import の失敗を修正して。再現して統合テストで確認し、既存の編集を残して。標準 goal モードで完了まで続行して。</code></pre><pre class="task-prompt" id="prompt-1" hidden><code>$autopilot 提供した仕様書のレイテンシとオフライン対応を比較して。出典を示し、不明な情報は不明のまま報告して。</code></pre><pre class="task-prompt" id="prompt-2" hidden><code>$autopilot source.txt を非技術者向けの概要にして。数値と制約を確認し、既存のメモを残して。</code></pre><p>今回の実行で完了できる作業はスキル本体だけを読み、成果を確認します。状態・ログファイルや作業フォルダー全体のハッシュ一覧は作りません。永続記録は次のセッションへの引き継ぎ、定期監視、明示的な記録依頼、既存ミッションに使います。既存の一時停止状態とユーザーの編集は常に保護します。</p></section>
+<section class="split-section evidence-section"><div><p class="eyebrow">03 / EVIDENCE</p><h2>約束より先に、根拠を。</h2><p>標準 goal と成果物・実行コストを比較します。短い例だけでは長時間の信頼性や時間短縮は証明できません。</p></div><div><h3>標準 goal に対する優位性は未確認</h3><p>小規模比較の条件、結果、限界を確認してください。</p><a href="../evidence.html">検証結果を読む →</a><hr><h3>記録が役立つ作業に。</h3><p>明確な単発作業は標準 goal だけで十分な場合があります。スキルはスケジューラ、サンドボックス、独立した検証器ではありません。</p></div></section>
+<section id="install" class="install-section"><p class="eyebrow">04 / START</p><h2>v2 プレビューを導入</h2><p>v2 は既定ブランチに反映済みです。正式なリリースタグはまだありません。以下のコマンドで現在の版を導入できます。</p><div class="code-toolbar"><span>Terminal</span><button type="button" id="copy-install" data-copied="コピーしました" data-failed="下のコマンドを選択してコピーしてください">コマンドをコピー</button></div><pre class="install-code"><code id="install-command">npx skills add PresentJay/autopilot-skills --skill autopilot</code></pre><p id="copy-status" role="status" aria-live="polite"></p><p class="host-note">Codex <code>$autopilot</code> · Claude Code <code>/autopilot</code></p></section>
+<section class="contribute-section"><p class="eyebrow">05 / BUILD IN PUBLIC</p><h2>価値を一緒に確かめる。</h2><p>失敗したミッション、検証方法の改善、効果を測った簡素化を歓迎します。コード・調査・文書を同等に扱います。</p><div class="actions"><a class="button" href="https://github.com/PresentJay/autopilot-skills/tree/main/ROADMAP.md">改善計画 ↗</a><a href="https://github.com/PresentJay/autopilot-skills/tree/main/CONTRIBUTING.md">貢献ガイド · English →</a></div></section></main>
+<footer><a class="brand" href="./">autopilot</a><p>公開開発のオープンソース · MIT <a href="https://github.com/PresentJay">PresentJay</a></p><p>V2 preview · <a href="../evidence.html">Evidence & limitations</a></p></footer></body></html>

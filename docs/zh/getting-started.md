@@ -1,32 +1,19 @@
 ---
-title: 入门
+layout: page
+title: "入门"
+lang: zh
 ---
 
-# 入门
+能在本次执行中完成的工作只读取技能入口并检查结果，不创建状态或日志文件，也不对整个工作目录计算哈希。持久记录用于跨会话交接、定期监控、用户明确要求记录或已有任务。始终保留已有暂停状态和用户修改。
 
-## 安装
+V2预览版已合入默认分支，尚无正式发布标签。请安装当前版本:
 
-```bash
-npx skills add PresentJay/autopilot-skills
+```sh
+npx skills add PresentJay/autopilot-skills --skill autopilot
 ```
 
-按提示选你正在用的代理,或者加 `--all -g` 一次性全装。
+在Codex中使用`$autopilot`，在Claude Code中使用`/autopilot`。说明目标、允许范围、完成检查和停止条件。代码、研究和文档均可使用，不要求Git。
 
-## 启动任务
+普通任务会持续推进，直到完成验证、遇到阻碍、暂停或达到用户或宿主的执行限制。不会仅因到达检查点而停止。`run-once`仅运行一个检查点。跨轮次继续执行时，请明确请求宿主提供的native goal。定时执行是另一项能力。
 
-在你用的代理(Claude Code、Codex、Cursor 等)里:
-
-```
-/autopilot
-```
-
-第一次跑会进 10 题问答。已经决定的答案可以直接传参跳过。
-
-```
-/autopilot mission="lint cleanup" risk=L2 cadence=15m
-```
-
-## 停下
-
-- "stop autopilot" / "멈춰" / "pause" — `mission.md` 的 Mode 变成 `paused`。
-- 删掉 `.autopilot.log/mission.md` — 下次调用从头来。
+对于明确的一次性任务，原生goal可能已经足够。Autopilot提供可复用的任务说明和工作记录。尚未证明速度或结果更好，请查看[比较结果与限制](../evidence.html)。

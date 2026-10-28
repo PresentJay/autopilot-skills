@@ -1,87 +1,15 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>autopilot-skills — self-driving mission runner</title>
-  <meta name="description" content="Universal self-driving mission runner for AI coding agents. One command. Endless cycle. Safety enforced every phase." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="assets/style.css" />
-  <meta property="og:title" content="autopilot-skills" />
-  <meta property="og:description" content="Universal self-driving mission runner for AI coding agents." />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="autopilot-skills" />
-  <meta property="og:locale" content="en_US" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Self-driving mission runner for AI coding agents." />
-  <meta name="twitter:description" content="One command. Endless cycle. Safety enforced every phase. Works on Claude Code, Codex, Cursor, Gemini, and 50+ other harnesses." />
-  <meta property="og:url" content="https://presentjay.github.io/autopilot-skills" />
-</head>
-<body>
-  <nav class="nav">
-    <a href="getting-started.html">Get started</a>
-    <a href="mission-schema.html">Mission</a>
-    <a href="safety.html">Safety</a>
-    <a href="cadence.html">Cadence</a>
-    <a href="milestones.html">Milestones</a>
-    <a href="comparison.html">Compare</a>
-    <a href="https://github.com/PresentJay/autopilot-skills">GitHub</a>
-    <span class="lang-switch">
-      <a href="/autopilot-skills/" class="active">EN</a>
-      <a href="/autopilot-skills/ko/">한</a>
-      <a href="/autopilot-skills/zh/">中</a>
-      <a href="/autopilot-skills/ja/">日</a>
-    </span>
-  </nav>
-
-  <h1>Self-driving mission runner for AI coding agents.</h1>
-  <p class="lead">One command. Endless cycle. Safety enforced every phase. Works on Claude Code, Codex, Cursor, Gemini, and 40+ other harnesses.</p>
-
-  <div class="install" id="install">
-    <span><span style="color: var(--muted)">$</span> npx skills add PresentJay/autopilot-skills</span>
-    <button onclick="navigator.clipboard.writeText('npx skills add PresentJay/autopilot-skills'); this.textContent='copied'; setTimeout(()=>this.textContent='copy', 1500);">copy</button>
-  </div>
-
-  <h2>What it does</h2>
-  <p>You hand it a mission in plain text. It runs an autonomous <code>discover → analyze → plan → execute → verify → learn</code> cycle and sleeps until the next one — until you tell it to stop, or until the mission is complete.</p>
-
-  <h2>What you'd use it for</h2>
-  <ul>
-    <li><strong>Codebase self-improvement</strong> — lint cleanup, dead code, coverage gaps, follow-up PRs. <code>mission="self-improvement of this repo"</code></li>
-    <li><strong>Documentation grooming</strong> — tone consistency, broken links, missing translations, schema docs. <code>mission="documentation tone consistency"</code></li>
-    <li><strong>Post-merge sweeps</strong> — small follow-ups after a large PR merges that you would otherwise forget. <code>mission="post-merge cleanup for PR #123"</code></li>
-    <li><strong>OSS adoption</strong> — README polish, comparison pages, social previews, SEO. (This site itself was groomed by autopilot.) <code>mission="adoption — visibility and trust"</code></li>
-  </ul>
-
-  <h2>What it won't do</h2>
-  <ul>
-    <li>Push to <code>main</code> / <code>master</code> directly.</li>
-    <li>Touch <code>.env</code>, secrets, infra, or workflows you didn't allow.</li>
-    <li>Run <code>--force</code>, <code>--no-verify</code>, <code>git reset --hard</code>, or <code>rm -rf</code> outside allow paths.</li>
-    <li>Re-attempt patterns it has already learned to fail (NOT-OK auto-grow).</li>
-  </ul>
-
-  <h2>Cadence is yours</h2>
-  <p>Pick how aggressive: <code>immediate</code> · <code>2m</code> · <code>5m</code> · <code>15m</code> (default) · <code>30m</code> · <code>1h+</code> (auto-promotes to a cron). Idle cycles auto-throttle.</p>
-
-  <h2>Milestones, kept</h2>
-  <p>The journal lives in <code>.autopilot.log/</code> (mutable). Significant moments — PR merged, bounded mission complete, first zero-defect — auto-promote into <code>.autopilot.milestones/</code>, which is fixed and immutable.</p>
-
-  <hr />
-
-  <h2>Read more</h2>
-  <ul>
-    <li><a href="getting-started.html">Get started in 60 seconds</a></li>
-    <li><a href="mission-schema.html">Mission schema (Q1–Q8)</a></li>
-    <li><a href="safety.html">Safety policy</a></li>
-    <li><a href="cadence.html">Cadence menu</a></li>
-    <li><a href="milestones.html">Milestone triggers</a></li>
-    <li><a href="comparison.html">vs ralph-loop · impeccable · gstack</a></li>
-    <li><a href="https://github.com/PresentJay/autopilot-skills/blob/main/CHANGELOG.md">Changelog</a></li>
-    <li><a href="https://github.com/PresentJay/autopilot-skills">GitHub repo</a></li>
-  </ul>
-
-  <footer>
-    <p>MIT-licensed. Built by <a href="https://github.com/PresentJay">PresentJay</a>. Inspired by <a href="https://impeccable.style">impeccable</a>'s minimalism.</p>
-  </footer>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autopilot — Give direction. Keep moving.</title><meta name="description" content="A reusable mission for your AI agent. Carry code, research, and documents forward with clear scope, checked outcomes, and a handoff you can inspect.">
+<meta property="og:title" content="Autopilot — portable missions"><meta property="og:description" content="A reusable mission for your AI agent. Carry code, research, and documents forward with clear scope, checked outcomes, and a handoff you can inspect."><meta property="og:type" content="website"><meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="canonical" href="https://presentjay.github.io/autopilot-skills/"><link rel="stylesheet" href="assets/style.css"><script src="assets/site.js" defer></script></head>
+<body class="landing"><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><a class="brand" href="./" aria-label="Autopilot home"><span class="brand-mark" aria-hidden="true">↗</span> autopilot</a><nav aria-label="Main"><a href="getting-started.html">Docs</a><a href="evidence.html">Evidence</a><a href="https://github.com/PresentJay/autopilot-skills">GitHub ↗</a></nav><nav class="languages" aria-label="Language"><a href="/autopilot-skills/" hreflang="en" aria-current="page">EN</a> <a href="/autopilot-skills/ko/" hreflang="ko" >한국어</a> <a href="/autopilot-skills/ja/" hreflang="ja" >日本語</a> <a href="/autopilot-skills/zh/" hreflang="zh" >中文</a></nav></header>
+<main id="main"><section class="hero"><div><p class="eyebrow">V2 preview · on main</p><h1>Give direction.<br>Keep moving.</h1><p class="lead">A reusable mission for your AI agent. Carry code, research, and documents forward with clear scope, checked outcomes, and a handoff you can inspect.</p><div class="actions"><a class="button" href="#install">Try the preview <span aria-hidden="true">↗</span></a><a href="evidence.html">Read the evidence →</a></div></div>
+<aside class="mission-example" aria-label="Mission record · illustrative"><p class="example-caption">Mission record · illustrative</p><div class="record"><span>SCOPE</span><p>User-approved files and actions</p></div><div class="record"><span>OUTCOME</span><p>Checked result + unresolved questions</p></div><div class="record"><span>NEXT</span><p>Next useful action, or a clear stop</p></div><p class="record-path">.autopilot.log/mission.md</p></aside></section>
+<section class="split-section"><div><p class="eyebrow">01 / MISSION</p><h2>Why add Autopilot?</h2><p>Native goals already keep an agent working. Autopilot packages the mission and its working record so you can reuse the brief, inspect progress, and pick up where you left off.</p></div><div class="feature-rows"><article><span class="step">01</span><div><h3>A brief that stays useful</h3><p>Keep the outcome, allowed scope, and completion checks together.</p></div></article><article><span class="step">02</span><div><h3>Evidence at each checkpoint</h3><p>Record what was actually checked, against which version, and what remains unknown.</p></div></article><article><span class="step">03</span><div><h3>A handoff that preserves work</h3><p>Inspect existing edits and partial results before continuing an interrupted mission.</p></div></article></div></section>
+<section class="task-section"><p class="eyebrow">02 / IN PRACTICE</p><h2>One mission. Your kind of work.</h2><p>Use your existing agent and tools. Choose the outcome; let the agent work within the agreed boundaries.</p><div class="prompt-tabs" aria-label="Mission examples"><button type="button" data-prompt="0" aria-pressed="true">Code</button><button type="button" data-prompt="1" aria-pressed="false">Research</button><button type="button" data-prompt="2" aria-pressed="false">Documents</button></div><pre class="task-prompt" id="prompt-0" ><code>$autopilot Fix the import failure without changing the public API. Reproduce it, run the integration tests, and preserve my edits. Use native goal mode to continue until complete.</code></pre><pre class="task-prompt" id="prompt-1" hidden><code>$autopilot Compare these vendor specifications for latency and offline support. Cite the supplied files and mark unavailable information as unknown.</code></pre><pre class="task-prompt" id="prompt-2" hidden><code>$autopilot Turn source.txt into a brief for a nontechnical reader. Check the figures, preserve the limitations, and keep my notes.</code></pre><p>A task that can finish in the current invocation reads only the skill entrypoint and verifies the requested output, without creating state/journal files or hashing the whole workspace. Persistent records are for cross-session handoffs, recurring monitoring, explicit record requests, or an existing mission. Existing pauses and user edits are always preserved.</p></section>
+<section class="split-section evidence-section"><div><p class="eyebrow">03 / EVIDENCE</p><h2>Evidence before promises.</h2><p>We compare actual artifacts and execution cost against native goals. Short fixtures can establish basic behavior; they cannot establish long-running reliability or time saved.</p></div><div><h3>No comparative advantage established</h3><p>Read the pilot results, exact conditions, and limitations before choosing the workflow.</p><a href="evidence.html">Read the evidence →</a><hr><h3>Use it where the record matters.</h3><p>For a clear one-off task, a native goal may be enough. The skill is not a scheduler, a sandbox, or an independent verifier. Continued execution depends on the host.</p></div></section>
+<section id="install" class="install-section"><p class="eyebrow">04 / START</p><h2>Install the v2 preview</h2><p>V2 is on the default branch. It remains an untagged preview; the command below installs the behavior described here.</p><div class="code-toolbar"><span>Terminal</span><button type="button" id="copy-install" data-copied="Copied" data-failed="Select and copy the commands below">Copy commands</button></div><pre class="install-code"><code id="install-command">npx skills add PresentJay/autopilot-skills --skill autopilot</code></pre><p id="copy-status" role="status" aria-live="polite"></p><p class="host-note">Codex <code>$autopilot</code> · Claude Code <code>/autopilot</code></p></section>
+<section class="contribute-section"><p class="eyebrow">05 / BUILD IN PUBLIC</p><h2>Help make it earn its place.</h2><p>Bring a mission that failed, a better verification method, or a measured simplification. Code, research, and document contributions are equally welcome.</p><div class="actions"><a class="button" href="https://github.com/PresentJay/autopilot-skills/tree/main/ROADMAP.md">Explore the roadmap ↗</a><a href="https://github.com/PresentJay/autopilot-skills/tree/main/CONTRIBUTING.md">Contribution guide →</a></div></section></main>
+<footer><a class="brand" href="./">autopilot</a><p>Open source. Built in public. MIT licensed. <a href="https://github.com/PresentJay">PresentJay</a></p><p>V2 preview · <a href="evidence.html">Evidence & limitations</a></p></footer></body></html>

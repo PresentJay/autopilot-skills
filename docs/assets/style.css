@@ -173,3 +173,66 @@ ul li {
 .lang-switch a:hover {
   color: var(--fg);
 }
+
+/* Shared accessible controls and a wider, responsive landing page. */
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+button { font: inherit; cursor: pointer; }
+.skip-link { position: absolute; top: -6rem; left: 1rem; padding: .7rem; background: var(--bg); z-index: 2; }
+.skip-link:focus { top: 1rem; }
+.landing { max-width: 1160px; padding: 0 2rem; }
+.site-header { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; padding: 1.6rem 0; border-bottom: 1px solid var(--rule); }
+.brand { display: inline-flex; align-items: center; gap: .65rem; font-weight: 750; font-size: 1.1rem; letter-spacing: -.03em; color: var(--fg); border: 0; }
+.brand-mark { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; background: var(--accent); color: var(--bg); }
+.site-header nav { display: flex; gap: 1.2rem; font-size: .85rem; }
+.site-header nav a { border: 0; color: var(--muted); padding: .25rem 0; }
+.site-header .languages { margin-left: auto; gap: .8rem; }
+.languages a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
+.hero { display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; align-items: center; padding: 6rem 0 5rem; }
+.landing h1 { font-size: clamp(2.8rem, 5.5vw, 4.8rem); letter-spacing: -.055em; line-height: 1.04; margin-bottom: 1.6rem; }
+.landing .lead { font-size: 1.1rem; max-width: 48ch; line-height: 1.65; }
+.eyebrow { font: .72rem ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; font-size: .9rem; }
+a.button { display: inline-flex; gap: 1.3rem; align-items: center; padding: .85rem 1.15rem; background: var(--accent); color: var(--bg); border: 0; font-weight: 650; }
+.mission-example { border: 1px solid var(--rule); border-top: 3px solid var(--accent); background: var(--code-bg); padding: 1.5rem; min-width: 0; }
+.example-caption { color: var(--muted); font-size: .78rem; border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+.record { padding: .6rem 0; }
+.record span { color: var(--muted); font: .67rem ui-monospace, monospace; letter-spacing: .1em; }
+.record p { font-size: .95rem; margin: .2rem 0 .5rem; }
+.record-path { font: .72rem ui-monospace, monospace; color: var(--muted); margin: 1rem 0 0; overflow-wrap: anywhere; }
+.split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; padding: 4rem 0; border-top: 1px solid var(--rule); }
+.landing h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.04em; line-height: 1.15; margin: 0 0 1.4rem; }
+.landing h3 { margin: 0 0 .5rem; font-size: 1.05rem; }
+.split-section p, .task-section > p:not(.eyebrow), .install-section > p:not(.eyebrow), .contribute-section > p:not(.eyebrow) { color: var(--muted); font-size: .98rem; max-width: 65ch; }
+.feature-rows article { display: flex; gap: 1.4rem; padding: 0 0 1.3rem; margin-bottom: 1.3rem; border-bottom: 1px solid var(--rule); }
+.feature-rows article:last-child { border: 0; padding: 0; margin: 0; }
+.step { font: .75rem ui-monospace, monospace; color: var(--accent); padding-top: .3rem; }
+.feature-rows p { margin: 0; }
+.task-section, .install-section, .contribute-section { border-top: 1px solid var(--rule); padding: 4rem 0; }
+.prompt-tabs { display: flex; gap: .4rem; flex-wrap: wrap; margin: 1.8rem 0 0; }
+.prompt-tabs button { background: transparent; border: 1px solid var(--rule); color: var(--muted); padding: .6rem 1rem; font-size: .85rem; }
+.prompt-tabs button[aria-pressed=true] { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+.task-prompt { white-space: pre-wrap; overflow-wrap: anywhere; min-height: 9rem; border: 1px solid var(--rule); border-radius: 0; padding: 1.7rem; margin-bottom: 0; }
+.task-prompt code { font-size: .9rem; line-height: 1.8; }
+.evidence-section hr { margin: 1.8rem 0; }
+.code-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; background: var(--code-bg); border: 1px solid var(--rule); padding: .65rem 1rem; margin-top: 1.5rem; font: .75rem ui-monospace, monospace; color: var(--muted); }
+.code-toolbar button { border: 1px solid var(--rule); color: var(--fg); background: var(--bg); padding: .5rem .8rem; }
+.install-code { margin-top: 0; border: 1px solid var(--rule); border-top: 0; border-radius: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.install-code code { font-size: .82rem; }
+#copy-status { min-height: 1.5em; margin: 0; }
+.landing footer { margin: 0; padding: 2rem 0; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center; }
+.landing footer p { font-size: .75rem; color: var(--muted); margin: 0; }
+body:not(.landing) { max-width: 80ch; }
+body:not(.landing) table { display: block; overflow-x: auto; font-size: .88rem; }
+.preview-note { border-left: 3px solid var(--accent); padding-left: 1rem; color: var(--muted); font-size: .85rem; }
+@media (max-width: 760px) {
+ .landing { padding: 0 1.25rem; }
+ .site-header { gap: 1rem; }
+ .site-header .languages { margin-left: 0; width: 100%; }
+ .site-header nav { margin-left: auto; gap: .8rem; }
+ .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 3.5rem 0; }
+ .split-section { grid-template-columns: 1fr; gap: 2rem; }
+ .split-section, .task-section, .install-section, .contribute-section { padding: 3rem 0; }
+ .task-prompt { min-height: 14rem; padding: 1.2rem; }
+ body:not(.landing) { padding: 2rem 1.25rem; }
+}

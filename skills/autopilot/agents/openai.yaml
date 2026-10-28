@@ -1,0 +1,4 @@
+interface:
+  display_name: "Autopilot"
+  short_description: "Verified missions for code, research, and documents"
+  default_prompt: "Use $autopilot to finish my task and verify the result; keep persistent records only when needed."

@@ -6,8 +6,8 @@ body:
     id: version
     attributes:
       label: Skill version
-      description: Found in SKILL.md frontmatter `version:`
-      placeholder: 1.2.0
+      description: Include the Git commit and metadata.version in SKILL.md (top-level version for v1).
+      placeholder: v2 preview, commit abc1234
     validations:
       required: true
   - type: dropdown
@@ -45,3 +45,15 @@ body:
     attributes:
       label: Relevant mission.md (sanitized)
       description: Paste the relevant sections; redact anything sensitive.
+  - type: input
+    id: model
+    attributes:
+      label: Model and agent version
+      description: Include reasoning effort when known.
+    validations:
+      required: true
+  - type: textarea
+    id: artifact
+    attributes:
+      label: Output and native-goal comparison
+      description: Attach a small public fixture or sanitized result. If tested without Autopilot, describe the difference; otherwise say not tested.
