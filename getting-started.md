@@ -6,7 +6,7 @@ lang: en
 
 A task that can finish in the current invocation reads only the skill entrypoint and verifies the requested output, without creating state/journal files or hashing the whole workspace. Persistent records are for cross-session handoffs, recurring monitoring, explicit record requests, or an existing mission. Existing pauses and user edits are always preserved.
 
-V2 is on the default branch as an untagged preview. Install the current version:
+V2.0.0 is released. Install the current version:
 
 ```sh
 npx skills add PresentJay/autopilot-skills --skill autopilot
