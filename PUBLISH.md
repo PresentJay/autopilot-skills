@@ -1,9 +1,9 @@
 # Publishing Autopilot
 
 The skill is installed from this GitHub repository. No npm publish is required.
-V2 is on `main` as an untagged preview. The default repository install includes
-v2 behavior. Merging the source does not create a stable release tag; publish a
-release only when that separate action is authorized.
+V2.0.0 is released from `main`. The default repository install includes v2
+behavior. Future releases still require explicit authorization and a new version
+tag; merging source changes alone does not publish a release.
 
 ## Validate a candidate
 

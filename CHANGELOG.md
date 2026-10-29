@@ -4,7 +4,9 @@ All notable changes to autopilot-skills are documented here.
 
 Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] — v2.0.0 preview
+## [Unreleased]
+
+## [2.0.0] — 2026-10-29
 
 ### Changed
 - Execute bounded tasks directly without mandatory state/journal files, workspace hash inventories, or extra references. Load durable-mission instructions only for existing/persistent work; retain verification and pause/ownership checks.
@@ -25,6 +27,10 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 - V1 missions and journals remain readable. Status never migrates state; authorized resume requires an exact backup before adding v2 fields.
 - Legacy completion markers and next-wakeup times require actual evidence/host confirmation. No existing mission is migrated during installation.
 - New mission/state templates replace the old mandatory Q1–Q10 interview. No custom daemon, scheduler, or MCP server is included.
+
+### Evidence and limits
+- In the small-task follow-up, aggregate native-goal tokens fell 21.8% against the previous preview, but the document task increased 18.0% and the strong native-goal control used less overall. This is not a general saving or quality claim.
+- The three bounded tasks and pause preservation were checked. Explicit durable-record probes timed out before agent output; long-session handoff effectiveness and broader host compatibility remain unverified. See the public evidence page and evaluation artifacts.
 
 ## [1.3.0] — 2026-05-05
 

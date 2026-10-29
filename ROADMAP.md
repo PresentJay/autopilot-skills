@@ -2,7 +2,7 @@
 
 Autopilot is a portable mission workflow for code, research, and documents. Its job is to carry the outcome, scope, checks, and working record forward using the host's tools. It does not replace native goals or claim to be a scheduler, sandbox, or independent verifier.
 
-The v2 preview preserves existing work and uses detailed records only when a mission needs persistence. Bounded tasks now run directly. The follow-up removed their record/reference overhead and reduced aggregate goal tokens against the previous preview in a small sample, but one task increased and native goals remained cheaper in total. No general quality or cost advantage is established. We will earn broader claims through evidence, not add architecture to justify the project.
+V2.0.0 preserves existing work and uses detailed records only when a mission needs persistence. Bounded tasks now run directly. The follow-up removed their record/reference overhead and reduced aggregate goal tokens against the previous preview in a small sample, but one task increased and native goals remained cheaper in total. No general quality or cost advantage is established. We will earn broader claims through evidence, not add architecture to justify the project.
 
 | Priority | Contribution | Observable result |
 | --- | --- | --- |

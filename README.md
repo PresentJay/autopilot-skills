@@ -11,7 +11,7 @@ native goal mode when available.
 [Evidence](docs/evidence.md) · [Roadmap](ROADMAP.md) ·
 [Contribute](CONTRIBUTING.md) · [한국어](https://presentjay.github.io/autopilot-skills/ko/)
 
-> **V2 preview on main.** No stable v2 release tag has been published.
+> **[v2.0.0 released](https://github.com/PresentJay/autopilot-skills/releases/tag/v2.0.0).**
 > No speed or quality advantage over native goals has been established.
 
 ## Why use it?
@@ -26,7 +26,7 @@ continuation and completion checks. Autopilot earns its place only if its added
 structure reduces repeated briefing, missed work, or supervision for your task.
 See the [comparison and limits](docs/comparison.md).
 
-## Try the preview
+## Install
 
 ```sh
 npx skills add PresentJay/autopilot-skills --skill autopilot
