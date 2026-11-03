@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "原生goal与Autopilot"
+description: "比较 Autopilot 与原生 goal 的持续执行、持久记录和验证方式，并说明尚未证实的性能优势。"
 lang: zh
+translation_key: comparison
 ---
 
 能在本次执行中完成的工作只读取技能入口并检查结果，不创建状态或日志文件，也不对整个工作目录计算哈希。持久记录用于跨会话交接、定期监控、用户明确要求记录或已有任务。始终保留已有暂停状态和用户修改。

@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "目標実行とスケジュール"
+description: "チェックポイント、run-once、ホストのスケジュール機能と継続実行の条件を説明します。"
 lang: ja
+translation_key: cadence
 ---
 
 目標に向けた継続実行と定期監視は別の機能です。現在のセッションで実際に使える機能だけを使います。

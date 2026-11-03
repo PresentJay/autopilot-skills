@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "成果与交接"
+description: "记录已验证的成果和剩余任务，让后续会话可以检查交接内容。"
 lang: zh
+translation_key: milestones
 ---
 
 可选的成果记录只保存经过验证的重要结果：代码修复、研究结论或审阅后的文档。不要改写旧记录。

@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "Preserve work and authorization"
+description: "How Autopilot preserves user edits, respects authorization and checks partial work before recovery."
 lang: en
+translation_key: safety
 ---
 
 User and repository instructions take priority over stored missions. The skill does not grant permissions, enforce a sandbox, or provide a distributed lock.

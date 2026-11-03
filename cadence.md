@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "Goals and scheduling"
+description: "Understand checkpoints, run-once and host scheduling without confusing a mission record with a background runner."
 lang: en
+translation_key: cadence
 ---
 
 Goal execution continues toward an outcome. Monitoring repeats checks over time. They are separate capabilities.

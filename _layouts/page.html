@@ -3,7 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <title>{{ page.title }} — autopilot-skills</title>
-  <meta name="description" content="Portable missions for code, research, and documents." />
+  {%- assign description = page.description | default: site.description -%}
+  <meta name="description" content="{{ description | escape }}" />
+  <link rel="canonical" href="{{ page.url | absolute_url }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{ page.title | escape }} — Autopilot" />
+  <meta property="og:description" content="{{ description | escape }}" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+  <meta property="og:image" content="{{ '/assets/social-preview.png' | absolute_url }}" />
+  <meta property="og:image:alt" content="Autopilot: keep the mission, progress and next action." />
+  <meta name="twitter:card" content="summary_large_image" />
+  {%- if page.translation_key -%}
+    {%- assign translations = site.pages | where: 'translation_key', page.translation_key -%}
+    {%- for translation in translations -%}
+  <link rel="alternate" hreflang="{{ translation.lang }}" href="{{ translation.url | absolute_url }}" />
+      {%- if translation.lang == 'en' -%}
+  <link rel="alternate" hreflang="x-default" href="{{ translation.url | absolute_url }}" />
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml" />
   <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}" />
@@ -42,6 +60,8 @@
       <a href="{{ '/milestones.html' | relative_url }}">Milestones</a>
       <a href="{{ '/comparison.html' | relative_url }}">Compare</a>
     {%- endif -%}
+    {% if lang == 'ko' %}<a href="{{ '/ko/when-agent-stops.html' | relative_url }}">중단 뒤 이어가기</a>
+    {% else %}<a href="{{ '/when-agent-stops.html' | relative_url }}">Interrupted work · EN</a>{% endif %}
     <a href="https://github.com/PresentJay/autopilot-skills">GitHub</a>
     <span class="lang-switch">
       <a href="{{ '/' | relative_url }}"{% if lang == 'en' %} class="active"{% endif %}>EN</a>
