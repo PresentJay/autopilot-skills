@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "Get started"
+description: "Install Autopilot in Codex or Claude Code, describe a task and choose when to keep persistent mission records."
 lang: en
+translation_key: getting-started
 ---
 
 A task that can finish in the current invocation reads only the skill entrypoint and verifies the requested output, without creating state/journal files or hashing the whole workspace. Persistent records are for cross-session handoffs, recurring monitoring, explicit record requests, or an existing mission. Existing pauses and user edits are always preserved.

@@ -15,6 +15,11 @@ yarn-error.log
 # OS
 Thumbs.db
 
+# Local Jekyll preview
+_site/
+.jekyll-cache/
+.sass-cache/
+
 # Python checks
 __pycache__/
 *.pyc

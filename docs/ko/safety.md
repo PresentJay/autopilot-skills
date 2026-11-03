@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "작업과 허가 범위 보존"
+description: "Autopilot이 사용자 수정과 권한 범위를 보존하고 재개 전 부분 결과를 확인하는 방법을 설명합니다."
 lang: ko
+translation_key: safety
 ---
 
 사용자와 저장소 지시가 저장된 미션보다 우선합니다. 스킬은 권한을 부여하거나 샌드박스·분산 잠금을 구현하지 않습니다.

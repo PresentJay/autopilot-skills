@@ -9,6 +9,9 @@ tag; merging source changes alone does not publish a release.
 
 1. Run `python3 scripts/validate_package.py` and `python3 -m unittest discover -s tests -v`.
 2. Check discovery with `npx -y skills add . --list` and inspect `npm pack --dry-run`.
+   For site changes, build with the GitHub Pages Jekyll toolchain and run
+   `python3 scripts/validate_package.py --site-dir <built-site-directory>`.
+   CI builds the documentation and runs the same rendered-site check.
 3. Review affected behavior with an isolated fixture. Live model runs are opt-in;
    publish conditions, limitations, and failures alongside results.
 4. Check migration notes and confirm that existing missions are preserved.

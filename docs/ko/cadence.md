@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "목표 실행과 예약"
+description: "체크포인트, run-once, 호스트 예약 기능의 차이와 지속 실행의 조건을 설명합니다."
 lang: ko
+translation_key: cadence
 ---
 
 목표 실행은 정한 결과에 도달할 때까지 이어서 작업합니다. 모니터링은 시간에 따라 확인을 반복합니다. 두 기능은 별도로 확인해야 합니다.

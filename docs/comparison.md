@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "Native goals and Autopilot"
+description: "Compare Autopilot and native goal mode: continuation, durable handoffs, verification and unproven performance claims."
 lang: en
+translation_key: comparison
 ---
 
 A task that can finish in the current invocation reads only the skill entrypoint and verifies the requested output, without creating state/journal files or hashing the whole workspace. Persistent records are for cross-session handoffs, recurring monitoring, explicit record requests, or an existing mission. Existing pauses and user edits are always preserved.

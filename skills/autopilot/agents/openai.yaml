@@ -1,4 +1,4 @@
 interface:
   display_name: "Autopilot"
-  short_description: "Verified missions for code, research, and documents"
+  short_description: "Resume interrupted work with a reusable mission and handoff"
   default_prompt: "Use $autopilot to finish my task and verify the result; keep persistent records only when needed."

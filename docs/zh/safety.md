@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "保护工作与授权范围"
+description: "说明 Autopilot 如何保留用户修改、遵守授权并在恢复前检查已有的部分结果。"
 lang: zh
+translation_key: safety
 ---
 
 用户和仓库指令优先。技能不能提供额外权限、沙箱或分布式锁。

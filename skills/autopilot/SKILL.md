@@ -1,6 +1,6 @@
 ---
 name: autopilot
-description: Carry an explicitly requested mission through verified checkpoints, or resume, pause, and inspect it. Use for 자율주행 or self-drive work in code, research, documents, or monitoring; discussing the skill does not start a mission.
+description: Carry an explicitly requested mission across checkpoints or sessions with scope, checked progress, and a next action. Use for interrupted work, repeated re-briefing, 자율주행, or self-drive in code, research, documents, or monitoring. Discussing a problem does not start a mission.
 metadata:
   version: "2.0.0"
 ---

@@ -1,6 +1,8 @@
 # Autopilot
 
-**Give your agent a mission it can carry forward.**
+**Keep the mission, checked progress and next action when AI work is interrupted.**
+
+[![skills.sh installs](https://skills.sh/b/PresentJay/autopilot-skills)](https://skills.sh/PresentJay/autopilot-skills/autopilot)
 
 Autopilot is a portable mission workflow for code, research, and documents.
 It keeps the outcome, scope, checks, and next action together so work can continue
@@ -13,6 +15,21 @@ native goal mode when available.
 
 > **[v2.0.0 released](https://github.com/PresentJay/autopilot-skills/releases/tag/v2.0.0).**
 > No speed or quality advantage over native goals has been established.
+
+## Agent stops early, or you keep repeating the brief?
+
+Start with the [interrupted-work guide](https://presentjay.github.io/autopilot-skills/when-agent-stops.html)
+([한국어](https://presentjay.github.io/autopilot-skills/ko/when-agent-stops.html)).
+It includes installation, a durable-record prompt, explicit resume, and a
+comparison with native goals and [unlazy](https://github.com/Leonxlnx/unlazy).
+See [a real public mission record](https://presentjay.github.io/autopilot-skills/handoff-example.html),
+with the tested behavior and remaining recovery questions clearly separated.
+
+Autopilot cannot prevent goal cancellation or keep a closed app running.
+Use it when carrying the task context forward matters. Unlazy emphasizes
+acceptance gates and proof before completion; Autopilot emphasizes a reusable
+mission and inspectable handoff. Both verify work, and neither makes the host's
+execution limits disappear.
 
 ## Why use it?
 
