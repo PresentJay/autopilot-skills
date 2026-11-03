@@ -46,6 +46,42 @@ Do not modify another repository or add crawler-policy files here to imply it do
 No new accounts, analytics service, submission bot or recurring job is required
 by these changes. Do not promise indexing, ranking or AI citations.
 
+## IndexNow submission on 2026-11-03
+
+After explicit maintainer authorization, the project published
+[`docs/indexnow-key.txt`](docs/indexnow-key.txt) at
+`https://presentjay.github.io/autopilot-skills/indexnow-key.txt`.
+Keep this file in future Pages publications; do not rotate it during a routine
+deployment. It is a public website-ownership verification file, not a billing
+credential or an authorization for other projects.
+
+One request sent the 33 current sitemap URLs to `https://api.indexnow.org/indexnow`
+with `host: presentjay.github.io` and the project-path `keyLocation` above.
+The published key matched the source bytes, and the API returned **202 Accepted**:
+the URLs were received and key validation was pending. This is not proof of
+crawling, indexing, ranking, or submission to Google. Do not repeat the same batch
+just to turn an accepted response into a stronger claim.
+
+[IndexNow's project-path verification and response definitions](https://www.indexnow.org/documentation)
+describe the scope and the meaning of 200/202 responses. No new account,
+scheduled submission job or custom indexing service was introduced.
+
+## Google Search Console ownership
+
+The project homepage contains the HTML verification meta tag issued for the
+maintainer's personal Google account. Search Console confirmed ownership of
+`https://presentjay.github.io/autopilot-skills/` on 2026-11-03. Preserve this
+tag in future Pages publications; removing it can invalidate verified ownership.
+The token is website ownership proof, not an API credential.
+
+The project sitemap was submitted. Its first report said it could not be read,
+although the public response was HTTP 200, `application/xml`, and valid XML with
+33 project URLs. A live homepage test passed and homepage/English-guide indexing
+requests were accepted. These observations do not prove sitemap processing,
+actual indexing, ranking or AI-search exposure. Follow the
+[official sitemap fetch diagnostics](https://support.google.com/webmasters/answer/7451001)
+and inspect the exact sitemap URL rather than repeatedly submitting the same file.
+
 ## Share a useful case
 
 Use the public-record article as the source. A concise introduction can say:
