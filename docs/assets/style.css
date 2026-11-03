@@ -189,7 +189,7 @@ button { font: inherit; cursor: pointer; }
 .site-header .languages { margin-left: auto; gap: .8rem; }
 .languages a[aria-current] { color: var(--fg); border-bottom: 2px solid var(--accent); }
 .hero { display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; align-items: center; padding: 6rem 0 5rem; }
-.landing h1 { font-size: clamp(2.8rem, 5.5vw, 4.8rem); letter-spacing: -.055em; line-height: 1.04; margin-bottom: 1.6rem; }
+.landing h1 { font-size: clamp(2.8rem, 5.5vw, 4.8rem); letter-spacing: -.04em; line-height: 1.04; margin-bottom: 1.6rem; }
 .landing .lead { font-size: 1.1rem; max-width: 48ch; line-height: 1.65; }
 .eyebrow { font: .72rem ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
 .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; font-size: .9rem; }
@@ -236,3 +236,6 @@ body:not(.landing) table { display: block; overflow-x: auto; font-size: .88rem; 
  .task-prompt { min-height: 14rem; padding: 1.2rem; }
  body:not(.landing) { padding: 2rem 1.25rem; }
 }
+
+/* Keep Korean words together in the longer problem-first copy. */
+html[lang="ko"] { word-break: keep-all; overflow-wrap: break-word; }

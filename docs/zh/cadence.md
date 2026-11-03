@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "目标执行与定时调度"
+description: "说明检查点、run-once、宿主调度功能和持续执行的条件，区分任务记录与后台执行。"
 lang: zh
+translation_key: cadence
 ---
 
 持续目标执行与定时监控是不同能力。只使用当前会话实际提供的宿主工具。

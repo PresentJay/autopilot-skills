@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "Verified outcomes and handoffs"
+description: "Record verified outcomes and unresolved work so a later session can inspect the mission handoff."
 lang: en
+translation_key: milestones
 ---
 
 Optional milestones record significant verified outcomes: a tested fix, a source-backed research answer, or a reviewed document. Keep existing milestones unchanged.

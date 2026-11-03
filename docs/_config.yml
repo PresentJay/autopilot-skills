@@ -1,5 +1,7 @@
 title: autopilot-skills
-description: Portable missions for code, research, and documents.
+description: "Keep the mission, checked progress and next action for interrupted AI work in Codex and Claude Code."
+plugins:
+  - jekyll-sitemap
 theme: minima
 baseurl: "/autopilot-skills"
 url: "https://presentjay.github.io"

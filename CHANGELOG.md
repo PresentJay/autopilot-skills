@@ -6,6 +6,11 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 
 ## [Unreleased]
 
+### Changed
+- Describe interrupted work and repeated briefing in skill discovery metadata without changing mission activation or execution behavior.
+- Add English/Korean interrupted-work guides and a public-record case, with current evidence limits and native-goal/unlazy comparisons.
+- Give documentation page-specific search/share metadata, reciprocal language alternatives, a sitemap and a social preview; verify the rendered Pages output in CI.
+
 ## [2.0.0] — 2026-10-29
 
 ### Changed

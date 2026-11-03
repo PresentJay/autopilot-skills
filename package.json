@@ -1,19 +1,18 @@
 {
   "name": "autopilot-skills",
   "version": "2.0.0",
-  "description": "Portable missions for code, research, and documents using the host agent runtime.",
+  "description": "An AI agent skill for interrupted work and cross-session handoffs in Codex and Claude Code. Keep the mission, checked progress and next action together.",
   "keywords": [
-    "ai-skill",
-    "autopilot",
     "agent-skills",
-    "claude-code",
+    "autopilot",
     "codex",
-    "cursor",
-    "gemini-cli",
-    "autonomy",
-    "self-driving",
-    "ralph-loop",
-    "self-improvement"
+    "claude-code",
+    "ai-agents",
+    "session-handoff",
+    "interrupted-work",
+    "long-running-tasks",
+    "goal-mode",
+    "mission-management"
   ],
   "license": "MIT",
   "author": "Hyeonjae Jeong (PresentJay)",

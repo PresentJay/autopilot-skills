@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "Evidence and limitations"
+description: "Read Autopilot native-goal pilot artifacts, token counters, failed attempts and limits. A general performance advantage is not demonstrated."
 lang: en
+translation_key: evidence
 ---
 
 # Does Autopilot earn its overhead?
