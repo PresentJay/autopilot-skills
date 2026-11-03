@@ -66,6 +66,22 @@ just to turn an accepted response into a stronger claim.
 describe the scope and the meaning of 200/202 responses. No new account,
 scheduled submission job or custom indexing service was introduced.
 
+## Google Search Console ownership
+
+The project homepage contains the HTML verification meta tag issued for the
+maintainer's personal Google account. Search Console confirmed ownership of
+`https://presentjay.github.io/autopilot-skills/` on 2026-11-03. Preserve this
+tag in future Pages publications; removing it can invalidate verified ownership.
+The token is website ownership proof, not an API credential.
+
+The project sitemap was submitted. Its first report said it could not be read,
+although the public response was HTTP 200, `application/xml`, and valid XML with
+33 project URLs. A live homepage test passed and homepage/English-guide indexing
+requests were accepted. These observations do not prove sitemap processing,
+actual indexing, ranking or AI-search exposure. Follow the
+[official sitemap fetch diagnostics](https://support.google.com/webmasters/answer/7451001)
+and inspect the exact sitemap URL rather than repeatedly submitting the same file.
+
 ## Share a useful case
 
 Use the public-record article as the source. A concise introduction can say:
