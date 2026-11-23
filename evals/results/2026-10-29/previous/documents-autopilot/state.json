@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "mission_id": "trial-brief",
+  "run_id": "local-1",
+  "target": "brief.md",
+  "criteria": [
+    "C1",
+    "C2",
+    "C3"
+  ],
+  "verification": [
+    {
+      "criterion": "C1",
+      "outcome": "pass",
+      "method": "Full source-to-brief coverage and numeric comparison, plus Python assertions",
+      "target_version": "sha256:8d9d0c3c36e4276ae878dd046232be46f3d9ca0ef16c3cb1202df6ba60745bed",
+      "evidence": ".autopilot.log/journal.md"
+    },
+    {
+      "criterion": "C2",
+      "outcome": "pass",
+      "method": "Read limitation and revenue statements against source sentences 4 and 5",
+      "target_version": "sha256:8d9d0c3c36e4276ae878dd046232be46f3d9ca0ef16c3cb1202df6ba60745bed",
+      "evidence": ".autopilot.log/journal.md"
+    },
+    {
+      "criterion": "C3",
+      "outcome": "pass",
+      "method": "Compared all 16 existing file hashes with baseline; inspected session actions",
+      "target_version": "sha256:8d9d0c3c36e4276ae878dd046232be46f3d9ca0ef16c3cb1202df6ba60745bed",
+      "evidence": ".autopilot.log/journal.md"
+    }
+  ],
+  "status": "done",
+  "last_result": "goal_verified",
+  "cycle_count": 1,
+  "last_run_at": "2026-10-28T15:18:33.977901+00:00",
+  "next_wakeup_at": null,
+  "cycle_started_at": null,
+  "last_tool_used": "exec_command",
+  "consecutive_failures": 0,
+  "consecutive_idle": 0,
+  "current_proposal_id": null,
+  "defect_baselines": {},
+  "compaction_history": [],
+  "last_update_check_at": null,
+  "available_version": null,
+  "interruption_history": []
+}

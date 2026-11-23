@@ -1,0 +1,1 @@
+Vendor A published 2026-10-01. Median latency is 200ms in the described benchmark. Offline support is not described. Conditions: one request at a time on a local network.

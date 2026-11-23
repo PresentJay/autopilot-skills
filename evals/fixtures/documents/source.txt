@@ -1,0 +1,1 @@
+Trial: 120 requests. 18 required a retry. Retry count fell from 30 to 18 versus the previous trial. The trials used different workloads, so the observed difference cannot establish a causal improvement. No revenue measurements were taken.

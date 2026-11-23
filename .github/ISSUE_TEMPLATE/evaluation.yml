@@ -1,0 +1,31 @@
+name: Evaluation result
+description: Report a win, regression, or no difference against a native goal
+labels: ["evaluation"]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Task and expected artifact
+      description: Include a public fixture or reproducible inputs.
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: Matched setup
+      description: Model, agent version, skill commit, prompts, tools, limits, repetitions, and differences between conditions.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Results and costs
+      description: Actual artifact quality, user interventions, elapsed time, token accounting, and failures. No difference is useful.
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limits and unverified claims
+    validations:
+      required: true

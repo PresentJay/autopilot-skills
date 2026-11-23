@@ -1,0 +1,10 @@
+{
+  "task": "code",
+  "arm": "autopilot",
+  "objective": "# Mission\nFix the discount function to cap a percentage at 100, preserving other behavior and user edits. Verify with the supplied tests. Do not commit, publish, or merge.\n\nKeep a durable mission record for a later session, with scope, completion checks, and concise verification evidence.\n Before reporting completion, verify the requested output against the input files, preserve unrelated user edits, and distinguish verified facts from unknowns. If a required check cannot run, report the blocker and the remaining uncertainty. Choose further work only within this mission.",
+  "prompt": "Start and complete the native goal already configured for this thread. Read mission.md and perform the task. Work only in this directory. Do not use network, other skills, external services, Git commits, or other agents. Answer in English. Use the Autopilot skill at ./skill/SKILL.md. You are explicitly authorized to use the active native goal to continue until this mission is complete.",
+  "model": "gpt-6-astra",
+  "effort": "medium",
+  "wall_limit_seconds": 180,
+  "token_budget": 60000
+}
