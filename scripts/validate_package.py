@@ -16,6 +16,7 @@ class SitePage(HTMLParser):
     def __init__(self, text):
         super().__init__()
         self.meta, self.canonicals, self.alternates, self.targets = {}, [], {}, []
+        self.language_links = {}
         self.language = None
         self.structured = []
         self.json_script = None
@@ -31,6 +32,8 @@ class SitePage(HTMLParser):
             self.canonicals.append(attrs.get("href"))
         if tag == "link" and attrs.get("rel") == "alternate" and "hreflang" in attrs:
             self.alternates[attrs["hreflang"]] = attrs.get("href")
+        if tag == "a" and "hreflang" in attrs:
+            self.language_links[attrs["hreflang"]] = attrs["href"]
         if tag in ("a", "link", "script", "img"):
             target = attrs.get("href") or attrs.get("src")
             if target:
@@ -74,6 +77,14 @@ def validate_site(directory):
             if lang != "x-default":
                 assert pages[target].language == lang, f"Wrong language target: {target}"
                 assert pages[target].alternates.get(page.language) == url, f"Nonreciprocal language link: {url}"
+        for lang, home in pages[SITE_URL].alternates.items():
+            if lang == "x-default":
+                continue
+            expected = page.alternates.get(lang, home)
+            href = page.language_links.get(lang)
+            assert href and urljoin(url, href) == expected, (
+                f"Wrong {lang} language switch: {url} -> {href}; expected {expected}"
+            )
         for target in page.targets:
             resolved = urljoin(url, target)
             parsed = urlsplit(resolved)
