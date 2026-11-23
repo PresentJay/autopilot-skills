@@ -6,6 +6,37 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 
 ## [Unreleased]
 
+### Changed
+- Describe interrupted work and repeated briefing in skill discovery metadata without changing mission activation or execution behavior.
+- Add English/Korean interrupted-work guides and a public-record case, with current evidence limits and native-goal/unlazy comparisons.
+- Give documentation page-specific search/share metadata, reciprocal language alternatives, a sitemap and a social preview; verify the rendered Pages output in CI.
+
+## [2.0.0] — 2026-10-29
+
+### Changed
+- Execute bounded tasks directly without mandatory state/journal files, workspace hash inventories, or extra references. Load durable-mission instructions only for existing/persistent work; retain verification and pause/ownership checks.
+- Use host-native goals, scheduling, and context management when actually available; otherwise continue within the current execution limits and leave a manual handoff.
+- Support code, research, documents, and monitoring equally with outcome-specific acceptance checks.
+- Replace the monolithic procedure with a concise entrypoint and conditional start, cycle, recovery, profile, and host references.
+- Preserve user work during recovery; remove blanket restore/clean, automatic L3 merges, and self-updating during missions.
+- Distinguish no candidates, successful no-change, blocked access, and verified completion.
+- Move skill version to metadata.version and align package metadata, docs, templates, and CI.
+
+### Added
+- Publish an English-first preview site, multilingual entry pages, a matched native-goal pilot, and contribution guidance.
+- Read-only state diagnosis with legacy compatibility, completion record validation, and confirmed schedule fields.
+- Negative tests for false completion and non-destructive legacy inspection; package/reference validation.
+- Codex UI metadata with normal skill discovery retained.
+
+### Migration
+- V1 missions and journals remain readable. Status never migrates state; authorized resume requires an exact backup before adding v2 fields.
+- Legacy completion markers and next-wakeup times require actual evidence/host confirmation. No existing mission is migrated during installation.
+- New mission/state templates replace the old mandatory Q1–Q10 interview. No custom daemon, scheduler, or MCP server is included.
+
+### Evidence and limits
+- In the small-task follow-up, aggregate native-goal tokens fell 21.8% against the previous preview, but the document task increased 18.0% and the strong native-goal control used less overall. This is not a general saving or quality claim.
+- The three bounded tasks and pause preservation were checked. Explicit durable-record probes timed out before agent output; long-session handoff effectiveness and broader host compatibility remain unverified. See the public evidence page and evaluation artifacts.
+
 ## [1.3.0] — 2026-05-05
 
 ### Changed
@@ -64,7 +95,8 @@ Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) an
 - Cadence menu: immediate / 2m / 5m / 15m (default) / 30m / 1h+ → /schedule cron / manual.
 - Templates: `mission.md`, `state.json`, `journal-entry.md`, `proposal.md`, `milestone.md`.
 
-[Unreleased]: https://github.com/PresentJay/autopilot-skills/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/PresentJay/autopilot-skills/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/PresentJay/autopilot-skills/compare/v1.3.0...v2.0.0
 [1.3.0]: https://github.com/PresentJay/autopilot-skills/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/PresentJay/autopilot-skills/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/PresentJay/autopilot-skills/compare/v0.1.0...v1.1.0

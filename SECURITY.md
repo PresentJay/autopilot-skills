@@ -8,7 +8,7 @@ Only the latest minor release is supported. autopilot-skills uses semver — sec
 
 Email **hyeonjae@ab180.co** with subject `[autopilot-skills] security`. Please include:
 
-- the affected version (`SKILL.md` frontmatter `version`)
+- the affected version (`SKILL.md` frontmatter `metadata.version`)
 - reproduction steps
 - expected vs actual behavior
 

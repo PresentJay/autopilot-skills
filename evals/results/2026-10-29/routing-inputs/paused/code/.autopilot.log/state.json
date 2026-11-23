@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "mission_id": "existing-user-mission",
+  "run_id": null,
+  "target": null,
+  "criteria": [],
+  "verification": [],
+  "status": "paused",
+  "last_result": null,
+  "cycle_count": 0,
+  "last_run_at": null,
+  "next_wakeup_at": null,
+  "cycle_started_at": null,
+  "last_tool_used": null,
+  "consecutive_failures": 0,
+  "consecutive_idle": 0,
+  "current_proposal_id": null,
+  "defect_baselines": {},
+  "compaction_history": [],
+  "last_update_check_at": null,
+  "available_version": null,
+  "interruption_history": []
+}

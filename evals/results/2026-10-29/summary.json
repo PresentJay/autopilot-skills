@@ -1,0 +1,416 @@
+{
+  "date": "2026-10-29",
+  "model": "gpt-6-astra",
+  "effort": "medium",
+  "codex_version": "0.164.0",
+  "conditions": [
+    "strong",
+    "previous",
+    "current"
+  ],
+  "previous_skill_commit": "7288f6223b0be0c4c1541d7fed09da8c9bdfda54",
+  "repetitions_per_task_condition": 1,
+  "goal_token_budget": 60000,
+  "wall_limit_seconds": 180,
+  "quality_rubric": {
+    "code": [
+      "supplied tests pass",
+      "45 independent cases equal price*(1-min(percent,100)/100)",
+      "original inputs and user notes unchanged"
+    ],
+    "research": [
+      "A median 200ms with one request at a time/local network",
+      "A offline unknown; B unavailable/403 and capabilities unknown",
+      "source references and date scope",
+      "no unsupported ranking or invented missing source",
+      "original inputs unchanged"
+    ],
+    "documents": [
+      "brief.md includes 120 requests, 18 retries, previous 30",
+      "different workloads and no causal inference",
+      "no revenue measurements or invented impact",
+      "plain language and original notes unchanged"
+    ]
+  },
+  "routing_rubric": [
+    "bounded current tasks produce no .autopilot.log, no reference/template/checker-source reads",
+    "existing paused mission is not bypassed",
+    "explicit durable record request still creates usable mission records"
+  ],
+  "interpretation": "Describe overhead on these small tasks only; no billed-cost, broad-quality, long-session, or statistically significant speed claim. Semantic review by supervising agent is unblinded. Published 2026-10-22 values remain historical; compare all three current conditions under CLI 0.164.0.",
+  "planned_max_concurrency": 3,
+  "observed_max_process_concurrency": 5,
+  "deviations": [
+    "Five runner processes briefly overlapped despite the planned maximum of three. Elapsed times are descriptive and confounded by shared local load; no speedup claim. Goal-token counters and artifacts remain reported for every run."
+  ],
+  "current_skill_files_sha256": {
+    "SKILL.md": "129fc3f33b05cddbfa6ac3347cffa497fa5d9bedec2c4a4ab67d16dfc2dad708",
+    "agents/openai.yaml": "00c45e3268b95ce48cc52ecae22df047d9090a1bafc232cac65ae8ec80cc12b0",
+    "references/cycle.md": "79b877d263cdc680cd990e416e003b279f1512a2ae32e754e4a3148f2db9549b",
+    "references/hosts.md": "9a2f1dd3f9cf3649754713f7fcbe1470eb95a1700e7f9c38946ebf6314a1514f",
+    "references/profiles.md": "966c7814455096a705e39ff2817881ebbe95742b5f4ba7ab47bee8c4fe0ffe22",
+    "references/recovery.md": "6c07e33573f020041e7b4fd37604f0e4b19a7e6f9d62c359d25ddd1aa4fad9e4",
+    "references/start.md": "cfea23a9e5fae56d270ef1c99d58a4e96bf03f52992a3a91fae35eee929a916a",
+    "scripts/check_state.py": "aab28b0317e05a732f50993551462c2c040bb6e49cf15a5ccd68fc1fedc74efb",
+    "templates/journal-entry.md": "513d7bb029a2a5f7969c583357a28316d727b7a2743b1a1f294e6c82581c319b",
+    "templates/milestone.md": "05e32d1d67ce6b23f581695315572974b7b343477fab751a03fe3a8d3e25000d",
+    "templates/mission.md": "ddd4d3452f9af8c509257086ba96e0574fe37fabfc8c1fc827cdd2e2bf511963",
+    "templates/proposal.md": "8583d434ab9d7831eafb427bdbb63d6c2de9653b1e9908c95162068f179a84cf",
+    "templates/state.json": "988dd78d77f43d05abed068f1fd990d00d63d82b2b1c1d36fdbb696bd3a3507e"
+  },
+  "candidate_commit": "b4b1f3bd7fc69a256b11e82c2fdc76b152435b4b",
+  "attempts": [
+    {
+      "run": "current/code-autopilot",
+      "task": "code",
+      "condition": "current",
+      "termination": "complete",
+      "native_goal_tokens": 12478,
+      "elapsed_seconds": 54.598,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 125235,
+        "inputTokens": 124659,
+        "cachedInputTokens": 111872,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 576,
+        "reasoningOutputTokens": 27
+      },
+      "original_inputs_preserved": true,
+      "checks": {
+        "supplied_tests": "2/2",
+        "independent_numeric_cases": "45/45"
+      },
+      "routing_checks": {
+        "new_runtime_records": 0,
+        "explicit_reference_template_checker_reads": 0
+      },
+      "artifact_sha256": {
+        "input.json": "717787988ed46fe97c6ead435ebdfe08ee7d75fa58b4d9c7b01031b6602ae762",
+        "discount.py": "8ba8f92642f07d69e01c83733a1d958f8f4c43ef7d23f94677f77b329344b732"
+      }
+    },
+    {
+      "run": "current/documents-autopilot",
+      "task": "documents",
+      "condition": "current",
+      "termination": "complete",
+      "native_goal_tokens": 19132,
+      "elapsed_seconds": 53.829,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 110398,
+        "inputTokens": 109650,
+        "cachedInputTokens": 90368,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 748,
+        "reasoningOutputTokens": 92
+      },
+      "original_inputs_preserved": true,
+      "routing_checks": {
+        "new_runtime_records": 0,
+        "explicit_reference_template_checker_reads": 0
+      },
+      "artifact_sha256": {
+        "input.json": "5270335393d9a8268a4eb93dec0533b4093d37f975575088f006b1e64219e9f2",
+        "brief.md": "978714eddbec41e2ffb286ec609dfed90824d13447c183fd65f2a6f46c2c67c7"
+      }
+    },
+    {
+      "run": "current/research-autopilot",
+      "task": "research",
+      "condition": "current",
+      "termination": "wall_limit",
+      "native_goal_tokens": 0,
+      "elapsed_seconds": 180.332,
+      "completed_turns": 0,
+      "quality": "not_run",
+      "note": "Wall limit without agent output or a completed turn; retained, not scored as an artifact-quality result.",
+      "artifact_sha256": {
+        "input.json": "3b0430e359f9a6f91d67b200db33dd046a72ac46382f96cb7bec5da1f713e5b5"
+      }
+    },
+    {
+      "run": "current-retry/research-autopilot",
+      "task": "research",
+      "condition": "current",
+      "termination": "complete",
+      "native_goal_tokens": 7321,
+      "elapsed_seconds": 56.277,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 108099,
+        "inputTokens": 107326,
+        "cachedInputTokens": 99200,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 773,
+        "reasoningOutputTokens": 20
+      },
+      "original_inputs_preserved": true,
+      "routing_checks": {
+        "new_runtime_records": 0,
+        "explicit_reference_template_checker_reads": 0
+      },
+      "artifact_sha256": {
+        "report.md": "238a540d33d80b9a9872b9748eea51f7d9acfa7368a43a19b9dc28bb37d2bb35",
+        "input.json": "3b0430e359f9a6f91d67b200db33dd046a72ac46382f96cb7bec5da1f713e5b5"
+      }
+    },
+    {
+      "run": "previous/code-autopilot",
+      "task": "code",
+      "condition": "previous",
+      "termination": "wall_limit",
+      "native_goal_tokens": 0,
+      "elapsed_seconds": 180.689,
+      "completed_turns": 0,
+      "quality": "not_run",
+      "note": "Wall limit without agent output or a completed turn; retained, not scored as an artifact-quality result.",
+      "artifact_sha256": {
+        "input.json": "717787988ed46fe97c6ead435ebdfe08ee7d75fa58b4d9c7b01031b6602ae762"
+      }
+    },
+    {
+      "run": "previous/documents-autopilot",
+      "task": "documents",
+      "condition": "previous",
+      "termination": "complete",
+      "native_goal_tokens": 16215,
+      "elapsed_seconds": 177.47,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 173021,
+        "inputTokens": 171055,
+        "cachedInputTokens": 156288,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1966,
+        "reasoningOutputTokens": 137
+      },
+      "original_inputs_preserved": true,
+      "artifact_sha256": {
+        "state.json": "8e3fdd5735c6e81d2b8e2211ac35dbf4b32391d30e26226d2120abaa599a9a87",
+        "input.json": "5270335393d9a8268a4eb93dec0533b4093d37f975575088f006b1e64219e9f2",
+        "journal.md": "3e2b09d62c4ca86508cd77789c213f6fe0658bd93ce8d79d978a169cde9d7dff",
+        "brief.md": "8d9d0c3c36e4276ae878dd046232be46f3d9ca0ef16c3cb1202df6ba60745bed"
+      }
+    },
+    {
+      "run": "previous/research-autopilot",
+      "task": "research",
+      "condition": "previous",
+      "termination": "complete",
+      "native_goal_tokens": 17715,
+      "elapsed_seconds": 99.783,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 127578,
+        "inputTokens": 125696,
+        "cachedInputTokens": 108800,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1882,
+        "reasoningOutputTokens": 60
+      },
+      "original_inputs_preserved": true,
+      "artifact_sha256": {
+        "state.json": "5f7420c9289cf495815e81663e956b7cc11d3531fe9ee1f34ae5a47b954cc0c5",
+        "report.md": "427c3da77fdf6d5d5f2d839280a56f9c429a4012edd9fda7e1fc440a9f440185",
+        "input.json": "3b0430e359f9a6f91d67b200db33dd046a72ac46382f96cb7bec5da1f713e5b5",
+        "journal.md": "ee2fc1802eb5a6ff64ff806b99e8995800aaf06eb82051f63e4bd1318a058d9f"
+      }
+    },
+    {
+      "run": "previous-retry/code-autopilot",
+      "task": "code",
+      "condition": "previous",
+      "termination": "complete",
+      "native_goal_tokens": 15877,
+      "elapsed_seconds": 74.829,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 176579,
+        "inputTokens": 175122,
+        "cachedInputTokens": 160128,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1457,
+        "reasoningOutputTokens": 32
+      },
+      "original_inputs_preserved": true,
+      "checks": {
+        "supplied_tests": "2/2",
+        "independent_numeric_cases": "45/45"
+      },
+      "artifact_sha256": {
+        "state.json": "301bc03343c2fe578127561cc5d690068afa995458c5eabbf078660f452deb03",
+        "input.json": "717787988ed46fe97c6ead435ebdfe08ee7d75fa58b4d9c7b01031b6602ae762",
+        "discount.py": "867ba624317debd5e6be217d195a374c1653b6ea096e4c912114e535e5e5b9c5"
+      }
+    },
+    {
+      "run": "strong/code-strong",
+      "task": "code",
+      "condition": "strong",
+      "termination": "complete",
+      "native_goal_tokens": 10883,
+      "elapsed_seconds": 61.587,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 104192,
+        "inputTokens": 103121,
+        "cachedInputTokens": 92416,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1071,
+        "reasoningOutputTokens": 45
+      },
+      "original_inputs_preserved": true,
+      "checks": {
+        "supplied_tests": "2/2",
+        "independent_numeric_cases": "45/45"
+      },
+      "artifact_sha256": {
+        "input.json": "d2697ea86786136df942c2321fed053e82d4b5d8ca75262c8af17795e6424878",
+        "discount.py": "5af766025f15036d7b060d2ce792612598a34f9ec6d3250137ca576189a77c46"
+      }
+    },
+    {
+      "run": "strong/documents-strong",
+      "task": "documents",
+      "condition": "strong",
+      "termination": "wall_limit",
+      "native_goal_tokens": 0,
+      "elapsed_seconds": 180.46,
+      "completed_turns": 0,
+      "quality": "not_run",
+      "note": "Wall limit without agent output or a completed turn; retained, not scored as an artifact-quality result.",
+      "artifact_sha256": {
+        "input.json": "d771576529a5d3492e17a8127836befa6ad899e136707151cc32094f87bd7acc"
+      }
+    },
+    {
+      "run": "strong/research-strong",
+      "task": "research",
+      "condition": "strong",
+      "termination": "wall_limit",
+      "native_goal_tokens": 0,
+      "elapsed_seconds": 180.526,
+      "completed_turns": 0,
+      "quality": "not_run",
+      "note": "Wall limit without agent output or a completed turn; retained, not scored as an artifact-quality result.",
+      "artifact_sha256": {
+        "input.json": "5eafb86776833ac6bc6d97d269992b9668ed5c09fd0103228c99876d8c2b9c37"
+      }
+    },
+    {
+      "run": "strong-retry/documents-strong",
+      "task": "documents",
+      "condition": "strong",
+      "termination": "complete",
+      "native_goal_tokens": 5734,
+      "elapsed_seconds": 50.033,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 103046,
+        "inputTokens": 102340,
+        "cachedInputTokens": 96128,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 706,
+        "reasoningOutputTokens": 73
+      },
+      "original_inputs_preserved": true,
+      "artifact_sha256": {
+        "input.json": "d771576529a5d3492e17a8127836befa6ad899e136707151cc32094f87bd7acc",
+        "brief.md": "1347249deef3a40dd3a576da407dbf58fe0904527345a626da36949063fbb77b"
+      }
+    },
+    {
+      "run": "strong-retry/research-strong",
+      "task": "research",
+      "condition": "strong",
+      "termination": "complete",
+      "native_goal_tokens": 4578,
+      "elapsed_seconds": 44.216,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 67344,
+        "inputTokens": 66956,
+        "cachedInputTokens": 56832,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 388,
+        "reasoningOutputTokens": 43
+      },
+      "original_inputs_preserved": true,
+      "output_delivery": "final_agent_response",
+      "artifact_sha256": {
+        "input.json": "5eafb86776833ac6bc6d97d269992b9668ed5c09fd0103228c99876d8c2b9c37",
+        "answer.md": "89d1176b7a9cc4d21166f5f3d716d377e1d4a9a16a06014a769cc68f4e22d3be"
+      }
+    }
+  ],
+  "routing": [
+    {
+      "run": "durable/code-autopilot",
+      "task": "code",
+      "condition": "durable",
+      "termination": "wall_limit",
+      "native_goal_tokens": 0,
+      "elapsed_seconds": 180.912,
+      "completed_turns": 0,
+      "quality": "not_run",
+      "note": "Wall limit without agent output or a completed turn; retained, not scored as an artifact-quality result.",
+      "artifact_sha256": {
+        "input.json": "ee4fd95d9adc049810b539ae3b3ced38e1c77632839ffc90f0895612f682d369"
+      }
+    },
+    {
+      "run": "durable-retry/code-autopilot",
+      "task": "code",
+      "condition": "durable-retry",
+      "termination": "wall_limit",
+      "native_goal_tokens": 0,
+      "elapsed_seconds": 180.404,
+      "completed_turns": 0,
+      "quality": "not_run",
+      "note": "Wall limit without agent output or a completed turn; retained, not scored as an artifact-quality result.",
+      "artifact_sha256": {
+        "input.json": "ee4fd95d9adc049810b539ae3b3ced38e1c77632839ffc90f0895612f682d369"
+      }
+    },
+    {
+      "run": "paused/code-autopilot",
+      "task": "code",
+      "condition": "paused",
+      "termination": "complete",
+      "native_goal_tokens": 11196,
+      "elapsed_seconds": 38.572,
+      "completed_turns": 1,
+      "quality": "pass",
+      "thread_token_usage": {
+        "totalTokens": 110310,
+        "inputTokens": 109875,
+        "cachedInputTokens": 98560,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 435,
+        "reasoningOutputTokens": 24
+      },
+      "original_inputs_preserved": true,
+      "routing_checks": {
+        "all_original_files_including_code_and_paused_state_unchanged": true
+      },
+      "artifact_sha256": {
+        "mission.md": "aa305a8cc311ac4f794b581e6ea5065ff44190ec37e3722d445e2a6f24d5aa7f",
+        "state.json": "212fd638b9f3ffd62c40c4aa97f89005a98383cd92a9642215e4ea72582ad193",
+        "input.json": "52bbc9b06aeb7fc9d31ca99c57c5c7a2364509113624dfb14d737aac7530e597",
+        "discount.py": "5c2ba7c9e9abf3267312f78f25c6b30e23b671055ddd60f3877cab27448d93fe"
+      }
+    }
+  ],
+  "semantic_review": "Unblinded supervising-agent review against supplied mission/source statements; not independent human/model adjudication."
+}
