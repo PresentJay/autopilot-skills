@@ -1,0 +1,16 @@
+en:
+  label: English
+  home_label: English home
+  home: /
+ko:
+  label: 한국어
+  home_label: 한국어 홈
+  home: /ko/
+zh:
+  label: 中文
+  home_label: 中文首页
+  home: /zh/
+ja:
+  label: 日本語
+  home_label: 日本語トップ
+  home: /ja/

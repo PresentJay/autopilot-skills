@@ -25,7 +25,7 @@ class RenderedSiteChecks(unittest.TestCase):
 <meta property="og:url" content="{self.url}">
 <meta property="og:image" content="{self.url}share.png">
 <meta name="twitter:card" content="summary_large_image">
-</head><body></body></html>'''
+</head><body><a hreflang="en" href="{self.url}">English</a></body></html>'''
         (self.root / "index.html").write_text(self.page)
         (self.root / "share.png").write_bytes(b"image fixture")
         (self.root / "sitemap.xml").write_text(f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>{self.url}</loc></url></urlset>')
