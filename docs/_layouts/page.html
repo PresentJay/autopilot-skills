@@ -64,10 +64,16 @@
     {% else %}<a href="{{ '/when-agent-stops.html' | relative_url }}">Interrupted work · EN</a>{% endif %}
     <a href="https://github.com/PresentJay/autopilot-skills">GitHub</a>
     <span class="lang-switch">
-      <a href="{{ '/' | relative_url }}"{% if lang == 'en' %} class="active"{% endif %}>EN</a>
-      <a href="{{ '/ko/' | relative_url }}"{% if lang == 'ko' %} class="active"{% endif %}>한</a>
-      <a href="{{ '/zh/' | relative_url }}"{% if lang == 'zh' %} class="active"{% endif %}>中</a>
-      <a href="{{ '/ja/' | relative_url }}"{% if lang == 'ja' %} class="active"{% endif %}>日</a>
+      {% for entry in site.data.guide_languages %}
+        {% assign code = entry[0] %}
+        {% assign locale = entry[1] %}
+        {% assign translation = translations | where: 'lang', code | first %}
+        {% if translation %}
+          <a href="{{ translation.url | relative_url }}" lang="{{ code }}" hreflang="{{ code }}"{% if code == lang %} class="active" aria-current="page"{% endif %}>{{ locale.label }}</a>
+        {% else %}
+          <a href="{{ locale.home | relative_url }}" lang="{{ code }}" hreflang="{{ code }}">{{ locale.home_label }}</a>
+        {% endif %}
+      {% endfor %}
     </span>
   </nav>
 
